@@ -1,0 +1,218 @@
+Motel/
+├── .impeccable
+│   └── design.json
+├── docs
+│   ├── screenshots
+│   │   ├── dashboard-desktop.png
+│   │   ├── users-desktop.png
+│   │   └── users-mobile.png
+│   ├── docker.md
+│   ├── folder-tree.txt
+│   ├── packages.md
+│   └── verification.md
+├── messages
+│   ├── de.json
+│   ├── en.json
+│   ├── fr.json
+│   └── vi.json
+├── public
+│   ├── fonts
+│   │   └── .gitkeep
+│   ├── gif
+│   │   └── .gitkeep
+│   ├── icons
+│   │   └── .gitkeep
+│   └── images
+│       └── .gitkeep
+├── scripts
+│   ├── generate-inventory.mjs
+│   └── init-env.mjs
+├── src
+│   ├── app
+│   │   ├── (auth)
+│   │   │   ├── auth
+│   │   │   │   ├── forgot-password
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── sign-in
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── sign-up
+│   │   │   │       └── page.tsx
+│   │   │   ├── forgot-password
+│   │   │   │   └── page.tsx
+│   │   │   ├── sign-in
+│   │   │   │   └── page.tsx
+│   │   │   ├── sign-up
+│   │   │   │   └── page.tsx
+│   │   │   └── layout.tsx
+│   │   ├── (dashboard)
+│   │   │   ├── dashboard
+│   │   │   │   └── page.tsx
+│   │   │   ├── settings
+│   │   │   │   └── page.tsx
+│   │   │   ├── users
+│   │   │   │   └── page.tsx
+│   │   │   └── layout.tsx
+│   │   ├── error.tsx
+│   │   ├── global-error.tsx
+│   │   ├── globals.css
+│   │   ├── icon.svg
+│   │   ├── layout.tsx
+│   │   ├── loading.tsx
+│   │   ├── not-found.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── shared
+│   │   │   ├── confirm-dialog
+│   │   │   │   └── confirm-dialog.tsx
+│   │   │   ├── data-table
+│   │   │   │   └── data-table.tsx
+│   │   │   ├── empty-state
+│   │   │   │   └── empty-state.tsx
+│   │   │   ├── layout
+│   │   │   │   ├── app-shell.tsx
+│   │   │   │   ├── header.tsx
+│   │   │   │   └── sidebar.tsx
+│   │   │   ├── loading
+│   │   │   │   └── loading-state.tsx
+│   │   │   ├── page-header
+│   │   │   │   └── page-header.tsx
+│   │   │   ├── can.tsx
+│   │   │   └── permission-denied.tsx
+│   │   └── ui
+│   │       ├── alert-dialog.tsx
+│   │       ├── badge.tsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── checkbox.tsx
+│   │       ├── dialog.tsx
+│   │       ├── dropdown-menu.tsx
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       ├── select.tsx
+│   │       ├── separator.tsx
+│   │       ├── skeleton.tsx
+│   │       └── table.tsx
+│   ├── config
+│   │   ├── env.ts
+│   │   ├── navigation.ts
+│   │   ├── permissions.ts
+│   │   └── site.ts
+│   ├── constants
+│   │   └── app.ts
+│   ├── features
+│   │   ├── auth
+│   │   │   ├── api
+│   │   │   │   ├── get-current-user.ts
+│   │   │   │   ├── recover-account.ts
+│   │   │   │   ├── sign-in.ts
+│   │   │   │   └── sign-out.ts
+│   │   │   ├── components
+│   │   │   │   ├── account-form.tsx
+│   │   │   │   ├── auth-guard.tsx
+│   │   │   │   └── sign-in-form.tsx
+│   │   │   ├── hooks
+│   │   │   │   └── use-session.ts
+│   │   │   ├── schemas
+│   │   │   │   └── auth.schema.ts
+│   │   │   ├── stores
+│   │   │   │   └── auth.store.ts
+│   │   │   ├── types
+│   │   │   │   └── auth.type.ts
+│   │   │   └── constants.ts
+│   │   ├── dashboard
+│   │   │   └── components
+│   │   │       └── dashboard-overview.tsx
+│   │   ├── settings
+│   │   │   ├── api
+│   │   │   │   ├── get-settings.ts
+│   │   │   │   └── update-settings.ts
+│   │   │   ├── components
+│   │   │   │   └── settings-panel.tsx
+│   │   │   ├── hooks
+│   │   │   │   └── use-settings.ts
+│   │   │   ├── schemas
+│   │   │   │   └── settings.schema.ts
+│   │   │   └── types
+│   │   │       └── settings.type.ts
+│   │   └── users
+│   │       ├── api
+│   │       │   ├── create-user.ts
+│   │       │   ├── delete-user.ts
+│   │       │   ├── get-user.ts
+│   │       │   ├── get-users.ts
+│   │       │   └── update-user.ts
+│   │       ├── components
+│   │       │   ├── user-form.tsx
+│   │       │   └── user-list.tsx
+│   │       ├── hooks
+│   │       │   ├── use-user-mutations.ts
+│   │       │   └── use-users.ts
+│   │       ├── schemas
+│   │       │   └── user.schema.ts
+│   │       ├── types
+│   │       │   └── user.type.ts
+│   │       └── constants.ts
+│   ├── hooks
+│   │   ├── use-debounce.ts
+│   │   ├── use-media-query.ts
+│   │   └── use-permission.ts
+│   ├── i18n
+│   │   └── request.ts
+│   ├── lib
+│   │   ├── api
+│   │   │   ├── api-error.ts
+│   │   │   ├── client.ts
+│   │   │   ├── endpoints.ts
+│   │   │   └── query-client.ts
+│   │   ├── auth
+│   │   │   ├── permission.ts
+│   │   │   ├── session.ts
+│   │   │   └── token.ts
+│   │   └── utils
+│   │       ├── cn.ts
+│   │       ├── date.ts
+│   │       ├── format.ts
+│   │       ├── number.ts
+│   │       └── string.ts
+│   ├── mocks
+│   │   ├── adapter.ts
+│   │   └── settings.ts
+│   ├── providers
+│   │   ├── app-provider.tsx
+│   │   ├── query-provider.tsx
+│   │   └── theme-provider.tsx
+│   ├── stores
+│   │   ├── app.store.ts
+│   │   ├── sidebar.store.ts
+│   │   └── ui.store.ts
+│   ├── types
+│   │   ├── api.ts
+│   │   ├── common.ts
+│   │   └── pagination.ts
+│   └── proxy.ts
+├── tests
+│   ├── e2e
+│   │   └── starter.spec.ts
+│   └── integration
+│       └── api-client.spec.ts
+├── .dockerignore
+├── .env.example
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+├── components.json
+├── compose.yaml
+├── DESIGN.md
+├── Dockerfile
+├── eslint.config.mjs
+├── knip.json
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── playwright.config.ts
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── PRODUCT.md
+├── README.md
+└── tsconfig.json

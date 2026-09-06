@@ -1,0 +1,2127 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "admin-starter",
+    "languages": [
+      "typescript",
+      "javascript",
+      "css",
+      "json",
+      "yaml",
+      "markdown",
+      "dockerfile"
+    ],
+    "frameworks": [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Zustand",
+      "TanStack Query",
+      "next-intl",
+      "Docker",
+      "Docker Compose"
+    ],
+    "description": "Frontend admin/dashboard/CMS Next.js theo Feature-first + Shared Core: xác thực phiên, quản lý user, cài đặt workspace và phân quyền UI, gọi HTTP REST tới backend riêng (không ORM, không Server Actions CRUD). Chế độ demo dùng adapter in-memory; Docker/Compose có PostgreSQL và Redis cho workspace local nhưng repo này chỉ là frontend.",
+    "analyzedAt": "2026-09-06T03:27:00.000Z",
+    "gitCommitHash": ""
+  },
+  "nodes": [
+    {
+      "id": "domain:authentication",
+      "type": "domain",
+      "name": "Xác thực",
+      "summary": "Quản lý đăng nhập, đăng ký, khôi phục mật khẩu, access token trong bộ nhớ tab và phiên người dùng hiện tại. Feature auth gọi REST hoặc adapter demo, rồi cache CurrentUser qua React Query.",
+      "tags": [
+        "xác-thực",
+        "phiên",
+        "token"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entities": [
+          "CurrentUser",
+          "AccessToken",
+          "Session",
+          "SignInCredentials"
+        ],
+        "businessRules": [
+          "Mật khẩu đăng nhập tối thiểu 8 ký tự; schema Zod cho email, remember, đăng ký và khôi phục.",
+          "Access token nằm trong bộ nhớ module; xóa token tăng generation để hủy refresh cũ.",
+          "Phiên nằm trong tab: reload demo mất phiên; Axios refresh đồng bộ khi 401 và thử lại một lần.",
+          "Dọn phiên xóa token, hủy query rồi xóa cache QueryClient."
+        ],
+        "crossDomainInteractions": [
+          "Cung cấp CurrentUser.permissions cho Access Control.",
+          "Khi DEMO_MODE, sign-in/sign-out/getCurrentUser đi qua Demo Runtime."
+        ]
+      }
+    },
+    {
+      "id": "domain:user-management",
+      "type": "domain",
+      "name": "Quản lý người dùng",
+      "summary": "CRUD danh sách user trên frontend: tìm kiếm debounce, phân trang, modal tạo/sửa và xác nhận xóa. Mọi thao tác đi REST hoặc mock; cache users bị vô hiệu hóa sau mutation.",
+      "tags": [
+        "người-dùng",
+        "crud",
+        "danh-sách"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entities": [
+          "User",
+          "UserRole",
+          "UserStatus",
+          "PaginatedUsers"
+        ],
+        "businessRules": [
+          "Tên 2–100 ký tự, email hợp lệ, vai trò admin/editor/viewer.",
+          "Trạng thái user là active hoặc invited; danh sách hỗ trợ trang, kích thước trang và tìm kiếm.",
+          "Trang /users yêu cầu user.read; thiếu quyền hiện PermissionDenied.",
+          "Xung đột email được ánh xạ vào trường form; ID trên URL được encode."
+        ],
+        "crossDomainInteractions": [
+          "Access Control ẩn nút tạo/sửa/xóa qua Can và user.create/update/delete.",
+          "Demo Runtime giả lập CRUD, phân trang và lỗi trùng email."
+        ]
+      }
+    },
+    {
+      "id": "domain:workspace-settings",
+      "type": "domain",
+      "name": "Cài đặt workspace",
+      "summary": "Đọc/cập nhật tên workspace qua REST hoặc mock, cùng tùy chọn locale (en/fr/de/vi), theme và mật độ bảng trên client. Dashboard overview chào user, số liệu demo và lối tắt theo quyền.",
+      "tags": [
+        "cài-đặt",
+        "workspace",
+        "dashboard"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entities": [
+          "WorkspaceSettings",
+          "TableDensity",
+          "Locale",
+          "DashboardOverview"
+        ],
+        "businessRules": [
+          "Tên workspace sau trim dài 2–100 ký tự.",
+          "Locale đọc từ cookie, mặc định en; mật độ bảng compact lưu Zustand trong bộ nhớ.",
+          "Trang /settings yêu cầu settings.read; sửa tên workspace cần settings.update.",
+          "Số liệu mẫu trên dashboard chỉ hiện khi DEMO_MODE."
+        ],
+        "crossDomainInteractions": [
+          "Access Control chặn trang settings và lối tắt dashboard.",
+          "Demo Runtime giữ tên workspace trong RAM; Authentication cung cấp user để chào trên overview."
+        ]
+      }
+    },
+    {
+      "id": "domain:access-control",
+      "type": "domain",
+      "name": "Kiểm soát truy cập",
+      "summary": "Phân quyền frontend: catalog user.* và settings.*, helper hasPermission (mặc định từ chối), hook usePermission, component Can và AuthGuard. Backend thật vẫn phải enforce; đây chỉ là gating UI/route.",
+      "tags": [
+        "quyền",
+        "auth-guard",
+        "can"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entities": [
+          "Permission",
+          "AuthGuard",
+          "Can"
+        ],
+        "businessRules": [
+          "Quyền gồm user.read/create/update/delete và settings.read/update.",
+          "hasPermission từ chối khi danh sách quyền chưa có.",
+          "Can chỉ render children khi đủ quyền, ngược lại fallback.",
+          "AuthGuard chuyển hướng 401/403 và dọn phiên khi session-expired."
+        ],
+        "crossDomainInteractions": [
+          "Đọc permissions từ phiên Authentication.",
+          "Cổng vào User Management, Workspace Settings và menu navigation."
+        ]
+      }
+    },
+    {
+      "id": "domain:demo-runtime",
+      "type": "domain",
+      "name": "Runtime demo",
+      "summary": "Adapter in-memory khi DEMO_MODE: giả lập auth, CRUD users (độ trễ, phân trang, trùng email) và settings workspace. Không phải backend hay database; reload tab mất phiên và reset dữ liệu.",
+      "tags": [
+        "demo",
+        "mock",
+        "bộ-nhớ"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entities": [
+          "DemoAdapter",
+          "InMemoryUsers",
+          "InMemorySettings"
+        ],
+        "businessRules": [
+          "Chỉ kích hoạt khi env DEMO_MODE; production gọi NEXT_PUBLIC_API_URL.",
+          "Phiên demo không bền: reload tab mất token và reset fixture.",
+          "Users mock hỗ trợ delay, search, pagination và lỗi trùng email.",
+          "Settings mock trả bản sao khi đọc/cập nhật tên workspace."
+        ],
+        "crossDomainInteractions": [
+          "Thay REST cho Authentication, User Management và Workspace Settings khi demo."
+        ]
+      }
+    },
+    {
+      "id": "flow:sign-in",
+      "type": "flow",
+      "name": "Đăng nhập",
+      "summary": "Người dùng mở /auth/sign-in, gửi email/mật khẩu, nhận token và CurrentUser rồi vào dashboard.",
+      "tags": [
+        "đăng-nhập",
+        "http",
+        "token"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "GET /auth/sign-in",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:sign-up",
+      "type": "flow",
+      "name": "Đăng ký tài khoản",
+      "summary": "Trang /auth/sign-up gửi yêu cầu đăng ký qua AccountForm (Zod + mutation recover-account chế độ register).",
+      "tags": [
+        "đăng-ký",
+        "http"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "GET /auth/sign-up",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:forgot-password",
+      "type": "flow",
+      "name": "Khôi phục mật khẩu",
+      "summary": "Trang /auth/forgot-password gửi email khôi phục qua AccountForm chế độ recover.",
+      "tags": [
+        "khôi-phục",
+        "http"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "GET /auth/forgot-password",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:session-restore",
+      "type": "flow",
+      "name": "Khôi phục phiên",
+      "summary": "Khi vào vùng dashboard, query auth/me lấy CurrentUser; thiếu token thì refresh; 401/403 hoặc session-expired thì dọn phiên.",
+      "tags": [
+        "phiên",
+        "auth-me",
+        "refresh"
+      ],
+      "complexity": "complex",
+      "domainMeta": {
+        "entryPoint": "GET /dashboard (AuthGuard + useSession)",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:sign-out",
+      "type": "flow",
+      "name": "Đăng xuất",
+      "summary": "Header gọi sign-out REST/demo, xóa token và cache rồi chuyển về trang đăng nhập.",
+      "tags": [
+        "đăng-xuất",
+        "phiên"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "Header — nút đăng xuất",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:list-users",
+      "type": "flow",
+      "name": "Danh sách người dùng",
+      "summary": "Trang /users kiểm tra user.read rồi tải danh sách phân trang, tìm kiếm debounce và thao tác theo quyền.",
+      "tags": [
+        "danh-sách",
+        "phân-trang",
+        "tìm-kiếm"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "GET /users",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:create-user",
+      "type": "flow",
+      "name": "Tạo người dùng",
+      "summary": "Modal UserForm validate Zod rồi POST user; thành công thì invalidate cache users và ánh xạ lỗi email.",
+      "tags": [
+        "tạo",
+        "crud",
+        "validation"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "UserList — modal tạo (user.create)",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:update-user",
+      "type": "flow",
+      "name": "Cập nhật người dùng",
+      "summary": "Sửa tên, email, vai trò bằng PATCH tới ID đã encode; invalidate cache sau thành công.",
+      "tags": [
+        "cập-nhật",
+        "crud"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "UserList — modal sửa (user.update)",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:delete-user",
+      "type": "flow",
+      "name": "Xóa người dùng",
+      "summary": "Xác nhận rồi DELETE user theo ID; cache users bị vô hiệu hóa.",
+      "tags": [
+        "xóa",
+        "crud",
+        "xác-nhận"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "UserList — ConfirmDialog (user.delete)",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:read-settings",
+      "type": "flow",
+      "name": "Đọc cài đặt",
+      "summary": "Trang /settings yêu cầu settings.read, query WorkspaceSettings qua REST hoặc mock và hiển thị SettingsPanel.",
+      "tags": [
+        "cài-đặt",
+        "đọc"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "GET /settings",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:update-settings",
+      "type": "flow",
+      "name": "Cập nhật cài đặt",
+      "summary": "PATCH tên workspace (2–100 ký tự) khi có settings.update; locale/theme/mật độ bảng cập nhật phía client.",
+      "tags": [
+        "cài-đặt",
+        "cập-nhật",
+        "i18n"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "SettingsPanel — lưu workspace / tùy chọn UI",
+        "entryType": "manual"
+      }
+    },
+    {
+      "id": "flow:dashboard-view",
+      "type": "flow",
+      "name": "Xem tổng quan",
+      "summary": "Trang /dashboard chào CurrentUser, hiện số liệu mẫu khi demo và lối tắt quản lý theo quyền.",
+      "tags": [
+        "dashboard",
+        "tổng-quan"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "GET /dashboard",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:permission-gating",
+      "type": "flow",
+      "name": "Gating quyền UI",
+      "summary": "Kết hợp catalog Permission, hasPermission, usePermission và Can để ẩn/hiện UI hoặc hiện PermissionDenied.",
+      "tags": [
+        "quyền",
+        "can",
+        "ui"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "Can / usePermission trên trang dashboard",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:route-auth-guard",
+      "type": "flow",
+      "name": "Bảo vệ route dashboard",
+      "summary": "Layout (dashboard) bọc AuthGuard: chờ phiên, redirect 401/403, dọn phiên khi session-expired.",
+      "tags": [
+        "auth-guard",
+        "route",
+        "phiên"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "src/app/(dashboard)/layout.tsx",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:navigation-by-permission",
+      "type": "flow",
+      "name": "Menu theo quyền",
+      "summary": "Sidebar lọc mục dashboard/users/settings theo permission khai báo trong navigation.ts.",
+      "tags": [
+        "menu",
+        "sidebar",
+        "quyền"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "AppShell / Sidebar",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:demo-auth-adapter",
+      "type": "flow",
+      "name": "Adapter auth demo",
+      "summary": "Khi DEMO_MODE, sign-in/getCurrentUser/sign-out dùng fixture in-memory thay REST; phiên mất khi reload tab.",
+      "tags": [
+        "demo",
+        "auth",
+        "mock"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "DEMO_MODE — src/mocks/adapter.ts (auth)",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:demo-users-adapter",
+      "type": "flow",
+      "name": "Adapter CRUD users demo",
+      "summary": "Mock users với độ trễ, phân trang, tìm kiếm và lỗi trùng email — không phải database.",
+      "tags": [
+        "demo",
+        "users",
+        "mock"
+      ],
+      "complexity": "moderate",
+      "domainMeta": {
+        "entryPoint": "DEMO_MODE — src/mocks/adapter.ts (users)",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "flow:demo-settings-adapter",
+      "type": "flow",
+      "name": "Adapter settings demo",
+      "summary": "Giữ tên workspace trong RAM và trả bản sao khi đọc/cập nhật; reset khi reload.",
+      "tags": [
+        "demo",
+        "settings",
+        "mock"
+      ],
+      "complexity": "simple",
+      "domainMeta": {
+        "entryPoint": "DEMO_MODE — src/mocks/settings.ts",
+        "entryType": "http"
+      }
+    },
+    {
+      "id": "step:sign-in:open-page",
+      "type": "step",
+      "name": "Mở trang đăng nhập",
+      "summary": "Route /auth/sign-in render SignInForm và metadata tiêu đề.",
+      "tags": [
+        "route",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(auth)/auth/sign-in/page.tsx"
+    },
+    {
+      "id": "step:sign-in:validate-form",
+      "type": "step",
+      "name": "Kiểm tra biểu mẫu",
+      "summary": "Zod kiểm tra email, mật khẩu tối thiểu 8 ký tự và cờ remember.",
+      "tags": [
+        "validation",
+        "zod"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/schemas/auth.schema.ts"
+    },
+    {
+      "id": "step:sign-in:submit-credentials",
+      "type": "step",
+      "name": "Gửi thông tin đăng nhập",
+      "summary": "Gọi REST đăng nhập hoặc mock demo, nhận access token và CurrentUser.",
+      "tags": [
+        "rest-api",
+        "token"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/api/sign-in.ts"
+    },
+    {
+      "id": "step:sign-in:store-token",
+      "type": "step",
+      "name": "Lưu access token",
+      "summary": "Ghi token vào bộ nhớ module để Axios gắn Bearer cho request sau.",
+      "tags": [
+        "token",
+        "bộ-nhớ"
+      ],
+      "complexity": "simple",
+      "filePath": "src/lib/auth/token.ts"
+    },
+    {
+      "id": "step:sign-in:cache-user",
+      "type": "step",
+      "name": "Cache người dùng",
+      "summary": "SignInForm ghi CurrentUser vào React Query (auth/me) rồi xử lý cờ phiên hết hạn.",
+      "tags": [
+        "react-query",
+        "phiên"
+      ],
+      "complexity": "moderate",
+      "filePath": "src/features/auth/components/sign-in-form.tsx"
+    },
+    {
+      "id": "step:sign-in:redirect-dashboard",
+      "type": "step",
+      "name": "Chuyển tới dashboard",
+      "summary": "Sau đăng nhập thành công, điều hướng vào /dashboard.",
+      "tags": [
+        "điều-hướng",
+        "dashboard"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/components/sign-in-form.tsx"
+    },
+    {
+      "id": "step:sign-up:open-page",
+      "type": "step",
+      "name": "Mở trang đăng ký",
+      "summary": "Route /auth/sign-up render AccountForm chế độ register.",
+      "tags": [
+        "route",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(auth)/auth/sign-up/page.tsx"
+    },
+    {
+      "id": "step:sign-up:validate-schema",
+      "type": "step",
+      "name": "Kiểm tra schema đăng ký",
+      "summary": "Dùng schema dẫn xuất từ đăng nhập (email/mật khẩu) cho form đăng ký.",
+      "tags": [
+        "validation",
+        "zod"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/schemas/auth.schema.ts"
+    },
+    {
+      "id": "step:sign-up:submit-request",
+      "type": "step",
+      "name": "Gửi yêu cầu đăng ký",
+      "summary": "Gọi recover-account/register REST hoặc mock demo.",
+      "tags": [
+        "rest-api",
+        "đăng-ký"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/api/recover-account.ts"
+    },
+    {
+      "id": "step:sign-up:notify-result",
+      "type": "step",
+      "name": "Thông báo kết quả",
+      "summary": "AccountForm hiển thị thông báo đã dịch sau mutation.",
+      "tags": [
+        "i18n",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/components/account-form.tsx"
+    },
+    {
+      "id": "step:forgot-password:open-page",
+      "type": "step",
+      "name": "Mở trang khôi phục",
+      "summary": "Route /auth/forgot-password render AccountForm chế độ recover.",
+      "tags": [
+        "route",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(auth)/auth/forgot-password/page.tsx"
+    },
+    {
+      "id": "step:forgot-password:validate-email",
+      "type": "step",
+      "name": "Kiểm tra email",
+      "summary": "Schema khôi phục yêu cầu email hợp lệ trước khi gửi.",
+      "tags": [
+        "validation",
+        "zod"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/schemas/auth.schema.ts"
+    },
+    {
+      "id": "step:forgot-password:submit-recovery",
+      "type": "step",
+      "name": "Gửi yêu cầu khôi phục",
+      "summary": "Gọi API khôi phục mật khẩu hoặc nhánh mock demo.",
+      "tags": [
+        "rest-api",
+        "khôi-phục"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/api/recover-account.ts"
+    },
+    {
+      "id": "step:forgot-password:notify-result",
+      "type": "step",
+      "name": "Thông báo kết quả",
+      "summary": "Form báo kết quả đã dịch, không tự đăng nhập.",
+      "tags": [
+        "i18n",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/components/account-form.tsx"
+    },
+    {
+      "id": "step:session-restore:query-me",
+      "type": "step",
+      "name": "Query auth/me",
+      "summary": "useSession lấy CurrentUser với staleTime 5 phút, không retry tự động.",
+      "tags": [
+        "react-query",
+        "phiên"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/hooks/use-session.ts"
+    },
+    {
+      "id": "step:session-restore:fetch-current-user",
+      "type": "step",
+      "name": "Lấy người dùng hiện tại",
+      "summary": "getCurrentUser gọi REST /me; làm mới access token nếu chưa có; demo dùng adapter.",
+      "tags": [
+        "rest-api",
+        "token"
+      ],
+      "complexity": "moderate",
+      "filePath": "src/features/auth/api/get-current-user.ts"
+    },
+    {
+      "id": "step:session-restore:refresh-on-401",
+      "type": "step",
+      "name": "Refresh khi 401",
+      "summary": "Axios đồng bộ refresh token, thử lại một lần và phát sự kiện hết phiên nếu thất bại.",
+      "tags": [
+        "http",
+        "refresh"
+      ],
+      "complexity": "complex",
+      "filePath": "src/lib/api/client.ts"
+    },
+    {
+      "id": "step:session-restore:guard-errors",
+      "type": "step",
+      "name": "Xử lý 401/403",
+      "summary": "AuthGuard chuyển hướng khi không có phiên hoặc bị cấm; lỗi khác có nút thử lại.",
+      "tags": [
+        "auth-guard",
+        "điều-hướng"
+      ],
+      "complexity": "moderate",
+      "filePath": "src/features/auth/components/auth-guard.tsx"
+    },
+    {
+      "id": "step:session-restore:clear-expired",
+      "type": "step",
+      "name": "Dọn phiên hết hạn",
+      "summary": "Khi nhận session-expired, xóa token và cache QueryClient.",
+      "tags": [
+        "phiên",
+        "cache"
+      ],
+      "complexity": "simple",
+      "filePath": "src/lib/auth/session.ts"
+    },
+    {
+      "id": "step:sign-out:click-header",
+      "type": "step",
+      "name": "Chọn đăng xuất",
+      "summary": "Header hiện user, nhãn demo và nút đăng xuất.",
+      "tags": [
+        "ui",
+        "header"
+      ],
+      "complexity": "simple",
+      "filePath": "src/components/shared/layout/header.tsx"
+    },
+    {
+      "id": "step:sign-out:call-api",
+      "type": "step",
+      "name": "Gọi API đăng xuất",
+      "summary": "Yêu cầu đăng xuất REST hoặc kết thúc phiên demo trong bộ nhớ.",
+      "tags": [
+        "rest-api",
+        "đăng-xuất"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/api/sign-out.ts"
+    },
+    {
+      "id": "step:sign-out:clear-session",
+      "type": "step",
+      "name": "Xóa phiên local",
+      "summary": "Xóa token, hủy query và xóa cache QueryClient.",
+      "tags": [
+        "phiên",
+        "cache"
+      ],
+      "complexity": "simple",
+      "filePath": "src/lib/auth/session.ts"
+    },
+    {
+      "id": "step:sign-out:redirect-sign-in",
+      "type": "step",
+      "name": "Về trang đăng nhập",
+      "summary": "Sau đăng xuất thành công, chuyển về /auth/sign-in.",
+      "tags": [
+        "điều-hướng"
+      ],
+      "complexity": "simple",
+      "filePath": "src/components/shared/layout/header.tsx"
+    },
+    {
+      "id": "step:list-users:check-read",
+      "type": "step",
+      "name": "Kiểm tra user.read",
+      "summary": "Trang /users yêu cầu quyền đọc; thiếu thì PermissionDenied.",
+      "tags": [
+        "quyền",
+        "route"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(dashboard)/users/page.tsx"
+    },
+    {
+      "id": "step:list-users:query-list",
+      "type": "step",
+      "name": "Query danh sách",
+      "summary": "useUsers giữ trang trước khi tải mới và truyền AbortSignal.",
+      "tags": [
+        "react-query",
+        "hook"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/hooks/use-users.ts"
+    },
+    {
+      "id": "step:list-users:fetch-paginated",
+      "type": "step",
+      "name": "Tải phân trang",
+      "summary": "getUsers lấy danh sách theo trang/tìm kiếm; demo dùng adapter.",
+      "tags": [
+        "rest-api",
+        "phân-trang"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/api/get-users.ts"
+    },
+    {
+      "id": "step:list-users:debounce-search",
+      "type": "step",
+      "name": "Tìm kiếm debounce",
+      "summary": "UserList debounce ô tìm kiếm rồi đưa vào query danh sách.",
+      "tags": [
+        "tìm-kiếm",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/components/user-list.tsx"
+    },
+    {
+      "id": "step:list-users:gate-actions",
+      "type": "step",
+      "name": "Ẩn hiện thao tác",
+      "summary": "Nút tạo/sửa/xóa chỉ hiện khi Can đủ user.create/update/delete.",
+      "tags": [
+        "can",
+        "quyền"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/components/user-list.tsx"
+    },
+    {
+      "id": "step:create-user:open-form",
+      "type": "step",
+      "name": "Mở form tạo",
+      "summary": "Modal UserForm nhập tên, email và vai trò.",
+      "tags": [
+        "ui",
+        "form"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/components/user-form.tsx"
+    },
+    {
+      "id": "step:create-user:validate-fields",
+      "type": "step",
+      "name": "Kiểm tra trường",
+      "summary": "Zod: tên 2–100, email hợp lệ, vai trò admin/editor/viewer.",
+      "tags": [
+        "validation",
+        "zod"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/schemas/user.schema.ts"
+    },
+    {
+      "id": "step:create-user:post-user",
+      "type": "step",
+      "name": "POST người dùng",
+      "summary": "createUser gửi dữ liệu đã định kiểu hoặc adapter demo.",
+      "tags": [
+        "rest-api",
+        "tạo"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/api/create-user.ts"
+    },
+    {
+      "id": "step:create-user:map-errors",
+      "type": "step",
+      "name": "Ánh xạ lỗi API",
+      "summary": "Lỗi theo trường và xung đột email được gắn vào input.",
+      "tags": [
+        "lỗi",
+        "form"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/components/user-form.tsx"
+    },
+    {
+      "id": "step:create-user:invalidate-cache",
+      "type": "step",
+      "name": "Invalidate cache users",
+      "summary": "Mutation thành công vô hiệu hóa query key users.",
+      "tags": [
+        "react-query",
+        "cache"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/hooks/use-user-mutations.ts"
+    },
+    {
+      "id": "step:update-user:edit-form",
+      "type": "step",
+      "name": "Mở form sửa",
+      "summary": "UserForm điền sẵn tên, email, vai trò của bản ghi.",
+      "tags": [
+        "ui",
+        "form"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/components/user-form.tsx"
+    },
+    {
+      "id": "step:update-user:validate-fields",
+      "type": "step",
+      "name": "Kiểm tra trường",
+      "summary": "Cùng schema Zod tên/email/vai trò như lúc tạo.",
+      "tags": [
+        "validation",
+        "zod"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/schemas/user.schema.ts"
+    },
+    {
+      "id": "step:update-user:patch-user",
+      "type": "step",
+      "name": "PATCH người dùng",
+      "summary": "updateUser gọi URL có ID đã encode hoặc cập nhật demo.",
+      "tags": [
+        "rest-api",
+        "cập-nhật"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/api/update-user.ts"
+    },
+    {
+      "id": "step:update-user:invalidate-cache",
+      "type": "step",
+      "name": "Invalidate cache users",
+      "summary": "Sau sửa thành công, làm mới danh sách và chi tiết.",
+      "tags": [
+        "react-query",
+        "cache"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/hooks/use-user-mutations.ts"
+    },
+    {
+      "id": "step:delete-user:confirm",
+      "type": "step",
+      "name": "Xác nhận xóa",
+      "summary": "ConfirmDialog yêu cầu xác nhận trước khi xóa.",
+      "tags": [
+        "xác-nhận",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/components/shared/confirm-dialog/confirm-dialog.tsx"
+    },
+    {
+      "id": "step:delete-user:delete-api",
+      "type": "step",
+      "name": "DELETE người dùng",
+      "summary": "Xóa theo ID đã encode trên URL hoặc adapter demo.",
+      "tags": [
+        "rest-api",
+        "xóa"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/api/delete-user.ts"
+    },
+    {
+      "id": "step:delete-user:invalidate-cache",
+      "type": "step",
+      "name": "Invalidate cache users",
+      "summary": "Mutation xóa vô hiệu hóa cache danh sách users.",
+      "tags": [
+        "react-query",
+        "cache"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/hooks/use-user-mutations.ts"
+    },
+    {
+      "id": "step:delete-user:refresh-table",
+      "type": "step",
+      "name": "Làm mới bảng",
+      "summary": "UserList phản ánh danh sách sau khi cache thay đổi.",
+      "tags": [
+        "ui",
+        "bảng"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/components/user-list.tsx"
+    },
+    {
+      "id": "step:read-settings:check-read",
+      "type": "step",
+      "name": "Kiểm tra settings.read",
+      "summary": "Trang /settings hiện PermissionDenied nếu thiếu quyền đọc.",
+      "tags": [
+        "quyền",
+        "route"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(dashboard)/settings/page.tsx"
+    },
+    {
+      "id": "step:read-settings:query-settings",
+      "type": "step",
+      "name": "Query thiết lập",
+      "summary": "useSettings cung cấp query đọc WorkspaceSettings.",
+      "tags": [
+        "react-query",
+        "hook"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/settings/hooks/use-settings.ts"
+    },
+    {
+      "id": "step:read-settings:fetch-api",
+      "type": "step",
+      "name": "Đọc REST hoặc mock",
+      "summary": "getSettings gọi API hoặc bản giả lập trong bộ nhớ.",
+      "tags": [
+        "rest-api",
+        "cài-đặt"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/settings/api/get-settings.ts"
+    },
+    {
+      "id": "step:read-settings:render-panel",
+      "type": "step",
+      "name": "Hiển thị SettingsPanel",
+      "summary": "Panel hiện tên workspace theo quyền, locale, theme và mật độ bảng.",
+      "tags": [
+        "ui",
+        "cài-đặt"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/settings/components/settings-panel.tsx"
+    },
+    {
+      "id": "step:update-settings:validate-name",
+      "type": "step",
+      "name": "Kiểm tra tên workspace",
+      "summary": "Trim rồi giới hạn 2–100 ký tự.",
+      "tags": [
+        "validation",
+        "zod"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/settings/schemas/settings.schema.ts"
+    },
+    {
+      "id": "step:update-settings:check-update",
+      "type": "step",
+      "name": "Kiểm tra settings.update",
+      "summary": "Chỉ cho sửa tên workspace khi đủ quyền cập nhật.",
+      "tags": [
+        "quyền",
+        "can"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/settings/components/settings-panel.tsx"
+    },
+    {
+      "id": "step:update-settings:patch-api",
+      "type": "step",
+      "name": "PATCH thiết lập",
+      "summary": "updateSettings gửi PATCH hoặc chuyển mock demo.",
+      "tags": [
+        "rest-api",
+        "cập-nhật"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/settings/api/update-settings.ts"
+    },
+    {
+      "id": "step:update-settings:write-cache",
+      "type": "step",
+      "name": "Ghi cache settings",
+      "summary": "Mutation thành công ghi phản hồi vào cache settings.",
+      "tags": [
+        "react-query",
+        "cache"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/settings/hooks/use-settings.ts"
+    },
+    {
+      "id": "step:update-settings:update-preferences",
+      "type": "step",
+      "name": "Cập nhật tùy chọn UI",
+      "summary": "Locale qua cookie next-intl; theme và mật độ bảng compact lưu client (Zustand).",
+      "tags": [
+        "i18n",
+        "theme",
+        "zustand"
+      ],
+      "complexity": "moderate",
+      "filePath": "src/features/settings/components/settings-panel.tsx"
+    },
+    {
+      "id": "step:dashboard-view:open-page",
+      "type": "step",
+      "name": "Mở trang tổng quan",
+      "summary": "Route /dashboard render DashboardOverview và metadata.",
+      "tags": [
+        "route",
+        "dashboard"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(dashboard)/dashboard/page.tsx"
+    },
+    {
+      "id": "step:dashboard-view:greet-user",
+      "type": "step",
+      "name": "Chào người dùng",
+      "summary": "Overview dùng CurrentUser từ phiên để chào.",
+      "tags": [
+        "ui",
+        "phiên"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/dashboard/components/dashboard-overview.tsx"
+    },
+    {
+      "id": "step:dashboard-view:demo-metrics",
+      "type": "step",
+      "name": "Số liệu mẫu demo",
+      "summary": "Chỉ hiện số liệu mẫu khi DEMO_MODE, không phải số liệu backend.",
+      "tags": [
+        "demo",
+        "dashboard"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/dashboard/components/dashboard-overview.tsx"
+    },
+    {
+      "id": "step:dashboard-view:permission-shortcuts",
+      "type": "step",
+      "name": "Lối tắt theo quyền",
+      "summary": "Liên kết users/settings chỉ hiện khi đủ quyền tương ứng.",
+      "tags": [
+        "quyền",
+        "điều-hướng"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/dashboard/components/dashboard-overview.tsx"
+    },
+    {
+      "id": "step:dashboard-view:compose-shell",
+      "type": "step",
+      "name": "Bọc AppShell",
+      "summary": "Layout dashboard đã qua AuthGuard rồi AppShell (sidebar, header).",
+      "tags": [
+        "layout",
+        "shell"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(dashboard)/layout.tsx"
+    },
+    {
+      "id": "step:permission-gating:catalog",
+      "type": "step",
+      "name": "Catalog quyền",
+      "summary": "Khai báo user.* và settings.*, dẫn xuất kiểu Permission.",
+      "tags": [
+        "cấu-hình",
+        "permission"
+      ],
+      "complexity": "simple",
+      "filePath": "src/config/permissions.ts"
+    },
+    {
+      "id": "step:permission-gating:has-permission",
+      "type": "step",
+      "name": "hasPermission mặc định từ chối",
+      "summary": "Chỉ cho phép khi quyền có trong danh sách; danh sách trống thì từ chối.",
+      "tags": [
+        "helper",
+        "từ-chối"
+      ],
+      "complexity": "simple",
+      "filePath": "src/lib/auth/permission.ts"
+    },
+    {
+      "id": "step:permission-gating:use-permission",
+      "type": "step",
+      "name": "Hook usePermission",
+      "summary": "Lấy quyền từ phiên hiện tại và trả hàm kiểm tra cho UI.",
+      "tags": [
+        "hook",
+        "phiên"
+      ],
+      "complexity": "simple",
+      "filePath": "src/hooks/use-permission.ts"
+    },
+    {
+      "id": "step:permission-gating:can-render",
+      "type": "step",
+      "name": "Can render children",
+      "summary": "Can chỉ render children khi đủ quyền, ngược lại fallback.",
+      "tags": [
+        "can",
+        "ui"
+      ],
+      "complexity": "simple",
+      "filePath": "src/components/shared/can.tsx"
+    },
+    {
+      "id": "step:permission-gating:denied-view",
+      "type": "step",
+      "name": "PermissionDenied",
+      "summary": "Trang users/settings hiện alert từ chối đã dịch khi thiếu quyền đọc.",
+      "tags": [
+        "ui",
+        "từ-chối"
+      ],
+      "complexity": "simple",
+      "filePath": "src/components/shared/permission-denied.tsx"
+    },
+    {
+      "id": "step:route-auth-guard:wrap-layout",
+      "type": "step",
+      "name": "Bọc layout dashboard",
+      "summary": "Mọi route (dashboard) đi qua AuthGuard rồi AppShell.",
+      "tags": [
+        "layout",
+        "route"
+      ],
+      "complexity": "simple",
+      "filePath": "src/app/(dashboard)/layout.tsx"
+    },
+    {
+      "id": "step:route-auth-guard:wait-session",
+      "type": "step",
+      "name": "Chờ phiên",
+      "summary": "AuthGuard dùng useSession để biết đã có CurrentUser hay chưa.",
+      "tags": [
+        "phiên",
+        "auth-guard"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/components/auth-guard.tsx"
+    },
+    {
+      "id": "step:route-auth-guard:redirect",
+      "type": "step",
+      "name": "Chuyển hướng 401/403",
+      "summary": "Không có phiên hoặc bị cấm thì rời khỏi vùng dashboard.",
+      "tags": [
+        "điều-hướng",
+        "http"
+      ],
+      "complexity": "moderate",
+      "filePath": "src/features/auth/components/auth-guard.tsx"
+    },
+    {
+      "id": "step:route-auth-guard:expired-event",
+      "type": "step",
+      "name": "Xử lý session-expired",
+      "summary": "Sự kiện hết phiên kích hoạt dọn token/cache; store auth chỉ giữ cờ UI.",
+      "tags": [
+        "sự-kiện",
+        "phiên"
+      ],
+      "complexity": "moderate",
+      "filePath": "src/features/auth/stores/auth.store.ts"
+    },
+    {
+      "id": "step:navigation-by-permission:declare-items",
+      "type": "step",
+      "name": "Khai báo menu",
+      "summary": "navigation.ts liệt kê dashboard, users, settings kèm icon, path và quyền tùy chọn.",
+      "tags": [
+        "cấu-hình",
+        "menu"
+      ],
+      "complexity": "simple",
+      "filePath": "src/config/navigation.ts"
+    },
+    {
+      "id": "step:navigation-by-permission:filter-sidebar",
+      "type": "step",
+      "name": "Lọc sidebar",
+      "summary": "Sidebar render đệ quy, ẩn mục thiếu quyền và đánh dấu trang hiện tại.",
+      "tags": [
+        "sidebar",
+        "quyền"
+      ],
+      "complexity": "simple",
+      "filePath": "src/components/shared/layout/sidebar.tsx"
+    },
+    {
+      "id": "step:navigation-by-permission:compose-shell",
+      "type": "step",
+      "name": "Gắn vào AppShell",
+      "summary": "AppShell đặt sidebar desktop và menu mobile dùng cùng nguồn navigation.",
+      "tags": [
+        "layout",
+        "shell"
+      ],
+      "complexity": "simple",
+      "filePath": "src/components/shared/layout/app-shell.tsx"
+    },
+    {
+      "id": "step:demo-auth-adapter:read-flag",
+      "type": "step",
+      "name": "Đọc cờ DEMO_MODE",
+      "summary": "env.ts validate Zod và chuẩn hóa cờ demo cùng API URL.",
+      "tags": [
+        "cấu-hình",
+        "env"
+      ],
+      "complexity": "simple",
+      "filePath": "src/config/env.ts"
+    },
+    {
+      "id": "step:demo-auth-adapter:mock-sign-in",
+      "type": "step",
+      "name": "Giả lập đăng nhập",
+      "summary": "Adapter giả lập credentials và phiên in-memory (ví dụ admin@example.com).",
+      "tags": [
+        "demo",
+        "auth"
+      ],
+      "complexity": "simple",
+      "filePath": "src/mocks/adapter.ts"
+    },
+    {
+      "id": "step:demo-auth-adapter:branch-api",
+      "type": "step",
+      "name": "Nhánh API auth",
+      "summary": "sign-in / get-current-user / sign-out chuyển sang adapter khi demo.",
+      "tags": [
+        "demo",
+        "rest-api"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/auth/api/sign-in.ts"
+    },
+    {
+      "id": "step:demo-auth-adapter:tab-memory",
+      "type": "step",
+      "name": "Phiên theo tab",
+      "summary": "Reload tab mất token module-memory và reset dữ liệu demo.",
+      "tags": [
+        "phiên",
+        "bộ-nhớ"
+      ],
+      "complexity": "simple",
+      "filePath": "src/lib/auth/token.ts"
+    },
+    {
+      "id": "step:demo-users-adapter:in-memory-crud",
+      "type": "step",
+      "name": "CRUD trong bộ nhớ",
+      "summary": "adapter.ts giả lập tạo/sửa/xóa/đọc users, không phải database.",
+      "tags": [
+        "demo",
+        "crud"
+      ],
+      "complexity": "moderate",
+      "filePath": "src/mocks/adapter.ts"
+    },
+    {
+      "id": "step:demo-users-adapter:delay-paginate",
+      "type": "step",
+      "name": "Độ trễ và phân trang",
+      "summary": "Mock thêm delay, pagination và search giống API thật.",
+      "tags": [
+        "phân-trang",
+        "demo"
+      ],
+      "complexity": "simple",
+      "filePath": "src/mocks/adapter.ts"
+    },
+    {
+      "id": "step:demo-users-adapter:duplicate-email",
+      "type": "step",
+      "name": "Lỗi trùng email",
+      "summary": "Tạo/sửa trùng email trả lỗi để form ánh xạ xung đột.",
+      "tags": [
+        "validation",
+        "email"
+      ],
+      "complexity": "simple",
+      "filePath": "src/mocks/adapter.ts"
+    },
+    {
+      "id": "step:demo-users-adapter:feature-branch",
+      "type": "step",
+      "name": "Nhánh API users",
+      "summary": "get-users và mutation users gọi adapter khi DEMO_MODE.",
+      "tags": [
+        "demo",
+        "users"
+      ],
+      "complexity": "simple",
+      "filePath": "src/features/users/api/get-users.ts"
+    },
+    {
+      "id": "step:demo-settings-adapter:memory-store",
+      "type": "step",
+      "name": "Lưu tên workspace RAM",
+      "summary": "settings.ts giữ tên workspace demo trong bộ nhớ.",
+      "tags": [
+        "demo",
+        "settings"
+      ],
+      "complexity": "simple",
+      "filePath": "src/mocks/settings.ts"
+    },
+    {
+      "id": "step:demo-settings-adapter:return-copy",
+      "type": "step",
+      "name": "Trả bản sao",
+      "summary": "Đọc/cập nhật trả bản sao để tránh mutate ngoài ý muốn.",
+      "tags": [
+        "bộ-nhớ",
+        "immutability"
+      ],
+      "complexity": "simple",
+      "filePath": "src/mocks/settings.ts"
+    },
+    {
+      "id": "step:demo-settings-adapter:reset-reload",
+      "type": "step",
+      "name": "Reset khi reload",
+      "summary": "Reload tab mất state RAM; không bền như PostgreSQL trong Compose.",
+      "tags": [
+        "demo",
+        "reset"
+      ],
+      "complexity": "simple",
+      "filePath": "src/mocks/settings.ts"
+    }
+  ],
+  "edges": [
+    {
+      "source": "domain:authentication",
+      "target": "flow:sign-in",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:authentication",
+      "target": "flow:sign-up",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:authentication",
+      "target": "flow:forgot-password",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:authentication",
+      "target": "flow:session-restore",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:authentication",
+      "target": "flow:sign-out",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:user-management",
+      "target": "flow:list-users",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:user-management",
+      "target": "flow:create-user",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:user-management",
+      "target": "flow:update-user",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:user-management",
+      "target": "flow:delete-user",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:workspace-settings",
+      "target": "flow:read-settings",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:workspace-settings",
+      "target": "flow:update-settings",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:workspace-settings",
+      "target": "flow:dashboard-view",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:access-control",
+      "target": "flow:permission-gating",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:access-control",
+      "target": "flow:route-auth-guard",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:access-control",
+      "target": "flow:navigation-by-permission",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:demo-runtime",
+      "target": "flow:demo-auth-adapter",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:demo-runtime",
+      "target": "flow:demo-users-adapter",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:demo-runtime",
+      "target": "flow:demo-settings-adapter",
+      "type": "contains_flow",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:sign-in",
+      "target": "step:sign-in:open-page",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:sign-in",
+      "target": "step:sign-in:validate-form",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:sign-in",
+      "target": "step:sign-in:submit-credentials",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:sign-in",
+      "target": "step:sign-in:store-token",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:sign-in",
+      "target": "step:sign-in:cache-user",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "flow:sign-in",
+      "target": "step:sign-in:redirect-dashboard",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:sign-up",
+      "target": "step:sign-up:open-page",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:sign-up",
+      "target": "step:sign-up:validate-schema",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:sign-up",
+      "target": "step:sign-up:submit-request",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:sign-up",
+      "target": "step:sign-up:notify-result",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:forgot-password",
+      "target": "step:forgot-password:open-page",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:forgot-password",
+      "target": "step:forgot-password:validate-email",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:forgot-password",
+      "target": "step:forgot-password:submit-recovery",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:forgot-password",
+      "target": "step:forgot-password:notify-result",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:session-restore",
+      "target": "step:session-restore:query-me",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:session-restore",
+      "target": "step:session-restore:fetch-current-user",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:session-restore",
+      "target": "step:session-restore:refresh-on-401",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:session-restore",
+      "target": "step:session-restore:guard-errors",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:session-restore",
+      "target": "step:session-restore:clear-expired",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:sign-out",
+      "target": "step:sign-out:click-header",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:sign-out",
+      "target": "step:sign-out:call-api",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:sign-out",
+      "target": "step:sign-out:clear-session",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:sign-out",
+      "target": "step:sign-out:redirect-sign-in",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:list-users",
+      "target": "step:list-users:check-read",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:list-users",
+      "target": "step:list-users:query-list",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:list-users",
+      "target": "step:list-users:fetch-paginated",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:list-users",
+      "target": "step:list-users:debounce-search",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:list-users",
+      "target": "step:list-users:gate-actions",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:create-user",
+      "target": "step:create-user:open-form",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:create-user",
+      "target": "step:create-user:validate-fields",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:create-user",
+      "target": "step:create-user:post-user",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:create-user",
+      "target": "step:create-user:map-errors",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:create-user",
+      "target": "step:create-user:invalidate-cache",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:update-user",
+      "target": "step:update-user:edit-form",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:update-user",
+      "target": "step:update-user:validate-fields",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:update-user",
+      "target": "step:update-user:patch-user",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:update-user",
+      "target": "step:update-user:invalidate-cache",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:delete-user",
+      "target": "step:delete-user:confirm",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:delete-user",
+      "target": "step:delete-user:delete-api",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:delete-user",
+      "target": "step:delete-user:invalidate-cache",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:delete-user",
+      "target": "step:delete-user:refresh-table",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:read-settings",
+      "target": "step:read-settings:check-read",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:read-settings",
+      "target": "step:read-settings:query-settings",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:read-settings",
+      "target": "step:read-settings:fetch-api",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:read-settings",
+      "target": "step:read-settings:render-panel",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:update-settings",
+      "target": "step:update-settings:validate-name",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:update-settings",
+      "target": "step:update-settings:check-update",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:update-settings",
+      "target": "step:update-settings:patch-api",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:update-settings",
+      "target": "step:update-settings:write-cache",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:update-settings",
+      "target": "step:update-settings:update-preferences",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:dashboard-view",
+      "target": "step:dashboard-view:open-page",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:dashboard-view",
+      "target": "step:dashboard-view:compose-shell",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:dashboard-view",
+      "target": "step:dashboard-view:greet-user",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:dashboard-view",
+      "target": "step:dashboard-view:demo-metrics",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:dashboard-view",
+      "target": "step:dashboard-view:permission-shortcuts",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:permission-gating",
+      "target": "step:permission-gating:catalog",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.2
+    },
+    {
+      "source": "flow:permission-gating",
+      "target": "step:permission-gating:has-permission",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:permission-gating",
+      "target": "step:permission-gating:use-permission",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "flow:permission-gating",
+      "target": "step:permission-gating:can-render",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:permission-gating",
+      "target": "step:permission-gating:denied-view",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:route-auth-guard",
+      "target": "step:route-auth-guard:wrap-layout",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:route-auth-guard",
+      "target": "step:route-auth-guard:wait-session",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:route-auth-guard",
+      "target": "step:route-auth-guard:redirect",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:route-auth-guard",
+      "target": "step:route-auth-guard:expired-event",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:navigation-by-permission",
+      "target": "step:navigation-by-permission:declare-items",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:navigation-by-permission",
+      "target": "step:navigation-by-permission:filter-sidebar",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:navigation-by-permission",
+      "target": "step:navigation-by-permission:compose-shell",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:demo-auth-adapter",
+      "target": "step:demo-auth-adapter:read-flag",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:demo-auth-adapter",
+      "target": "step:demo-auth-adapter:mock-sign-in",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:demo-auth-adapter",
+      "target": "step:demo-auth-adapter:branch-api",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:demo-auth-adapter",
+      "target": "step:demo-auth-adapter:tab-memory",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:demo-users-adapter",
+      "target": "step:demo-users-adapter:in-memory-crud",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.3
+    },
+    {
+      "source": "flow:demo-users-adapter",
+      "target": "step:demo-users-adapter:delay-paginate",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "flow:demo-users-adapter",
+      "target": "step:demo-users-adapter:duplicate-email",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "flow:demo-users-adapter",
+      "target": "step:demo-users-adapter:feature-branch",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "flow:demo-settings-adapter",
+      "target": "step:demo-settings-adapter:memory-store",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.4
+    },
+    {
+      "source": "flow:demo-settings-adapter",
+      "target": "step:demo-settings-adapter:return-copy",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "flow:demo-settings-adapter",
+      "target": "step:demo-settings-adapter:reset-reload",
+      "type": "flow_step",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "domain:authentication",
+      "target": "domain:access-control",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Phiên CurrentUser.permissions là nguồn quyền cho Can, AuthGuard và menu."
+    },
+    {
+      "source": "domain:access-control",
+      "target": "domain:user-management",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Gating user.read trên trang và user.create/update/delete trên thao tác CRUD."
+    },
+    {
+      "source": "domain:access-control",
+      "target": "domain:workspace-settings",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "settings.read/update chặn trang cài đặt; lối tắt dashboard lọc theo quyền."
+    },
+    {
+      "source": "domain:authentication",
+      "target": "domain:workspace-settings",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Dashboard overview chào user từ phiên đã khôi phục."
+    },
+    {
+      "source": "domain:demo-runtime",
+      "target": "domain:authentication",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Khi DEMO_MODE, adapter thay REST cho sign-in, /me và sign-out; phiên chỉ trong tab."
+    },
+    {
+      "source": "domain:demo-runtime",
+      "target": "domain:user-management",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "Adapter in-memory giả lập list/create/update/delete users kèm trùng email và phân trang."
+    },
+    {
+      "source": "domain:demo-runtime",
+      "target": "domain:workspace-settings",
+      "type": "cross_domain",
+      "direction": "forward",
+      "weight": 0.6,
+      "description": "settings.ts giữ tên workspace trong RAM; overview hiện số liệu mẫu chỉ ở demo."
+    }
+  ],
+  "layers": [],
+  "tour": []
+}

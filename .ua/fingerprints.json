@@ -1,0 +1,5170 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "",
+  "generatedAt": "2026-09-06T03:26:29.246Z",
+  "files": {
+    ".dockerignore": {
+      "filePath": ".dockerignore",
+      "contentHash": "4ed0586d676c11a43aa1ae0d21cbe445c2500444899cc46bf832e718dc90dbd3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": false
+    },
+    ".env.example": {
+      "filePath": ".env.example",
+      "contentHash": "8563c705aaac08e5aacfc454005de22f90407a28265deb7b0d05dd1d28cfbe6c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "AGENTS.md": {
+      "filePath": "AGENTS.md",
+      "contentHash": "63f2c50380ed6303237cce215ce27af1d620d094c215e28d1b1538a3c070e3bb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "CLAUDE.md": {
+      "filePath": "CLAUDE.md",
+      "contentHash": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "DESIGN.md": {
+      "filePath": "DESIGN.md",
+      "contentHash": "cdca143f6f2f05ec6a46ccc6ebc2487a739b81082aae5e25189ecf5c408cf9e2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 150,
+      "hasStructuralAnalysis": true
+    },
+    "Dockerfile": {
+      "filePath": "Dockerfile",
+      "contentHash": "799084ff7cc4b3f2a996a22c592b99a9677e70f447e714a17bcaabb461f6ae05",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    },
+    "PRODUCT.md": {
+      "filePath": "PRODUCT.md",
+      "contentHash": "3febc0e7d4480603d963615facef9ce0fd9f085134ae5ff12380eb32c0d609f1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "8d147d2d25e85e752bd0915922d41e8a5755d0f54742755c450aa3b288696833",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 239,
+      "hasStructuralAnalysis": true
+    },
+    "components.json": {
+      "filePath": "components.json",
+      "contentHash": "6e0acb27c73e4bbc60e7ab719b61cc840bbb1d54c06b82c030a38d4f866b77ba",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "compose.yaml": {
+      "filePath": "compose.yaml",
+      "contentHash": "267029a7177a5b1e126f50738139b10d48bd20b913ad2104408b9842e0172e60",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "docs/docker.md": {
+      "filePath": "docs/docker.md",
+      "contentHash": "b778743659372cec092626268016e4ec3756527a22b289258f55ad33a047a347",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 65,
+      "hasStructuralAnalysis": true
+    },
+    "docs/folder-tree.txt": {
+      "filePath": "docs/folder-tree.txt",
+      "contentHash": "68f67c98b114d495124b154f8af59f84feb3897c9c606f83792b63979db353ea",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 219,
+      "hasStructuralAnalysis": false
+    },
+    "docs/packages.md": {
+      "filePath": "docs/packages.md",
+      "contentHash": "ca6871631a751a59614f5edd1bde237592d74beecbb2426e198da027d3525640",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 46,
+      "hasStructuralAnalysis": true
+    },
+    "docs/verification.md": {
+      "filePath": "docs/verification.md",
+      "contentHash": "a991d81e44d855648065fee5821cc02c55035c6b96856cc9387a0e6a987eb7b3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
+    "eslint.config.mjs": {
+      "filePath": "eslint.config.mjs",
+      "contentHash": "f6907f837f61916f21ddba1adf00998d6eccbdd3e3baecd74188828723ecbdc4",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "eslint/config",
+          "specifiers": [
+            "defineConfig",
+            "globalIgnores"
+          ]
+        },
+        {
+          "source": "eslint-config-next/core-web-vitals",
+          "specifiers": [
+            "nextVitals"
+          ]
+        },
+        {
+          "source": "eslint-config-next/typescript",
+          "specifiers": [
+            "nextTs"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "knip.json": {
+      "filePath": "knip.json",
+      "contentHash": "5cd0ff25824034567c22bcbf6a36f8fc5949eb903c08acb8d9c360b99eab4a9f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "messages/de.json": {
+      "filePath": "messages/de.json",
+      "contentHash": "9a4a78b54d9105f5f9920007e7c95d87241e6f706500483c0f15e59c0436d27b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 120,
+      "hasStructuralAnalysis": true
+    },
+    "messages/en.json": {
+      "filePath": "messages/en.json",
+      "contentHash": "529b5adaf1855833e2c420eea2e1eccf7431e54cc314e0b6285e450de380b667",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 120,
+      "hasStructuralAnalysis": true
+    },
+    "messages/fr.json": {
+      "filePath": "messages/fr.json",
+      "contentHash": "5cef54ed2d1fbca19c1d3ec019fd70245db5d184d949feb75293daf2bd1cc34d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 120,
+      "hasStructuralAnalysis": true
+    },
+    "messages/vi.json": {
+      "filePath": "messages/vi.json",
+      "contentHash": "d4c56449c2e7fe563c393faa20a73e114b5dfdf5d51471993f33b3114a48d89b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 120,
+      "hasStructuralAnalysis": true
+    },
+    "next-env.d.ts": {
+      "filePath": "next-env.d.ts",
+      "contentHash": "0f70629890b72a0a82e91972cc032c04b658b26c265373cb711cf576bfbf8fcc",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./.next/dev/types/routes.d.ts",
+          "specifiers": []
+        },
+        {
+          "source": "./.next/dev/types/root-params.d.ts",
+          "specifiers": []
+        }
+      ],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "next.config.ts": {
+      "filePath": "next.config.ts",
+      "contentHash": "8f086533cc114834b4bf8949027f8ada42f28fd649846c01e0a9788341b67859",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next",
+          "specifiers": [
+            "NextConfig"
+          ]
+        },
+        {
+          "source": "next-intl/plugin",
+          "specifiers": [
+            "createNextIntlPlugin"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "package.json": {
+      "filePath": "package.json",
+      "contentHash": "5184af977f3c2f743c3864ecda93bc386c001cdf3b73255fa3ea5c0136fa65a1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 55,
+      "hasStructuralAnalysis": true
+    },
+    "playwright.config.ts": {
+      "filePath": "playwright.config.ts",
+      "contentHash": "d7f9a4606b82d9534eeba53fc69adb0a2b1411e98c62a02790365500a8a73c6d",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@playwright/test",
+          "specifiers": [
+            "defineConfig",
+            "devices"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "pnpm-workspace.yaml": {
+      "filePath": "pnpm-workspace.yaml",
+      "contentHash": "ac731784509847e911faa096aab46ae69b93e8a86590209a160dbc2f8b60d6b8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "postcss.config.mjs": {
+      "filePath": "postcss.config.mjs",
+      "contentHash": "b783348d5618047d0f37e12acd15c5a2c5f02809d8711e0764c9cea52750346c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": true
+    },
+    "public/fonts/.gitkeep": {
+      "filePath": "public/fonts/.gitkeep",
+      "contentHash": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "public/gif/.gitkeep": {
+      "filePath": "public/gif/.gitkeep",
+      "contentHash": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "public/icons/.gitkeep": {
+      "filePath": "public/icons/.gitkeep",
+      "contentHash": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "public/images/.gitkeep": {
+      "filePath": "public/images/.gitkeep",
+      "contentHash": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/generate-inventory.mjs": {
+      "filePath": "scripts/generate-inventory.mjs",
+      "contentHash": "8a75277823287eda0025ad6235bc419e6500f2f7e479cd66edf3d8bb798c3b92",
+      "functions": [
+        {
+          "name": "tree",
+          "params": [
+            "directory"
+          ],
+          "exported": false,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:fs",
+          "specifiers": [
+            "fs"
+          ]
+        },
+        {
+          "source": "node:path",
+          "specifiers": [
+            "path"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/init-env.mjs": {
+      "filePath": "scripts/init-env.mjs",
+      "contentHash": "c6b253858e2b14ba4cf5e76f82f79ae8489ff0016c15efb26f7c80e39c8b9059",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "node:fs",
+          "specifiers": [
+            "existsSync",
+            "readFileSync",
+            "writeFileSync"
+          ]
+        },
+        {
+          "source": "node:crypto",
+          "specifiers": [
+            "randomBytes"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(auth)/auth/forgot-password/page.tsx": {
+      "filePath": "src/app/(auth)/auth/forgot-password/page.tsx",
+      "contentHash": "b82f2b6a79a2da59329d05d02ba1e7b2b43ca5e793dbf65c755cd531f1e20945",
+      "functions": [
+        {
+          "name": "ForgotPasswordPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/auth/components/account-form",
+          "specifiers": [
+            "AccountForm"
+          ]
+        }
+      ],
+      "exports": [
+        "metadata",
+        "ForgotPasswordPage"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(auth)/auth/sign-in/page.tsx": {
+      "filePath": "src/app/(auth)/auth/sign-in/page.tsx",
+      "contentHash": "1280afb4839db6dc96a019e032aef3d925c7957cfe8ac78f4b93188a5606bbba",
+      "functions": [
+        {
+          "name": "SignInPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/auth/components/sign-in-form",
+          "specifiers": [
+            "SignInForm"
+          ]
+        }
+      ],
+      "exports": [
+        "metadata",
+        "SignInPage"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(auth)/auth/sign-up/page.tsx": {
+      "filePath": "src/app/(auth)/auth/sign-up/page.tsx",
+      "contentHash": "64253ccf6085353cdaa622263f10d6750d6898a455ec74d8aa886b66a56a7143",
+      "functions": [
+        {
+          "name": "SignUpPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/auth/components/account-form",
+          "specifiers": [
+            "AccountForm"
+          ]
+        }
+      ],
+      "exports": [
+        "metadata",
+        "SignUpPage"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(auth)/forgot-password/page.tsx": {
+      "filePath": "src/app/(auth)/forgot-password/page.tsx",
+      "contentHash": "60139e68baed38af02c5db5201189a3b78ed8c3392115292f4f8e4994a2bed83",
+      "functions": [
+        {
+          "name": "RedirectPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "redirect"
+          ]
+        }
+      ],
+      "exports": [
+        "RedirectPage"
+      ],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(auth)/layout.tsx": {
+      "filePath": "src/app/(auth)/layout.tsx",
+      "contentHash": "5d405ff296b3aef407c286e09e19187cc8d07d73d2f523e4c39f16b1897c6474",
+      "functions": [
+        {
+          "name": "AuthLayout",
+          "params": [
+            "{\n  children,\n}"
+          ],
+          "exported": true,
+          "lineCount": 35
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "Layers2"
+          ]
+        },
+        {
+          "source": "next-intl/server",
+          "specifiers": [
+            "getTranslations"
+          ]
+        },
+        {
+          "source": "@/config/site",
+          "specifiers": [
+            "site"
+          ]
+        }
+      ],
+      "exports": [
+        "AuthLayout"
+      ],
+      "totalLines": 39,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(auth)/sign-in/page.tsx": {
+      "filePath": "src/app/(auth)/sign-in/page.tsx",
+      "contentHash": "4c68353ac93accdc0a1414c9cde8b9929a0df5cc2527eb8e67565e248a8dba9f",
+      "functions": [
+        {
+          "name": "RedirectPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "redirect"
+          ]
+        }
+      ],
+      "exports": [
+        "RedirectPage"
+      ],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(auth)/sign-up/page.tsx": {
+      "filePath": "src/app/(auth)/sign-up/page.tsx",
+      "contentHash": "58b7075a585a5003225dfa3c1a50ac7522f5b92bb7bf5ca2316b2e2cfd0fcf4e",
+      "functions": [
+        {
+          "name": "RedirectPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "redirect"
+          ]
+        }
+      ],
+      "exports": [
+        "RedirectPage"
+      ],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(dashboard)/dashboard/page.tsx": {
+      "filePath": "src/app/(dashboard)/dashboard/page.tsx",
+      "contentHash": "8d91608f54ee8b3404bb3c51c57fd9434738b89f861591725e5a9c2e9afb1ee2",
+      "functions": [
+        {
+          "name": "DashboardPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/dashboard/components/dashboard-overview",
+          "specifiers": [
+            "DashboardOverview"
+          ]
+        }
+      ],
+      "exports": [
+        "metadata",
+        "DashboardPage"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(dashboard)/layout.tsx": {
+      "filePath": "src/app/(dashboard)/layout.tsx",
+      "contentHash": "e108e7bc00022dc4896f9d42f24e15e09e536040dbcd208c1ad453d19b74f12f",
+      "functions": [
+        {
+          "name": "DashboardLayout",
+          "params": [
+            "{\n  children,\n}"
+          ],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/auth/components/auth-guard",
+          "specifiers": [
+            "AuthGuard"
+          ]
+        },
+        {
+          "source": "@/components/shared/layout/app-shell",
+          "specifiers": [
+            "AppShell"
+          ]
+        }
+      ],
+      "exports": [
+        "DashboardLayout"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(dashboard)/settings/page.tsx": {
+      "filePath": "src/app/(dashboard)/settings/page.tsx",
+      "contentHash": "0935dcb89d07b7cbf4d1d54428730a338329265cd757aab83b815445d6bb9a95",
+      "functions": [
+        {
+          "name": "SettingsPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/settings/components/settings-panel",
+          "specifiers": [
+            "SettingsPanel"
+          ]
+        },
+        {
+          "source": "@/components/shared/can",
+          "specifiers": [
+            "Can"
+          ]
+        },
+        {
+          "source": "@/components/shared/permission-denied",
+          "specifiers": [
+            "PermissionDenied"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "PERMISSIONS"
+          ]
+        }
+      ],
+      "exports": [
+        "metadata",
+        "SettingsPage"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/(dashboard)/users/page.tsx": {
+      "filePath": "src/app/(dashboard)/users/page.tsx",
+      "contentHash": "f9eb4038d4feef1c51b5fda0b6e9130e00121f9203dcaa6ec55ca2e06562d6dc",
+      "functions": [
+        {
+          "name": "UsersPage",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/users/components/user-list",
+          "specifiers": [
+            "UserList"
+          ]
+        },
+        {
+          "source": "@/components/shared/can",
+          "specifiers": [
+            "Can"
+          ]
+        },
+        {
+          "source": "@/components/shared/permission-denied",
+          "specifiers": [
+            "PermissionDenied"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "PERMISSIONS"
+          ]
+        }
+      ],
+      "exports": [
+        "metadata",
+        "UsersPage"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/error.tsx": {
+      "filePath": "src/app/error.tsx",
+      "contentHash": "8de7760f8b58c6aff19d5c0d7faf338dd017c134b9ff6d50f7c80b2261b6bd26",
+      "functions": [
+        {
+          "name": "ErrorPage",
+          "params": [
+            "{\n  reset,\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        }
+      ],
+      "exports": [
+        "ErrorPage"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/global-error.tsx": {
+      "filePath": "src/app/global-error.tsx",
+      "contentHash": "a11edec74267343541b0944d816db01a857cc327c14b03b9f5df6528db59261b",
+      "functions": [
+        {
+          "name": "GlobalError",
+          "params": [
+            "{\n  reset,\n}"
+          ],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "GlobalError"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/globals.css": {
+      "filePath": "src/app/globals.css",
+      "contentHash": "a06a6e21c469138f2a64cddf528edab037bc1fd8b65fd679a796f5cb5970dbdb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 82,
+      "hasStructuralAnalysis": false
+    },
+    "src/app/layout.tsx": {
+      "filePath": "src/app/layout.tsx",
+      "contentHash": "34df2dd439260ead7dedfcba410d850723f2cf788b7a78234ef183bd6cfeba42",
+      "functions": [
+        {
+          "name": "RootLayout",
+          "params": [
+            "{\n  children,\n}"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next",
+          "specifiers": [
+            "Metadata"
+          ]
+        },
+        {
+          "source": "next-intl/server",
+          "specifiers": [
+            "getLocale",
+            "getMessages"
+          ]
+        },
+        {
+          "source": "@/providers/app-provider",
+          "specifiers": [
+            "AppProvider"
+          ]
+        },
+        {
+          "source": "@/config/site",
+          "specifiers": [
+            "site"
+          ]
+        },
+        {
+          "source": "./globals.css",
+          "specifiers": []
+        }
+      ],
+      "exports": [
+        "metadata",
+        "RootLayout"
+      ],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/loading.tsx": {
+      "filePath": "src/app/loading.tsx",
+      "contentHash": "cb9f34ae3d3c113a96e35541d0e69d43d5964272de28a599ac8e0c3d863127df",
+      "functions": [
+        {
+          "name": "Loading",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/components/shared/loading/loading-state",
+          "specifiers": [
+            "LoadingState"
+          ]
+        }
+      ],
+      "exports": [
+        "Loading"
+      ],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/not-found.tsx": {
+      "filePath": "src/app/not-found.tsx",
+      "contentHash": "f486f49eb4702a606a89bf94053684fa47a7e81171500498c79da86cbb25230a",
+      "functions": [
+        {
+          "name": "NotFound",
+          "params": [],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/link",
+          "specifiers": [
+            "Link"
+          ]
+        },
+        {
+          "source": "next-intl/server",
+          "specifiers": [
+            "getTranslations"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        }
+      ],
+      "exports": [
+        "NotFound"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "src/app/page.tsx": {
+      "filePath": "src/app/page.tsx",
+      "contentHash": "28035bb3f68c893bf1720ab5dfc2b6c18b254c11b6d5c587f91652b0af2dded6",
+      "functions": [
+        {
+          "name": "HomePage",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "redirect"
+          ]
+        }
+      ],
+      "exports": [
+        "HomePage"
+      ],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/can.tsx": {
+      "filePath": "src/components/shared/can.tsx",
+      "contentHash": "f5c15e5060e425a41e981ca0abc6bd1f4cd79c7de94b20d3546d565dcbf7afee",
+      "functions": [
+        {
+          "name": "Can",
+          "params": [
+            "{\n  permission,\n  children,\n  fallback = null,\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/hooks/use-permission",
+          "specifiers": [
+            "usePermission"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "Permission"
+          ]
+        }
+      ],
+      "exports": [
+        "Can"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/confirm-dialog/confirm-dialog.tsx": {
+      "filePath": "src/components/shared/confirm-dialog/confirm-dialog.tsx",
+      "contentHash": "92e31ab569e4e85ea56e9993f0797972b54a2a5d1fd8839f72253576b2aa501e",
+      "functions": [
+        {
+          "name": "ConfirmDialog",
+          "params": [
+            "{\n  open,\n  onOpenChange,\n  title,\n  description,\n  pending,\n  onConfirm,\n}"
+          ],
+          "exported": true,
+          "lineCount": 40
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "@/components/ui/alert-dialog",
+          "specifiers": [
+            "AlertDialog",
+            "AlertDialogContent",
+            "AlertDialogHeader",
+            "AlertDialogTitle",
+            "AlertDialogDescription",
+            "AlertDialogFooter",
+            "AlertDialogCancel"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        }
+      ],
+      "exports": [
+        "ConfirmDialog"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/data-table/data-table.tsx": {
+      "filePath": "src/components/shared/data-table/data-table.tsx",
+      "contentHash": "b3892a3061f789d484fd5ffdb9437b3a68f2212ee899e9d0aa78151824730462",
+      "functions": [
+        {
+          "name": "DataTable",
+          "params": [
+            "{\n  data,\n  columns,\n  page,\n  pageSize,\n  total,\n  onPageChange,\n  pending,\n}"
+          ],
+          "exported": true,
+          "lineCount": 105
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-table",
+          "specifiers": [
+            "flexRender",
+            "getCoreRowModel",
+            "useReactTable",
+            "ColumnDef"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "ChevronLeft",
+            "ChevronRight"
+          ]
+        },
+        {
+          "source": "@/components/ui/table",
+          "specifiers": [
+            "Table",
+            "TableBody",
+            "TableCell",
+            "TableHead",
+            "TableHeader",
+            "TableRow"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/components/shared/empty-state/empty-state",
+          "specifiers": [
+            "EmptyState"
+          ]
+        },
+        {
+          "source": "@/stores/ui.store",
+          "specifiers": [
+            "useUiStore"
+          ]
+        }
+      ],
+      "exports": [
+        "DataTable"
+      ],
+      "totalLines": 126,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/empty-state/empty-state.tsx": {
+      "filePath": "src/components/shared/empty-state/empty-state.tsx",
+      "contentHash": "7751e6d1dbeb27ddaf0df759871d14230de293d3a7baf6e3a8864b4827871fa1",
+      "functions": [
+        {
+          "name": "EmptyState",
+          "params": [
+            "{\n  title,\n  description,\n}"
+          ],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "UsersRound"
+          ]
+        }
+      ],
+      "exports": [
+        "EmptyState"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/layout/app-shell.tsx": {
+      "filePath": "src/components/shared/layout/app-shell.tsx",
+      "contentHash": "1c2bd897562d108376a0806abf4048f59e6a76cf4e43c2ec354c4708b66c695a",
+      "functions": [
+        {
+          "name": "AppShell",
+          "params": [
+            "{ children }"
+          ],
+          "exported": true,
+          "lineCount": 43
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/components/ui/dialog",
+          "specifiers": [
+            "Dialog",
+            "DialogContent",
+            "DialogTitle"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "@/hooks/use-media-query",
+          "specifiers": [
+            "useMediaQuery"
+          ]
+        },
+        {
+          "source": "@/stores/sidebar.store",
+          "specifiers": [
+            "useSidebarStore"
+          ]
+        },
+        {
+          "source": "@/components/shared/layout/sidebar",
+          "specifiers": [
+            "Sidebar"
+          ]
+        },
+        {
+          "source": "@/components/shared/layout/header",
+          "specifiers": [
+            "Header"
+          ]
+        }
+      ],
+      "exports": [
+        "AppShell"
+      ],
+      "totalLines": 51,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/layout/header.tsx": {
+      "filePath": "src/components/shared/layout/header.tsx",
+      "contentHash": "40fc2c0775add1a293333aedb100c5bffd57263a78b5f8a004d2b58396f29306",
+      "functions": [
+        {
+          "name": "Header",
+          "params": [],
+          "exported": true,
+          "lineCount": 66
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "useRouter",
+            "usePathname"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "Menu",
+            "LogOut"
+          ]
+        },
+        {
+          "source": "sonner",
+          "specifiers": [
+            "toast"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/stores/sidebar.store",
+          "specifiers": [
+            "useSidebarStore"
+          ]
+        },
+        {
+          "source": "@/features/auth/hooks/use-session",
+          "specifiers": [
+            "useSession"
+          ]
+        },
+        {
+          "source": "@/features/auth/api/sign-out",
+          "specifiers": [
+            "signOut"
+          ]
+        },
+        {
+          "source": "@/lib/auth/session",
+          "specifiers": [
+            "clearSession"
+          ]
+        },
+        {
+          "source": "@/lib/utils/string",
+          "specifiers": [
+            "initials"
+          ]
+        },
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/config/navigation",
+          "specifiers": [
+            "navigation"
+          ]
+        }
+      ],
+      "exports": [
+        "Header"
+      ],
+      "totalLines": 81,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/layout/sidebar.tsx": {
+      "filePath": "src/components/shared/layout/sidebar.tsx",
+      "contentHash": "2b979748523bdaac3e45e16f62ddf8629d4c9ff2e84c0615a5b90754e5b1c8da",
+      "functions": [
+        {
+          "name": "Sidebar",
+          "params": [],
+          "exported": true,
+          "lineCount": 58
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/link",
+          "specifiers": [
+            "Link"
+          ]
+        },
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "usePathname"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "Layers2",
+            "X"
+          ]
+        },
+        {
+          "source": "@/config/navigation",
+          "specifiers": [
+            "navigation",
+            "NavigationItem"
+          ]
+        },
+        {
+          "source": "@/config/site",
+          "specifiers": [
+            "site"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "@/hooks/use-permission",
+          "specifiers": [
+            "usePermission"
+          ]
+        },
+        {
+          "source": "@/stores/sidebar.store",
+          "specifiers": [
+            "useSidebarStore"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        }
+      ],
+      "exports": [
+        "Sidebar"
+      ],
+      "totalLines": 70,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/loading/loading-state.tsx": {
+      "filePath": "src/components/shared/loading/loading-state.tsx",
+      "contentHash": "40d2cff0ad1df69ab2c29dbd18467415db3bfb112d98319876dd8479f4c9154e",
+      "functions": [
+        {
+          "name": "LoadingState",
+          "params": [],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "LoaderCircle"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        }
+      ],
+      "exports": [
+        "LoadingState"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/page-header/page-header.tsx": {
+      "filePath": "src/components/shared/page-header/page-header.tsx",
+      "contentHash": "76f7af47b73983ab03e4e4b35475dbf5bf24d5c2043681247d640dcbd7aeee65",
+      "functions": [
+        {
+          "name": "PageHeader",
+          "params": [
+            "{\n  title,\n  description,\n  action,\n}"
+          ],
+          "exported": true,
+          "lineCount": 23
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "ReactNode"
+          ]
+        }
+      ],
+      "exports": [
+        "PageHeader"
+      ],
+      "totalLines": 25,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/shared/permission-denied.tsx": {
+      "filePath": "src/components/shared/permission-denied.tsx",
+      "contentHash": "b298b914037a31cce71996985811733430cbe90250dfb64184762f9df5fe7442",
+      "functions": [
+        {
+          "name": "PermissionDenied",
+          "params": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        }
+      ],
+      "exports": [
+        "PermissionDenied"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/alert-dialog.tsx": {
+      "filePath": "src/components/ui/alert-dialog.tsx",
+      "contentHash": "ae6f0d5fd06a60ff51985df458c8c780d68107d36b616677488235627573a578",
+      "functions": [
+        {
+          "name": "AlertDialog",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "AlertDialogTrigger",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "AlertDialogPortal",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "AlertDialogOverlay",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "AlertDialogContent",
+          "params": [
+            "{\n  className,\n  size = \"default\",\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "AlertDialogHeader",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "AlertDialogFooter",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "AlertDialogTitle",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "AlertDialogDescription",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "AlertDialogMedia",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "AlertDialogAction",
+          "params": [
+            "{\n  className,\n  variant = \"default\",\n  size = \"default\",\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "AlertDialogCancel",
+          "params": [
+            "{\n  className,\n  variant = \"outline\",\n  size = \"default\",\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "AlertDialogPrimitive"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        }
+      ],
+      "exports": [
+        "AlertDialog",
+        "AlertDialogAction",
+        "AlertDialogCancel",
+        "AlertDialogContent",
+        "AlertDialogDescription",
+        "AlertDialogFooter",
+        "AlertDialogHeader",
+        "AlertDialogMedia",
+        "AlertDialogOverlay",
+        "AlertDialogPortal",
+        "AlertDialogTitle",
+        "AlertDialogTrigger"
+      ],
+      "totalLines": 197,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/badge.tsx": {
+      "filePath": "src/components/ui/badge.tsx",
+      "contentHash": "4aebc3749191a88439170f85356959419d55db2b784154114caf2dd8cf47d144",
+      "functions": [
+        {
+          "name": "Badge",
+          "params": [
+            "{\n  className,\n  variant = \"default\",\n  asChild = false,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 18
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "class-variance-authority",
+          "specifiers": [
+            "cva",
+            "VariantProps"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "Slot"
+          ]
+        }
+      ],
+      "exports": [
+        "Badge",
+        "badgeVariants"
+      ],
+      "totalLines": 48,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/button.tsx": {
+      "filePath": "src/components/ui/button.tsx",
+      "contentHash": "d80c61b767c05779930bff84e83754957e90bd9747f877507359f4d6a41c2535",
+      "functions": [
+        {
+          "name": "Button",
+          "params": [
+            "{\n  className,\n  variant = \"default\",\n  size = \"default\",\n  asChild = false,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "class-variance-authority",
+          "specifiers": [
+            "cva",
+            "VariantProps"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "Slot"
+          ]
+        }
+      ],
+      "exports": [
+        "Button",
+        "buttonVariants"
+      ],
+      "totalLines": 64,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/card.tsx": {
+      "filePath": "src/components/ui/card.tsx",
+      "contentHash": "78608973f29337a79f59dac325a7cc627651625e18ad998bea61fcfb9292e8ca",
+      "functions": [
+        {
+          "name": "Card",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "CardHeader",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "CardTitle",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "CardDescription",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "CardAction",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "CardContent",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "CardFooter",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        }
+      ],
+      "exports": [
+        "Card",
+        "CardHeader",
+        "CardFooter",
+        "CardTitle",
+        "CardAction",
+        "CardDescription",
+        "CardContent"
+      ],
+      "totalLines": 92,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/checkbox.tsx": {
+      "filePath": "src/components/ui/checkbox.tsx",
+      "contentHash": "0ae8b7c99ff51f7e0bad8fac80e62caf11ed0864a4af10d173967a2a59a72bb3",
+      "functions": [
+        {
+          "name": "Checkbox",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "CheckIcon"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "CheckboxPrimitive"
+          ]
+        }
+      ],
+      "exports": [
+        "Checkbox"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/dialog.tsx": {
+      "filePath": "src/components/ui/dialog.tsx",
+      "contentHash": "3da4064a664b7187dbf8cf1d0a9f8fec3e45c68353c552047250ae3d1d87de16",
+      "functions": [
+        {
+          "name": "Dialog",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "DialogTrigger",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "DialogPortal",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "DialogClose",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "DialogOverlay",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "DialogContent",
+          "params": [
+            "{\n  className,\n  children,\n  showCloseButton = true,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "DialogHeader",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "DialogFooter",
+          "params": [
+            "{\n  className,\n  showCloseButton = false,\n  children,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "DialogTitle",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "DialogDescription",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "XIcon"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "DialogPrimitive"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        }
+      ],
+      "exports": [
+        "Dialog",
+        "DialogClose",
+        "DialogContent",
+        "DialogDescription",
+        "DialogFooter",
+        "DialogHeader",
+        "DialogOverlay",
+        "DialogPortal",
+        "DialogTitle",
+        "DialogTrigger"
+      ],
+      "totalLines": 159,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/dropdown-menu.tsx": {
+      "filePath": "src/components/ui/dropdown-menu.tsx",
+      "contentHash": "b879f3f70f2dc3b7f9d227529fabbfe27633b6939adad51302d86bc3072f10f0",
+      "functions": [
+        {
+          "name": "DropdownMenu",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "DropdownMenuPortal",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "DropdownMenuTrigger",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "DropdownMenuContent",
+          "params": [
+            "{\n  className,\n  sideOffset = 4,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "DropdownMenuGroup",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "DropdownMenuItem",
+          "params": [
+            "{\n  className,\n  inset,\n  variant = \"default\",\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "DropdownMenuCheckboxItem",
+          "params": [
+            "{\n  className,\n  children,\n  checked,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "DropdownMenuRadioGroup",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "DropdownMenuRadioItem",
+          "params": [
+            "{\n  className,\n  children,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "DropdownMenuLabel",
+          "params": [
+            "{\n  className,\n  inset,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "DropdownMenuSeparator",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "DropdownMenuShortcut",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "DropdownMenuSub",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "DropdownMenuSubTrigger",
+          "params": [
+            "{\n  className,\n  inset,\n  children,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "DropdownMenuSubContent",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "CheckIcon",
+            "ChevronRightIcon",
+            "CircleIcon"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "DropdownMenuPrimitive"
+          ]
+        }
+      ],
+      "exports": [
+        "DropdownMenu",
+        "DropdownMenuPortal",
+        "DropdownMenuTrigger",
+        "DropdownMenuContent",
+        "DropdownMenuGroup",
+        "DropdownMenuLabel",
+        "DropdownMenuItem",
+        "DropdownMenuCheckboxItem",
+        "DropdownMenuRadioGroup",
+        "DropdownMenuRadioItem",
+        "DropdownMenuSeparator",
+        "DropdownMenuShortcut",
+        "DropdownMenuSub",
+        "DropdownMenuSubTrigger",
+        "DropdownMenuSubContent"
+      ],
+      "totalLines": 257,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/input.tsx": {
+      "filePath": "src/components/ui/input.tsx",
+      "contentHash": "802f822d8ccb0addba9a51fdda1102cbfebbe814891968f277acccf7c37a3858",
+      "functions": [
+        {
+          "name": "Input",
+          "params": [
+            "{ className, type, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        }
+      ],
+      "exports": [
+        "Input"
+      ],
+      "totalLines": 21,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/label.tsx": {
+      "filePath": "src/components/ui/label.tsx",
+      "contentHash": "4e88f1d5b651029abd64da86be492fc62e3e1f4cedb8f173f3777c1cbc5ee06b",
+      "functions": [
+        {
+          "name": "Label",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "LabelPrimitive"
+          ]
+        }
+      ],
+      "exports": [
+        "Label"
+      ],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/select.tsx": {
+      "filePath": "src/components/ui/select.tsx",
+      "contentHash": "8aa5c298c3d5c843c9cf6de3dff18c5659d412ee2881a20a219a770584243a18",
+      "functions": [
+        {
+          "name": "Select",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "SelectGroup",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "SelectValue",
+          "params": [
+            "{\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "SelectTrigger",
+          "params": [
+            "{\n  className,\n  size = \"default\",\n  children,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "SelectContent",
+          "params": [
+            "{\n  className,\n  children,\n  position = \"item-aligned\",\n  align = \"center\",\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 36
+        },
+        {
+          "name": "SelectLabel",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "SelectItem",
+          "params": [
+            "{\n  className,\n  children,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "SelectSeparator",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "SelectScrollUpButton",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "SelectScrollDownButton",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "CheckIcon",
+            "ChevronDownIcon",
+            "ChevronUpIcon"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "SelectPrimitive"
+          ]
+        }
+      ],
+      "exports": [
+        "Select",
+        "SelectContent",
+        "SelectGroup",
+        "SelectItem",
+        "SelectLabel",
+        "SelectScrollDownButton",
+        "SelectScrollUpButton",
+        "SelectSeparator",
+        "SelectTrigger",
+        "SelectValue"
+      ],
+      "totalLines": 190,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/separator.tsx": {
+      "filePath": "src/components/ui/separator.tsx",
+      "contentHash": "3344f16d70aa75c40148c392b7396a07779a85bd2819384636feacb5b913a1ce",
+      "functions": [
+        {
+          "name": "Separator",
+          "params": [
+            "{\n  className,\n  orientation = \"horizontal\",\n  decorative = true,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        },
+        {
+          "source": "radix-ui",
+          "specifiers": [
+            "SeparatorPrimitive"
+          ]
+        }
+      ],
+      "exports": [
+        "Separator"
+      ],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/skeleton.tsx": {
+      "filePath": "src/components/ui/skeleton.tsx",
+      "contentHash": "fad193d13e5bd57324717b638c67d9ddf4bf5ebae9b103a783c51cfbe5b4fec4",
+      "functions": [
+        {
+          "name": "Skeleton",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        }
+      ],
+      "exports": [
+        "Skeleton"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/components/ui/table.tsx": {
+      "filePath": "src/components/ui/table.tsx",
+      "contentHash": "f6f0517306d037a0bec1b2c2f461b56f2784ab61360086cc6cc58658f6c39c81",
+      "functions": [
+        {
+          "name": "Table",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "TableHeader",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "TableBody",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "TableFooter",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "TableRow",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "TableHead",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "TableCell",
+          "params": [
+            "{ className, ...props }"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "TableCaption",
+          "params": [
+            "{\n  className,\n  ...props\n}"
+          ],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "* as React"
+          ]
+        },
+        {
+          "source": "@/lib/utils/cn",
+          "specifiers": [
+            "cn"
+          ]
+        }
+      ],
+      "exports": [
+        "Table",
+        "TableHeader",
+        "TableBody",
+        "TableFooter",
+        "TableHead",
+        "TableRow",
+        "TableCell",
+        "TableCaption"
+      ],
+      "totalLines": 119,
+      "hasStructuralAnalysis": true
+    },
+    "src/config/env.ts": {
+      "filePath": "src/config/env.ts",
+      "contentHash": "a672b9e9aaca97b80b643b05b2ee9015467ca95ae274c4283e802ed8142359fb",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zod",
+          "specifiers": [
+            "z"
+          ]
+        }
+      ],
+      "exports": [
+        "env"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "src/config/navigation.ts": {
+      "filePath": "src/config/navigation.ts",
+      "contentHash": "ea6590a57ba2fad31ac0b5e41a03f4374ff16a7ec107c3584ad12b847012dc4b",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "LayoutDashboard",
+            "UsersRound",
+            "Settings2",
+            "LucideIcon"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "PERMISSIONS",
+            "Permission"
+          ]
+        }
+      ],
+      "exports": [
+        "navigation"
+      ],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "src/config/permissions.ts": {
+      "filePath": "src/config/permissions.ts",
+      "contentHash": "2da4b2bc67b5a7ca24f9660679cc13cc23de1b7f9671ed61c280724370ab098c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "PERMISSIONS"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/config/site.ts": {
+      "filePath": "src/config/site.ts",
+      "contentHash": "e35ae6de5e790719bb1a04f20b2ed316a045aa0fcf9b1afda835e1d03ee3afa1",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        }
+      ],
+      "exports": [
+        "site"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/constants/app.ts": {
+      "filePath": "src/constants/app.ts",
+      "contentHash": "c964955a70648d3f0582dbf08107f22d4982063d3f785b195bcd6eb7e6e18d70",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "PAGE_SIZE",
+        "LOCALES"
+      ],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/api/get-current-user.ts": {
+      "filePath": "src/features/auth/api/get-current-user.ts",
+      "contentHash": "010a1a27870468f3f3ad52f3171b11051cd35e9e016160c0f0af61be7fbbe011",
+      "functions": [
+        {
+          "name": "getCurrentUser",
+          "params": [],
+          "returnType": "Promise<CurrentUser>",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient",
+            "refreshAccessToken"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/lib/auth/token",
+          "specifiers": [
+            "token"
+          ]
+        },
+        {
+          "source": "@/features/auth/types/auth.type",
+          "specifiers": [
+            "CurrentUser"
+          ]
+        }
+      ],
+      "exports": [
+        "getCurrentUser"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/api/recover-account.ts": {
+      "filePath": "src/features/auth/api/recover-account.ts",
+      "contentHash": "91362600a37af18d9667f95e9b88bcf274129e9c8b49e7e8028ba98b733dd3e6",
+      "functions": [
+        {
+          "name": "recoverAccount",
+          "params": [
+            "values"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "registerAccount",
+          "params": [
+            "values"
+          ],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        }
+      ],
+      "exports": [
+        "recoverAccount",
+        "registerAccount"
+      ],
+      "totalLines": 18,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/api/sign-in.ts": {
+      "filePath": "src/features/auth/api/sign-in.ts",
+      "contentHash": "4a6c387d95a09e45d316495d3379572d4e184b45b07f24c46be290fab21cda2e",
+      "functions": [
+        {
+          "name": "signIn",
+          "params": [
+            "values"
+          ],
+          "returnType": "Promise<AuthResponse>",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/features/auth/schemas/auth.schema",
+          "specifiers": [
+            "SignInValues"
+          ]
+        },
+        {
+          "source": "@/features/auth/types/auth.type",
+          "specifiers": [
+            "AuthResponse"
+          ]
+        }
+      ],
+      "exports": [
+        "signIn"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/api/sign-out.ts": {
+      "filePath": "src/features/auth/api/sign-out.ts",
+      "contentHash": "764057dcbde6eafe9565f5b4ec03f0cafb79f035ff7e6cbdd9aca0080bdbdc18",
+      "functions": [
+        {
+          "name": "signOut",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        }
+      ],
+      "exports": [
+        "signOut"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/components/account-form.tsx": {
+      "filePath": "src/features/auth/components/account-form.tsx",
+      "contentHash": "5104f0784cf95d76b4f944abf8828f92b0a43d3b30e1c0adb92796a751811b42",
+      "functions": [
+        {
+          "name": "AccountForm",
+          "params": [
+            "{ mode }"
+          ],
+          "exported": true,
+          "lineCount": 98
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/link",
+          "specifiers": [
+            "Link"
+          ]
+        },
+        {
+          "source": "react-hook-form",
+          "specifiers": [
+            "useForm"
+          ]
+        },
+        {
+          "source": "@hookform/resolvers/zod",
+          "specifiers": [
+            "zodResolver"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "zod",
+          "specifiers": [
+            "z"
+          ]
+        },
+        {
+          "source": "@/features/auth/schemas/auth.schema",
+          "specifiers": [
+            "signUpSchema",
+            "forgotPasswordSchema"
+          ]
+        },
+        {
+          "source": "@/features/auth/api/recover-account",
+          "specifiers": [
+            "recoverAccount",
+            "registerAccount"
+          ]
+        },
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/components/ui/input",
+          "specifiers": [
+            "Input"
+          ]
+        },
+        {
+          "source": "@/components/ui/label",
+          "specifiers": [
+            "Label"
+          ]
+        }
+      ],
+      "exports": [
+        "AccountForm"
+      ],
+      "totalLines": 119,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/components/auth-guard.tsx": {
+      "filePath": "src/features/auth/components/auth-guard.tsx",
+      "contentHash": "d0163dbf3206169b10d162c469f7639d9bb10807381e2b7ed2a4f5c8fec505b3",
+      "functions": [
+        {
+          "name": "AuthGuard",
+          "params": [
+            "{ children }"
+          ],
+          "exported": true,
+          "lineCount": 30
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useEffect"
+          ]
+        },
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "useRouter"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "@/features/auth/hooks/use-session",
+          "specifiers": [
+            "useSession"
+          ]
+        },
+        {
+          "source": "@/features/auth/stores/auth.store",
+          "specifiers": [
+            "useAuthStore"
+          ]
+        },
+        {
+          "source": "@/lib/auth/session",
+          "specifiers": [
+            "clearSession"
+          ]
+        },
+        {
+          "source": "@/lib/api/api-error",
+          "specifiers": [
+            "normalizeApiError"
+          ]
+        },
+        {
+          "source": "@/components/shared/loading/loading-state",
+          "specifiers": [
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        }
+      ],
+      "exports": [
+        "AuthGuard"
+      ],
+      "totalLines": 42,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/components/sign-in-form.tsx": {
+      "filePath": "src/features/auth/components/sign-in-form.tsx",
+      "contentHash": "2926f1cb2487166991dd3ca549a84f95d0fbba58e1c5e58eea5e62b649701b92",
+      "functions": [
+        {
+          "name": "SignInForm",
+          "params": [],
+          "exported": true,
+          "lineCount": 134
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/link",
+          "specifiers": [
+            "Link"
+          ]
+        },
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "useRouter"
+          ]
+        },
+        {
+          "source": "react-hook-form",
+          "specifiers": [
+            "useForm",
+            "Controller"
+          ]
+        },
+        {
+          "source": "@hookform/resolvers/zod",
+          "specifiers": [
+            "zodResolver"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "ArrowRight",
+            "LoaderCircle"
+          ]
+        },
+        {
+          "source": "@/features/auth/schemas/auth.schema",
+          "specifiers": [
+            "signInSchema",
+            "SignInValues"
+          ]
+        },
+        {
+          "source": "@/features/auth/api/sign-in",
+          "specifiers": [
+            "signIn"
+          ]
+        },
+        {
+          "source": "@/features/auth/constants",
+          "specifiers": [
+            "AUTH_QUERY_KEY"
+          ]
+        },
+        {
+          "source": "@/features/auth/stores/auth.store",
+          "specifiers": [
+            "useAuthStore"
+          ]
+        },
+        {
+          "source": "@/lib/auth/token",
+          "specifiers": [
+            "token"
+          ]
+        },
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/components/ui/input",
+          "specifiers": [
+            "Input"
+          ]
+        },
+        {
+          "source": "@/components/ui/label",
+          "specifiers": [
+            "Label"
+          ]
+        },
+        {
+          "source": "@/components/ui/checkbox",
+          "specifiers": [
+            "Checkbox"
+          ]
+        }
+      ],
+      "exports": [
+        "SignInForm"
+      ],
+      "totalLines": 156,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/constants.ts": {
+      "filePath": "src/features/auth/constants.ts",
+      "contentHash": "efebcb877ddeeac79bc845518660844a9a8ba50b60024e42a38c2a4a96dbc440",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "AUTH_QUERY_KEY"
+      ],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/hooks/use-session.ts": {
+      "filePath": "src/features/auth/hooks/use-session.ts",
+      "contentHash": "7b29478c8dc393f4e4278294355538c582129fe77b0969101708b3e2f273a062",
+      "functions": [
+        {
+          "name": "useSession",
+          "params": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useQuery"
+          ]
+        },
+        {
+          "source": "@/features/auth/constants",
+          "specifiers": [
+            "AUTH_QUERY_KEY"
+          ]
+        },
+        {
+          "source": "@/features/auth/api/get-current-user",
+          "specifiers": [
+            "getCurrentUser"
+          ]
+        }
+      ],
+      "exports": [
+        "useSession"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/schemas/auth.schema.ts": {
+      "filePath": "src/features/auth/schemas/auth.schema.ts",
+      "contentHash": "442fb3361a385e8fc64e78d76368e0f800eb097c7fee51c75636291cbbeff62c",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zod",
+          "specifiers": [
+            "z"
+          ]
+        }
+      ],
+      "exports": [
+        "signInSchema",
+        "signUpSchema",
+        "forgotPasswordSchema"
+      ],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/stores/auth.store.ts": {
+      "filePath": "src/features/auth/stores/auth.store.ts",
+      "contentHash": "e7e4783cca623cf9f22e7dbc7e4aa3c00fc7e04d433d0bfddf1c5bcca6415b66",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zustand",
+          "specifiers": [
+            "create"
+          ]
+        }
+      ],
+      "exports": [
+        "useAuthStore"
+      ],
+      "totalLines": 7,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/auth/types/auth.type.ts": {
+      "filePath": "src/features/auth/types/auth.type.ts",
+      "contentHash": "7cad90338fdcd802edc1d04b34efd4a145e000bad88b4a293b5cd724cf4849bd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/dashboard/components/dashboard-overview.tsx": {
+      "filePath": "src/features/dashboard/components/dashboard-overview.tsx",
+      "contentHash": "86e6145ef8ad91e6934bcab4d37600ed2fbd052879935c454ae969fc1304d97c",
+      "functions": [
+        {
+          "name": "DashboardOverview",
+          "params": [],
+          "exported": true,
+          "lineCount": 81
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/link",
+          "specifiers": [
+            "Link"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "ArrowUpRight",
+            "UsersRound",
+            "Settings2"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "@/components/shared/page-header/page-header",
+          "specifiers": [
+            "PageHeader"
+          ]
+        },
+        {
+          "source": "@/components/ui/card",
+          "specifiers": [
+            "Card",
+            "CardContent",
+            "CardHeader",
+            "CardTitle",
+            "CardDescription"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/components/shared/can",
+          "specifiers": [
+            "Can"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "PERMISSIONS"
+          ]
+        },
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/features/auth/hooks/use-session",
+          "specifiers": [
+            "useSession"
+          ]
+        },
+        {
+          "source": "@/lib/utils/number",
+          "specifiers": [
+            "formatNumber"
+          ]
+        }
+      ],
+      "exports": [
+        "DashboardOverview"
+      ],
+      "totalLines": 100,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/settings/api/get-settings.ts": {
+      "filePath": "src/features/settings/api/get-settings.ts",
+      "contentHash": "e3dccc2bc27f35aadfcefae389a9aa01670afca5b968f6c57487af37840163ac",
+      "functions": [
+        {
+          "name": "getSettings",
+          "params": [],
+          "returnType": "Promise<WorkspaceSettings>",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/features/settings/types/settings.type",
+          "specifiers": [
+            "WorkspaceSettings"
+          ]
+        }
+      ],
+      "exports": [
+        "getSettings"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/settings/api/update-settings.ts": {
+      "filePath": "src/features/settings/api/update-settings.ts",
+      "contentHash": "46510b953eb48ddd4a12d14ff0efd1b06d9c9a80897e5383133b5e18cc1bcd08",
+      "functions": [
+        {
+          "name": "updateSettings",
+          "params": [
+            "values"
+          ],
+          "returnType": "Promise<WorkspaceSettings>",
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/features/settings/types/settings.type",
+          "specifiers": [
+            "WorkspaceSettings"
+          ]
+        }
+      ],
+      "exports": [
+        "updateSettings"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/settings/components/settings-panel.tsx": {
+      "filePath": "src/features/settings/components/settings-panel.tsx",
+      "contentHash": "5e3fc38601b8bb83f78d764f9c7679bf4f6b87ef8ac309619e97f12c9134280e",
+      "functions": [
+        {
+          "name": "WorkspaceForm",
+          "params": [
+            "{ settings }"
+          ],
+          "exported": false,
+          "lineCount": 37
+        },
+        {
+          "name": "SettingsPanel",
+          "params": [],
+          "exported": true,
+          "lineCount": 91
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useLocale",
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "next/navigation",
+          "specifiers": [
+            "useRouter"
+          ]
+        },
+        {
+          "source": "next-themes",
+          "specifiers": [
+            "useTheme"
+          ]
+        },
+        {
+          "source": "react-hook-form",
+          "specifiers": [
+            "useForm"
+          ]
+        },
+        {
+          "source": "@hookform/resolvers/zod",
+          "specifiers": [
+            "zodResolver"
+          ]
+        },
+        {
+          "source": "sonner",
+          "specifiers": [
+            "toast"
+          ]
+        },
+        {
+          "source": "@/features/settings/schemas/settings.schema",
+          "specifiers": [
+            "settingsSchema"
+          ]
+        },
+        {
+          "source": "@/features/settings/types/settings.type",
+          "specifiers": [
+            "WorkspaceSettings"
+          ]
+        },
+        {
+          "source": "@/features/settings/hooks/use-settings",
+          "specifiers": [
+            "useSettings",
+            "useUpdateSettings"
+          ]
+        },
+        {
+          "source": "@/constants/app",
+          "specifiers": [
+            "LOCALES"
+          ]
+        },
+        {
+          "source": "@/stores/ui.store",
+          "specifiers": [
+            "useUiStore"
+          ]
+        },
+        {
+          "source": "@/hooks/use-permission",
+          "specifiers": [
+            "usePermission"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "PERMISSIONS"
+          ]
+        },
+        {
+          "source": "@/components/shared/page-header/page-header",
+          "specifiers": [
+            "PageHeader"
+          ]
+        },
+        {
+          "source": "@/components/shared/loading/loading-state",
+          "specifiers": [
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/components/ui/input",
+          "specifiers": [
+            "Input"
+          ]
+        },
+        {
+          "source": "@/components/ui/label",
+          "specifiers": [
+            "Label"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/components/ui/checkbox",
+          "specifiers": [
+            "Checkbox"
+          ]
+        },
+        {
+          "source": "@/components/ui/select",
+          "specifiers": [
+            "Select",
+            "SelectTrigger",
+            "SelectValue",
+            "SelectContent",
+            "SelectItem"
+          ]
+        }
+      ],
+      "exports": [
+        "SettingsPanel"
+      ],
+      "totalLines": 159,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/settings/hooks/use-settings.ts": {
+      "filePath": "src/features/settings/hooks/use-settings.ts",
+      "contentHash": "760f51160715e18ced486c5728f7577e1d995ba8dd0cbd9b124d7201cce6be73",
+      "functions": [
+        {
+          "name": "useSettings",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "useUpdateSettings",
+          "params": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useQuery",
+            "useMutation",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "@/features/settings/api/get-settings",
+          "specifiers": [
+            "getSettings"
+          ]
+        },
+        {
+          "source": "@/features/settings/api/update-settings",
+          "specifiers": [
+            "updateSettings"
+          ]
+        }
+      ],
+      "exports": [
+        "useSettings",
+        "useUpdateSettings"
+      ],
+      "totalLines": 16,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/settings/schemas/settings.schema.ts": {
+      "filePath": "src/features/settings/schemas/settings.schema.ts",
+      "contentHash": "febb66ddc7f130b34cf47b97f597185b75317c97b0a02a618a82e86e05d6d5a4",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zod",
+          "specifiers": [
+            "z"
+          ]
+        }
+      ],
+      "exports": [
+        "settingsSchema"
+      ],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/settings/types/settings.type.ts": {
+      "filePath": "src/features/settings/types/settings.type.ts",
+      "contentHash": "213b194dff73af49ae01c16ed41c9a263d7e513b908db41747310c3b099e69fe",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zod",
+          "specifiers": [
+            "z"
+          ]
+        },
+        {
+          "source": "@/features/settings/schemas/settings.schema",
+          "specifiers": [
+            "settingsSchema"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/api/create-user.ts": {
+      "filePath": "src/features/users/api/create-user.ts",
+      "contentHash": "36f0338f498d8d2568a49845a1ee7c14bc935a7b64f2cac269220b4f8ed64ddb",
+      "functions": [
+        {
+          "name": "createUser",
+          "params": [
+            "values"
+          ],
+          "returnType": "Promise<User>",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/features/users/types/user.type",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "@/features/users/schemas/user.schema",
+          "specifiers": [
+            "UserValues"
+          ]
+        }
+      ],
+      "exports": [
+        "createUser"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/api/delete-user.ts": {
+      "filePath": "src/features/users/api/delete-user.ts",
+      "contentHash": "f73717fc8c76ecb06dbee8450c5368c0cfd465c397f673e258140ed14fbfacfa",
+      "functions": [
+        {
+          "name": "deleteUser",
+          "params": [
+            "id"
+          ],
+          "returnType": "Promise<void>",
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        }
+      ],
+      "exports": [
+        "deleteUser"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/api/get-user.ts": {
+      "filePath": "src/features/users/api/get-user.ts",
+      "contentHash": "9873690fc98dc44096f9abe1e3cb8af0b8375649c707c4acd1ba668167f4d225",
+      "functions": [
+        {
+          "name": "getUser",
+          "params": [
+            "id",
+            "signal"
+          ],
+          "returnType": "Promise<User>",
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/features/users/types/user.type",
+          "specifiers": [
+            "User"
+          ]
+        }
+      ],
+      "exports": [
+        "getUser"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/api/get-users.ts": {
+      "filePath": "src/features/users/api/get-users.ts",
+      "contentHash": "5af4b808155c7fc1019e7f05f52b9fc6c7af7ba65a5b6baf0d232861c15e530b",
+      "functions": [
+        {
+          "name": "getUsers",
+          "params": [
+            "params",
+            "signal"
+          ],
+          "returnType": "Promise<PaginatedResponse<User>>",
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/features/users/types/user.type",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "@/types/pagination",
+          "specifiers": [
+            "PaginationParams",
+            "PaginatedResponse"
+          ]
+        }
+      ],
+      "exports": [
+        "getUsers"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/api/update-user.ts": {
+      "filePath": "src/features/users/api/update-user.ts",
+      "contentHash": "23dad2540d1b334dbc2a1c551bf207c27bf6043cd24776b2ebdaf7c906ceada5",
+      "functions": [
+        {
+          "name": "updateUser",
+          "params": [
+            "id",
+            "values"
+          ],
+          "returnType": "Promise<User>",
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "apiClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        },
+        {
+          "source": "@/features/users/types/user.type",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "@/features/users/schemas/user.schema",
+          "specifiers": [
+            "UserValues"
+          ]
+        }
+      ],
+      "exports": [
+        "updateUser"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/components/user-form.tsx": {
+      "filePath": "src/features/users/components/user-form.tsx",
+      "contentHash": "9b465272ec9a89d5d25f5b1f6f547861bacdbbefd02dc3bfafa3ee247f0f08c5",
+      "functions": [
+        {
+          "name": "UserForm",
+          "params": [
+            "{\n  user,\n  onSave,\n  onCancel,\n  pending,\n}"
+          ],
+          "exported": true,
+          "lineCount": 94
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react-hook-form",
+          "specifiers": [
+            "useForm",
+            "Controller"
+          ]
+        },
+        {
+          "source": "@hookform/resolvers/zod",
+          "specifiers": [
+            "zodResolver"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "@/features/users/schemas/user.schema",
+          "specifiers": [
+            "userSchema",
+            "UserValues"
+          ]
+        },
+        {
+          "source": "@/features/users/types/user.type",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "@/lib/api/api-error",
+          "specifiers": [
+            "normalizeApiError"
+          ]
+        },
+        {
+          "source": "@/components/ui/input",
+          "specifiers": [
+            "Input"
+          ]
+        },
+        {
+          "source": "@/components/ui/label",
+          "specifiers": [
+            "Label"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/components/ui/select",
+          "specifiers": [
+            "Select",
+            "SelectContent",
+            "SelectItem",
+            "SelectTrigger",
+            "SelectValue"
+          ]
+        }
+      ],
+      "exports": [
+        "UserForm"
+      ],
+      "totalLines": 115,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/components/user-list.tsx": {
+      "filePath": "src/features/users/components/user-list.tsx",
+      "contentHash": "ac7570f36775a6f8de6c9e616b9707d891e2075409ac4edbaaf3cf07615121e4",
+      "functions": [
+        {
+          "name": "UserList",
+          "params": [],
+          "exported": true,
+          "lineCount": 209
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "useTranslations"
+          ]
+        },
+        {
+          "source": "lucide-react",
+          "specifiers": [
+            "Plus",
+            "Search",
+            "Pencil",
+            "Trash2"
+          ]
+        },
+        {
+          "source": "sonner",
+          "specifiers": [
+            "toast"
+          ]
+        },
+        {
+          "source": "@tanstack/react-table",
+          "specifiers": [
+            "ColumnDef"
+          ]
+        },
+        {
+          "source": "@/features/users/hooks/use-users",
+          "specifiers": [
+            "useUsers"
+          ]
+        },
+        {
+          "source": "@/features/users/hooks/use-user-mutations",
+          "specifiers": [
+            "useUserMutations"
+          ]
+        },
+        {
+          "source": "@/features/users/components/user-form",
+          "specifiers": [
+            "UserForm"
+          ]
+        },
+        {
+          "source": "@/features/users/types/user.type",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "@/hooks/use-debounce",
+          "specifiers": [
+            "useDebounce"
+          ]
+        },
+        {
+          "source": "@/hooks/use-permission",
+          "specifiers": [
+            "usePermission"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "PERMISSIONS"
+          ]
+        },
+        {
+          "source": "@/constants/app",
+          "specifiers": [
+            "PAGE_SIZE"
+          ]
+        },
+        {
+          "source": "@/lib/utils/date",
+          "specifiers": [
+            "formatDate"
+          ]
+        },
+        {
+          "source": "@/lib/utils/string",
+          "specifiers": [
+            "initials"
+          ]
+        },
+        {
+          "source": "@/components/shared/page-header/page-header",
+          "specifiers": [
+            "PageHeader"
+          ]
+        },
+        {
+          "source": "@/components/shared/data-table/data-table",
+          "specifiers": [
+            "DataTable"
+          ]
+        },
+        {
+          "source": "@/components/shared/loading/loading-state",
+          "specifiers": [
+            "LoadingState"
+          ]
+        },
+        {
+          "source": "@/components/shared/confirm-dialog/confirm-dialog",
+          "specifiers": [
+            "ConfirmDialog"
+          ]
+        },
+        {
+          "source": "@/components/ui/button",
+          "specifiers": [
+            "Button"
+          ]
+        },
+        {
+          "source": "@/components/ui/input",
+          "specifiers": [
+            "Input"
+          ]
+        },
+        {
+          "source": "@/components/ui/badge",
+          "specifiers": [
+            "Badge"
+          ]
+        },
+        {
+          "source": "@/components/ui/dialog",
+          "specifiers": [
+            "Dialog",
+            "DialogContent",
+            "DialogHeader",
+            "DialogTitle",
+            "DialogDescription"
+          ]
+        }
+      ],
+      "exports": [
+        "UserList"
+      ],
+      "totalLines": 240,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/constants.ts": {
+      "filePath": "src/features/users/constants.ts",
+      "contentHash": "5addc6325d521b136bf3b01961a8306b414264c2dd79540998f5eb687de92309",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "USER_QUERY_KEYS"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/hooks/use-user-mutations.ts": {
+      "filePath": "src/features/users/hooks/use-user-mutations.ts",
+      "contentHash": "809bace18199332e3f6e6b45b5eeccf76cc75420d72dbbcadbefd01bbade31d6",
+      "functions": [
+        {
+          "name": "useUserMutations",
+          "params": [],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "useMutation",
+            "useQueryClient"
+          ]
+        },
+        {
+          "source": "@/features/users/api/create-user",
+          "specifiers": [
+            "createUser"
+          ]
+        },
+        {
+          "source": "@/features/users/api/update-user",
+          "specifiers": [
+            "updateUser"
+          ]
+        },
+        {
+          "source": "@/features/users/api/delete-user",
+          "specifiers": [
+            "deleteUser"
+          ]
+        },
+        {
+          "source": "@/features/users/constants",
+          "specifiers": [
+            "USER_QUERY_KEYS"
+          ]
+        },
+        {
+          "source": "@/features/users/schemas/user.schema",
+          "specifiers": [
+            "UserValues"
+          ]
+        }
+      ],
+      "exports": [
+        "useUserMutations"
+      ],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/hooks/use-users.ts": {
+      "filePath": "src/features/users/hooks/use-users.ts",
+      "contentHash": "087389992cf897c52e9842489890ef643d85eb54484f7a683ba6bc1f8e9f03a0",
+      "functions": [
+        {
+          "name": "useUsers",
+          "params": [
+            "params"
+          ],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "keepPreviousData",
+            "useQuery"
+          ]
+        },
+        {
+          "source": "@/features/users/api/get-users",
+          "specifiers": [
+            "getUsers"
+          ]
+        },
+        {
+          "source": "@/features/users/constants",
+          "specifiers": [
+            "USER_QUERY_KEYS"
+          ]
+        },
+        {
+          "source": "@/types/pagination",
+          "specifiers": [
+            "PaginationParams"
+          ]
+        }
+      ],
+      "exports": [
+        "useUsers"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/schemas/user.schema.ts": {
+      "filePath": "src/features/users/schemas/user.schema.ts",
+      "contentHash": "bbd2aaf9fddc8bf3407f9827216d08add25dbfa8de54c6b0eb71a55692a6e91e",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zod",
+          "specifiers": [
+            "z"
+          ]
+        }
+      ],
+      "exports": [
+        "userSchema"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "src/features/users/types/user.type.ts": {
+      "filePath": "src/features/users/types/user.type.ts",
+      "contentHash": "da753781b634b4af11a4612fde1e2990e9a3177197930aae1f92b1a1d855db7d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "src/hooks/use-debounce.ts": {
+      "filePath": "src/hooks/use-debounce.ts",
+      "contentHash": "944ba94e04f798ba70b0abb1a7a75e7c8c0ea1731605a715e0e2072659440691",
+      "functions": [
+        {
+          "name": "useDebounce",
+          "params": [
+            "value",
+            "delay"
+          ],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useEffect",
+            "useState"
+          ]
+        }
+      ],
+      "exports": [
+        "useDebounce"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/hooks/use-media-query.ts": {
+      "filePath": "src/hooks/use-media-query.ts",
+      "contentHash": "7f8380857a50f697d3a99e3327bc2f4f457615fc4960786579ab11c4c099790f",
+      "functions": [
+        {
+          "name": "useMediaQuery",
+          "params": [
+            "query"
+          ],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useSyncExternalStore"
+          ]
+        }
+      ],
+      "exports": [
+        "useMediaQuery"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/hooks/use-permission.ts": {
+      "filePath": "src/hooks/use-permission.ts",
+      "contentHash": "96166aa752a561c643d8cb5da406476a898707c9d6a81b959e29bcb243a5e638",
+      "functions": [
+        {
+          "name": "usePermission",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/auth/hooks/use-session",
+          "specifiers": [
+            "useSession"
+          ]
+        },
+        {
+          "source": "@/lib/auth/permission",
+          "specifiers": [
+            "hasPermission"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "Permission"
+          ]
+        }
+      ],
+      "exports": [
+        "usePermission"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "src/i18n/request.ts": {
+      "filePath": "src/i18n/request.ts",
+      "contentHash": "d2311ee46dfff84ec2a4de8f88b56e236226f760ddc06716a19ce3605c628688",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next-intl/server",
+          "specifiers": [
+            "getRequestConfig"
+          ]
+        },
+        {
+          "source": "next/headers",
+          "specifiers": [
+            "cookies"
+          ]
+        },
+        {
+          "source": "@/constants/app",
+          "specifiers": [
+            "LOCALES",
+            "Locale"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/api/api-error.ts": {
+      "filePath": "src/lib/api/api-error.ts",
+      "contentHash": "75832dd94c466725f8abf8b6a49916ccca89e10aab773aafce7c3509f34ca418",
+      "functions": [
+        {
+          "name": "normalizeApiError",
+          "params": [
+            "error"
+          ],
+          "returnType": "ApiError",
+          "exported": true,
+          "lineCount": 22
+        }
+      ],
+      "classes": [
+        {
+          "name": "ApiError",
+          "methods": [
+            "constructor"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "imports": [
+        {
+          "source": "axios",
+          "specifiers": [
+            "axios"
+          ]
+        }
+      ],
+      "exports": [
+        "ApiError",
+        "normalizeApiError"
+      ],
+      "totalLines": 35,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/api/client.ts": {
+      "filePath": "src/lib/api/client.ts",
+      "contentHash": "b292ed51c07538419e256fbf95bafd48f70e80666289ba0d02cee21f85ece464",
+      "functions": [
+        {
+          "name": "refreshAccessToken",
+          "params": [],
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "expireSession",
+          "params": [],
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "axios",
+          "specifiers": [
+            "axios"
+          ]
+        },
+        {
+          "source": "@/config/env",
+          "specifiers": [
+            "env"
+          ]
+        },
+        {
+          "source": "@/lib/auth/token",
+          "specifiers": [
+            "token"
+          ]
+        },
+        {
+          "source": "@/lib/api/api-error",
+          "specifiers": [
+            "ApiError",
+            "normalizeApiError"
+          ]
+        },
+        {
+          "source": "@/lib/api/endpoints",
+          "specifiers": [
+            "ENDPOINTS"
+          ]
+        }
+      ],
+      "exports": [
+        "apiClient",
+        "refreshAccessToken"
+      ],
+      "totalLines": 97,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/api/endpoints.ts": {
+      "filePath": "src/lib/api/endpoints.ts",
+      "contentHash": "a997a5d27ec2a52178003ce7e9189d619bb40d834ff08accd6838d8674aa3fc8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "ENDPOINTS"
+      ],
+      "totalLines": 13,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/api/query-client.ts": {
+      "filePath": "src/lib/api/query-client.ts",
+      "contentHash": "00a781887c0294371429f2a118ad542ed32e1c1b70ef6f325de7b39b07466b55",
+      "functions": [
+        {
+          "name": "makeQueryClient",
+          "params": [],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClient"
+          ]
+        },
+        {
+          "source": "@/lib/api/api-error",
+          "specifiers": [
+            "ApiError"
+          ]
+        }
+      ],
+      "exports": [
+        "makeQueryClient"
+      ],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/auth/permission.ts": {
+      "filePath": "src/lib/auth/permission.ts",
+      "contentHash": "36130576dc8d4781af7d8a81c27eb38315b0ff1a29adedaa01f5047b8a78cba4",
+      "functions": [
+        {
+          "name": "hasPermission",
+          "params": [
+            "permissions",
+            "permission"
+          ],
+          "exported": true,
+          "lineCount": 6
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "Permission"
+          ]
+        }
+      ],
+      "exports": [
+        "hasPermission"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/auth/session.ts": {
+      "filePath": "src/lib/auth/session.ts",
+      "contentHash": "468f2705d8ad01deeeb455fc3cc8cf76df7bc9e65a90961b78c44cc5e2d072df",
+      "functions": [
+        {
+          "name": "clearSession",
+          "params": [
+            "client"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClient"
+          ]
+        },
+        {
+          "source": "@/lib/auth/token",
+          "specifiers": [
+            "token"
+          ]
+        }
+      ],
+      "exports": [
+        "clearSession"
+      ],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/auth/token.ts": {
+      "filePath": "src/lib/auth/token.ts",
+      "contentHash": "d63ca0b626c94656c8ac7e6a6cbf95766d014e58545dcb1350062517bd3a9c12",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "token"
+      ],
+      "totalLines": 14,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/utils/cn.ts": {
+      "filePath": "src/lib/utils/cn.ts",
+      "contentHash": "c4afe23db29651dec75ca5a3098a8bafe35f78cd45d4773d1db1c8001e640623",
+      "functions": [
+        {
+          "name": "cn",
+          "params": [
+            "...inputs"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "clsx",
+          "specifiers": [
+            "clsx",
+            "ClassValue"
+          ]
+        },
+        {
+          "source": "tailwind-merge",
+          "specifiers": [
+            "twMerge"
+          ]
+        }
+      ],
+      "exports": [
+        "cn"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/utils/date.ts": {
+      "filePath": "src/lib/utils/date.ts",
+      "contentHash": "b664eefc5172225b91591a7da464b813bd08127b3ab23e24d83432d99a05214f",
+      "functions": [
+        {
+          "name": "formatDate",
+          "params": [
+            "value"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "dayjs",
+          "specifiers": [
+            "dayjs"
+          ]
+        }
+      ],
+      "exports": [
+        "formatDate"
+      ],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/utils/format.ts": {
+      "filePath": "src/lib/utils/format.ts",
+      "contentHash": "970ed722cce921fafcb1948a483b92eb63c660a5619a06312d304ceb324b1a56",
+      "functions": [
+        {
+          "name": "formatCurrency",
+          "params": [
+            "value",
+            "currency",
+            "locale"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "formatCurrency"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/utils/number.ts": {
+      "filePath": "src/lib/utils/number.ts",
+      "contentHash": "e56c850ecfda1cb0cf763d827117646dc97579ba18dd67cb02dd2d2f4855304f",
+      "functions": [
+        {
+          "name": "formatNumber",
+          "params": [
+            "value",
+            "locale"
+          ],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "formatNumber"
+      ],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "src/lib/utils/string.ts": {
+      "filePath": "src/lib/utils/string.ts",
+      "contentHash": "f834a69beec202c937658d83b7e88dd4b56fbcf57552ec2a66385017c7de990b",
+      "functions": [
+        {
+          "name": "initials",
+          "params": [
+            "name"
+          ],
+          "exported": true,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [
+        "initials"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "src/mocks/adapter.ts": {
+      "filePath": "src/mocks/adapter.ts",
+      "contentHash": "f495d24e616eda554b0d60d63170ce58100eb0ec9117e3003b0b998ae94eae21",
+      "functions": [
+        {
+          "name": "delay",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "requireSession",
+          "params": [],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/lib/api/api-error",
+          "specifiers": [
+            "ApiError"
+          ]
+        },
+        {
+          "source": "@/config/permissions",
+          "specifiers": [
+            "PERMISSIONS"
+          ]
+        },
+        {
+          "source": "@/features/auth/types/auth.type",
+          "specifiers": [
+            "CurrentUser",
+            "AuthResponse"
+          ]
+        },
+        {
+          "source": "@/features/users/types/user.type",
+          "specifiers": [
+            "User"
+          ]
+        },
+        {
+          "source": "@/features/users/schemas/user.schema",
+          "specifiers": [
+            "UserValues"
+          ]
+        },
+        {
+          "source": "@/types/pagination",
+          "specifiers": [
+            "PaginationParams",
+            "PaginatedResponse"
+          ]
+        }
+      ],
+      "exports": [
+        "mockAdapter"
+      ],
+      "totalLines": 129,
+      "hasStructuralAnalysis": true
+    },
+    "src/mocks/settings.ts": {
+      "filePath": "src/mocks/settings.ts",
+      "contentHash": "7e2b0323f8af086f6cf67750d7b39af1d7c3dc71a90c1b3acc83db34786e820b",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@/features/settings/types/settings.type",
+          "specifiers": [
+            "WorkspaceSettings"
+          ]
+        }
+      ],
+      "exports": [
+        "mockSettings"
+      ],
+      "totalLines": 10,
+      "hasStructuralAnalysis": true
+    },
+    "src/providers/app-provider.tsx": {
+      "filePath": "src/providers/app-provider.tsx",
+      "contentHash": "393034572052f45925a52ea474b38e3fd180a54593440ceb3776d39858b570ea",
+      "functions": [
+        {
+          "name": "AppProvider",
+          "params": [
+            "{\n  children,\n  locale,\n  messages,\n}"
+          ],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next-intl",
+          "specifiers": [
+            "NextIntlClientProvider",
+            "AbstractIntlMessages"
+          ]
+        },
+        {
+          "source": "sonner",
+          "specifiers": [
+            "Toaster"
+          ]
+        },
+        {
+          "source": "@/providers/query-provider",
+          "specifiers": [
+            "QueryProvider"
+          ]
+        },
+        {
+          "source": "@/providers/theme-provider",
+          "specifiers": [
+            "ThemeProvider"
+          ]
+        }
+      ],
+      "exports": [
+        "AppProvider"
+      ],
+      "totalLines": 26,
+      "hasStructuralAnalysis": true
+    },
+    "src/providers/query-provider.tsx": {
+      "filePath": "src/providers/query-provider.tsx",
+      "contentHash": "50761108f1761a9ed202a916701ea809ce1b526061fa371b8e2f59ab6ba5d22a",
+      "functions": [
+        {
+          "name": "QueryProvider",
+          "params": [
+            "{ children }"
+          ],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState",
+            "ReactNode"
+          ]
+        },
+        {
+          "source": "@tanstack/react-query",
+          "specifiers": [
+            "QueryClientProvider"
+          ]
+        },
+        {
+          "source": "@/lib/api/query-client",
+          "specifiers": [
+            "makeQueryClient"
+          ]
+        }
+      ],
+      "exports": [
+        "QueryProvider"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "src/providers/theme-provider.tsx": {
+      "filePath": "src/providers/theme-provider.tsx",
+      "contentHash": "19b03c7d9790d25737cfb47082b4926f2a4d9cd887a8d44a1dffa9f0e3d3f585",
+      "functions": [
+        {
+          "name": "ThemeProvider",
+          "params": [
+            "{ children }"
+          ],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next-themes",
+          "specifiers": [
+            "NextThemeProvider"
+          ]
+        },
+        {
+          "source": "react",
+          "specifiers": [
+            "ReactNode"
+          ]
+        }
+      ],
+      "exports": [
+        "ThemeProvider"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/proxy.ts": {
+      "filePath": "src/proxy.ts",
+      "contentHash": "5fe672599d7f44000cbeb65a650a8bcf8b899a40781350e1caf2c8639d4a7636",
+      "functions": [
+        {
+          "name": "proxy",
+          "params": [
+            "request"
+          ],
+          "exported": true,
+          "lineCount": 10
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "next/server",
+          "specifiers": [
+            "NextResponse",
+            "NextRequest"
+          ]
+        }
+      ],
+      "exports": [
+        "proxy",
+        "config"
+      ],
+      "totalLines": 15,
+      "hasStructuralAnalysis": true
+    },
+    "src/stores/app.store.ts": {
+      "filePath": "src/stores/app.store.ts",
+      "contentHash": "70605563c03ef259d7cfd12b499f09e086cd5d9edae1f11ff3d88c2dd9e14513",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zustand",
+          "specifiers": [
+            "create"
+          ]
+        }
+      ],
+      "exports": [
+        "useAppStore"
+      ],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    "src/stores/sidebar.store.ts": {
+      "filePath": "src/stores/sidebar.store.ts",
+      "contentHash": "7fef78fa139dd7f9ec1f3f667eea9206a50b17057ce813acf3202a102d42241d",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zustand",
+          "specifiers": [
+            "create"
+          ]
+        }
+      ],
+      "exports": [
+        "useSidebarStore"
+      ],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "src/stores/ui.store.ts": {
+      "filePath": "src/stores/ui.store.ts",
+      "contentHash": "52389cea8ce86454af211567103fb7bcfda3930691b08702b055ae9ea3a51331",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "zustand",
+          "specifiers": [
+            "create"
+          ]
+        }
+      ],
+      "exports": [
+        "useUiStore"
+      ],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "src/types/api.ts": {
+      "filePath": "src/types/api.ts",
+      "contentHash": "d9c734b9f3f297ef6b93a58fc91f448a354d72d021ea0c5bcc7e2ad55aade005",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "src/types/common.ts": {
+      "filePath": "src/types/common.ts",
+      "contentHash": "ca05b2ff4dac961073c649bb9f2c035491c01aa73282ab44ba07ee57445bc334",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "src/types/pagination.ts": {
+      "filePath": "src/types/pagination.ts",
+      "contentHash": "19b81f905256e5e62348c7243664722224b37fabdef1a959868fef0835636d9e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": true
+    },
+    "tests/e2e/starter.spec.ts": {
+      "filePath": "tests/e2e/starter.spec.ts",
+      "contentHash": "f2622c156168289e8b4306dde36e1bdefa1ae6f2ebd5bb88eae41f248053f4ab",
+      "functions": [
+        {
+          "name": "login",
+          "params": [
+            "page"
+          ],
+          "exported": false,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@playwright/test",
+          "specifiers": [
+            "test",
+            "expect",
+            "Page"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 125,
+      "hasStructuralAnalysis": true
+    },
+    "tests/integration/api-client.spec.ts": {
+      "filePath": "tests/integration/api-client.spec.ts",
+      "contentHash": "0dc6cccaeeb3fbe3d04c0bdd0e8f460b917cc4a80f6cb941e9668cd6f8767520",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@playwright/test",
+          "specifiers": [
+            "test",
+            "expect"
+          ]
+        },
+        {
+          "source": "node:http",
+          "specifiers": [
+            "createServer",
+            "Server"
+          ]
+        },
+        {
+          "source": "@/lib/api/client",
+          "specifiers": [
+            "* as client"
+          ]
+        },
+        {
+          "source": "@/lib/auth/token",
+          "specifiers": [
+            "token"
+          ]
+        },
+        {
+          "source": "@/lib/api/api-error",
+          "specifiers": [
+            "ApiError"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 108,
+      "hasStructuralAnalysis": true
+    },
+    "tsconfig.json": {
+      "filePath": "tsconfig.json",
+      "contentHash": "6afbf461bfa7cc2cd8f894505561821e61d8ae7efb0edc147ed27d3f4ace9224",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 34,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

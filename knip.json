@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/components/ui/*.{ts,tsx}",
+    "src/features/users/api/get-user.ts",
+    "src/lib/utils/format.ts",
+    "src/stores/app.store.ts",
+    "src/types/api.ts",
+    "src/types/common.ts"
+  ]
+}

@@ -1,0 +1,45 @@
+# Installed packages
+
+Resolved versions from the current installation; pnpm-lock.yaml is authoritative.
+
+## dependencies
+
+| Package | Version |
+| --- | --- |
+| @hookform/resolvers | 5.9.1 |
+| @tanstack/react-query | 5.102.8 |
+| @tanstack/react-table | 8.21.3 |
+| axios | 1.20.0 |
+| class-variance-authority | 0.7.1 |
+| clsx | 2.1.1 |
+| dayjs | 1.11.23 |
+| lucide-react | 1.41.0 |
+| next | 16.3.4 |
+| next-intl | 4.14.2 |
+| next-themes | 0.4.6 |
+| radix-ui | 1.6.7 |
+| react | 19.2.8 |
+| react-dom | 19.2.8 |
+| react-hook-form | 7.87.0 |
+| sonner | 2.0.8 |
+| tailwind-merge | 3.6.0 |
+| zod | 4.5.4 |
+| zustand | 5.0.15 |
+
+## devDependencies
+
+| Package | Version |
+| --- | --- |
+| @playwright/test | 1.62.1 |
+| @tailwindcss/postcss | 4.3.3 |
+| @types/node | 22.20.1 |
+| @types/react | 19.2.18 |
+| @types/react-dom | 19.2.7 |
+| babel-plugin-react-compiler | 1.0.0 |
+| eslint | 9.39.5 |
+| eslint-config-next | 16.3.4 |
+| knip | 6.34.0 |
+| tailwindcss | 4.3.3 |
+| typescript | 5.9.3 |
+
+shadcn/ui is generated source under src/components/ui, not a runtime package. Its CLI was used via pnpm dlx. Prettier was used via pnpm dlx for formatting.

@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+*.tsbuildinfo
+playwright-report/
+test-results/
+.ua/intermediate/
+.ua/diff-overlay.json
+.ua/.trash-*/
+
