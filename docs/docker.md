@@ -7,11 +7,14 @@
 Docker Desktop phải chạy Linux containers.
 
 ```bash
+cd FE
 pnpm env:init
-docker compose up -d --build --wait
+cd ..
+docker compose --env-file FE/.env up -d --build --wait
 docker compose ps
 ```
 
+Frontend image builds from `FE/`. Compose reads `FE/.env` for interpolation; any missing or empty variable uses the default in `compose.yaml` (same values as `FE/.env.example`). `FE/.env` is optional for Compose (`required: false`).
 Mở http://localhost:3000. Env local đã được tạo với mật khẩu ngẫu nhiên; script không ghi đè file có sẵn.
 Trên máy hiện tại, .env dùng APP_PORT=3002 do cổng 3000 bị chiếm: mở http://localhost:3002. Template mặc định vẫn là 3000.
 Không cần install Node dependencies trên host nếu .env đã tồn tại và chỉ chạy Docker.
@@ -26,7 +29,7 @@ Frontend chạy production standalone bằng user node, có healthcheck. Postgre
 | Redis | localhost:6379 | redis:6379 |
 | Frontend | localhost:3000 | frontend:3000 |
 
-User/database/password đọc từ .env. Redis cần REDIS_PASSWORD. Không đưa DB/Redis password vào NEXT_PUBLIC_*.
+User/database/password đọc từ `FE/.env`. Redis cần REDIS_PASSWORD. Không đưa DB/Redis password vào NEXT_PUBLIC_*.
 Các port chỉ bind 127.0.0.1 để dùng local. Backend riêng chưa được cung cấp nên không có backend container, migrations hoặc DB client trong Next.js.
 
 NEXT_PUBLIC_API_URL phải là địa chỉ mà **trình duyệt người dùng** truy cập được, không dùng hostname Docker như backend:8080.
@@ -49,16 +52,17 @@ Production cần domain/TLS, secret management và backup phù hợp; file Compo
 
 ## Files
 
-Dockerfile: multi-stage dependencies/build/runtime.
+FE/Dockerfile: multi-stage dependencies/build/runtime.
 DOCKER_BUILD=true chỉ đặt trong builder để xuất standalone; pnpm build/start ngoài Docker giữ hành vi thông thường.
-.dockerignore: loại .env thật, dependencies host và artifacts khỏi build context.
-compose.yaml: ba services và persistent volumes.
-.env.example: template không chứa mật khẩu thật; .env được gitignore.
+FE/.dockerignore: loại .env thật, dependencies host và artifacts khỏi build context.
+compose.yaml (repository root): frontend build context `./FE`, plus PostgreSQL and Redis volumes.
+FE/.env.example: template không chứa mật khẩu thật; FE/.env được gitignore.
 
 Chạy E2E trên container đang chạy (PowerShell):
 
 ```powershell
 $env:E2E_BASE_URL = 'http://127.0.0.1:3002'
+Set-Location FE
 pnpm test tests/e2e/starter.spec.ts
 Remove-Item Env:E2E_BASE_URL
 ```

@@ -1,13 +1,21 @@
-name: motel
+name: wms-apa-nano
+# ${VAR:-default}: use FE/.env when present, otherwise the default.
+#   docker compose --env-file FE/.env up -d --build --wait
 services:
   frontend:
     build:
-      context: .
+      context: ./FE
+      dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_APP_NAME: ${NEXT_PUBLIC_APP_NAME:-Workspace}
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080/api/v1}
         NEXT_PUBLIC_DEMO_MODE: ${NEXT_PUBLIC_DEMO_MODE:-true}
         NEXT_PUBLIC_API_CREDENTIALS: ${NEXT_PUBLIC_API_CREDENTIALS:-true}
+    env_file:
+      - path: ./FE/.env.example
+        required: true
+      - path: ./FE/.env
+        required: false
     ports:
       - "127.0.0.1:${APP_PORT:-3000}:3000"
     restart: unless-stopped
@@ -20,10 +28,15 @@ services:
       retries: 3
   postgres:
     image: postgres:18-bookworm
+    env_file:
+      - path: ./FE/.env.example
+        required: true
+      - path: ./FE/.env
+        required: false
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-motel}
       POSTGRES_USER: ${POSTGRES_USER:-motel}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run pnpm env:init first}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
       - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     volumes:
@@ -37,8 +50,13 @@ services:
       start_period: 20s
   redis:
     image: redis:8-bookworm
+    env_file:
+      - path: ./FE/.env.example
+        required: true
+      - path: ./FE/.env
+        required: false
     environment:
-      REDIS_PASSWORD: ${REDIS_PASSWORD:?Run pnpm env:init first}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis}
     command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
     ports:
       - "127.0.0.1:${REDIS_PORT:-6379}:6379"
@@ -50,6 +68,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  # TODO: backend service after the BE framework is chosen.
+  # TODO: gateway routing /* → FE and /api/* → BE.
 volumes:
   postgres_data:
   redis_data:

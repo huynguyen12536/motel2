@@ -3,6 +3,8 @@ node_modules/
 out/
 .env*
 !.env.example
+!FE/.env.example
+!BE/.env.example
 *.tsbuildinfo
 playwright-report/
 test-results/
@@ -10,3 +12,14 @@ test-results/
 .ua/diff-overlay.json
 .ua/.trash-*/
 
+FE/node_modules/
+FE/.next/
+FE/out/
+FE/playwright-report/
+FE/test-results/
+FE/*.tsbuildinfo
+
+BE/node_modules/
+BE/dist/
+BE/build/
+BE/coverage/

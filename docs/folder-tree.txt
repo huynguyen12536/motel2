@@ -1,6 +1,155 @@
 Motel/
 ├── .impeccable
 │   └── design.json
+├── .ua
+│   ├── .trash-1788665201
+│   │   ├── tmp
+│   │   │   ├── all-edges.json
+│   │   │   ├── arch-input.json
+│   │   │   ├── assemble-batches-1-5.cjs
+│   │   │   ├── assign-layers.mjs
+│   │   │   ├── dir-groups.json
+│   │   │   ├── extract-b6-11.cjs
+│   │   │   ├── finalize-graph.mjs
+│   │   │   ├── fingerprint-input.json
+│   │   │   ├── save-graph.mjs
+│   │   │   ├── semantic-b6-11.cjs
+│   │   │   ├── tour-nodes.json
+│   │   │   ├── ua-assemble-and-save.mjs
+│   │   │   ├── ua-file-analyzer-input-1.json
+│   │   │   ├── ua-file-analyzer-input-10.json
+│   │   │   ├── ua-file-analyzer-input-11.json
+│   │   │   ├── ua-file-analyzer-input-2.json
+│   │   │   ├── ua-file-analyzer-input-3.json
+│   │   │   ├── ua-file-analyzer-input-4.json
+│   │   │   ├── ua-file-analyzer-input-5.json
+│   │   │   ├── ua-file-analyzer-input-6.json
+│   │   │   ├── ua-file-analyzer-input-7.json
+│   │   │   ├── ua-file-analyzer-input-8.json
+│   │   │   ├── ua-file-analyzer-input-9.json
+│   │   │   ├── ua-file-extract-results-1.json
+│   │   │   ├── ua-file-extract-results-10.json
+│   │   │   ├── ua-file-extract-results-11.json
+│   │   │   ├── ua-file-extract-results-2.json
+│   │   │   ├── ua-file-extract-results-3.json
+│   │   │   ├── ua-file-extract-results-4.json
+│   │   │   ├── ua-file-extract-results-5.json
+│   │   │   ├── ua-file-extract-results-6.json
+│   │   │   ├── ua-file-extract-results-7.json
+│   │   │   ├── ua-file-extract-results-8.json
+│   │   │   ├── ua-file-extract-results-9.json
+│   │   │   ├── ua-import-map-input.json
+│   │   │   ├── ua-import-map-output.json
+│   │   │   ├── ua-inline-validate.cjs
+│   │   │   └── ua-scan-files.json
+│   │   ├── assemble-review.json
+│   │   ├── assembled-graph.json
+│   │   ├── batch-1.json
+│   │   ├── batch-10.json
+│   │   ├── batch-11.json
+│   │   ├── batch-2.json
+│   │   ├── batch-3.json
+│   │   ├── batch-4-part-1.json
+│   │   ├── batch-4-part-2.json
+│   │   ├── batch-5.json
+│   │   ├── batch-6.json
+│   │   ├── batch-7.json
+│   │   ├── batch-8.json
+│   │   ├── batch-9.json
+│   │   ├── batches.json
+│   │   ├── layers.json
+│   │   ├── review.json
+│   │   └── tour.json
+│   ├── intermediate
+│   │   └── scan-result.json
+│   ├── tmp
+│   ├── .understandignore
+│   ├── config.json
+│   ├── domain-graph.json
+│   ├── fingerprints.json
+│   ├── knowledge-graph.json
+│   └── meta.json
+├── BE
+│   ├── migrations
+│   │   └── .gitkeep
+│   ├── scripts
+│   │   └── .gitkeep
+│   ├── src
+│   │   ├── config
+│   │   │   └── .gitkeep
+│   │   ├── database
+│   │   │   └── .gitkeep
+│   │   ├── infrastructure
+│   │   │   └── .gitkeep
+│   │   ├── modules
+│   │   │   ├── ai
+│   │   │   │   ├── demand-forecast
+│   │   │   │   │   └── .gitkeep
+│   │   │   │   ├── expiry-risk
+│   │   │   │   │   └── .gitkeep
+│   │   │   │   ├── inventory-health
+│   │   │   │   │   └── .gitkeep
+│   │   │   │   ├── invoice-ocr
+│   │   │   │   │   └── .gitkeep
+│   │   │   │   └── warehouse-assistant
+│   │   │   │       └── .gitkeep
+│   │   │   ├── audit-logs
+│   │   │   │   └── .gitkeep
+│   │   │   ├── auth
+│   │   │   │   └── .gitkeep
+│   │   │   ├── departments
+│   │   │   │   └── .gitkeep
+│   │   │   ├── disposals
+│   │   │   │   └── .gitkeep
+│   │   │   ├── employees
+│   │   │   │   └── .gitkeep
+│   │   │   ├── inbound
+│   │   │   │   └── .gitkeep
+│   │   │   ├── inventory
+│   │   │   │   └── .gitkeep
+│   │   │   ├── inventory-movements
+│   │   │   │   └── .gitkeep
+│   │   │   ├── material-categories
+│   │   │   │   └── .gitkeep
+│   │   │   ├── material-lots
+│   │   │   │   └── .gitkeep
+│   │   │   ├── materials
+│   │   │   │   └── .gitkeep
+│   │   │   ├── notifications
+│   │   │   │   └── .gitkeep
+│   │   │   ├── outbound
+│   │   │   │   └── .gitkeep
+│   │   │   ├── permissions
+│   │   │   │   └── .gitkeep
+│   │   │   ├── quality-control
+│   │   │   │   └── .gitkeep
+│   │   │   ├── reports
+│   │   │   │   └── .gitkeep
+│   │   │   ├── roles
+│   │   │   │   └── .gitkeep
+│   │   │   ├── sap-integration
+│   │   │   │   └── .gitkeep
+│   │   │   ├── stock-counts
+│   │   │   │   └── .gitkeep
+│   │   │   ├── suppliers
+│   │   │   │   └── .gitkeep
+│   │   │   ├── transfers
+│   │   │   │   └── .gitkeep
+│   │   │   ├── units
+│   │   │   │   └── .gitkeep
+│   │   │   ├── users
+│   │   │   │   └── .gitkeep
+│   │   │   ├── warehouse-locations
+│   │   │   │   └── .gitkeep
+│   │   │   └── warehouses
+│   │   │       └── .gitkeep
+│   │   └── shared
+│   │       └── .gitkeep
+│   ├── tests
+│   │   └── .gitkeep
+│   ├── .dockerignore
+│   ├── .env.example
+│   └── README.md
 ├── docs
 │   ├── screenshots
 │   │   ├── dashboard-desktop.png
@@ -10,209 +159,213 @@ Motel/
 │   ├── folder-tree.txt
 │   ├── packages.md
 │   └── verification.md
-├── messages
-│   ├── de.json
-│   ├── en.json
-│   ├── fr.json
-│   └── vi.json
-├── public
-│   ├── fonts
-│   │   └── .gitkeep
-│   ├── gif
-│   │   └── .gitkeep
-│   ├── icons
-│   │   └── .gitkeep
-│   └── images
-│       └── .gitkeep
-├── scripts
-│   ├── generate-inventory.mjs
-│   └── init-env.mjs
-├── src
-│   ├── app
-│   │   ├── (auth)
-│   │   │   ├── auth
+├── FE
+│   ├── messages
+│   │   ├── de.json
+│   │   ├── en.json
+│   │   ├── fr.json
+│   │   └── vi.json
+│   ├── public
+│   │   ├── fonts
+│   │   │   └── .gitkeep
+│   │   ├── gif
+│   │   │   └── .gitkeep
+│   │   ├── icons
+│   │   │   └── .gitkeep
+│   │   └── images
+│   │       ├── auth
+│   │       └── .gitkeep
+│   ├── scripts
+│   │   ├── generate-inventory.mjs
+│   │   └── init-env.mjs
+│   ├── src
+│   │   ├── app
+│   │   │   ├── (auth)
+│   │   │   │   ├── auth
+│   │   │   │   │   ├── forgot-password
+│   │   │   │   │   │   └── page.tsx
+│   │   │   │   │   ├── sign-in
+│   │   │   │   │   │   └── page.tsx
+│   │   │   │   │   └── sign-up
+│   │   │   │   │       └── page.tsx
 │   │   │   │   ├── forgot-password
 │   │   │   │   │   └── page.tsx
 │   │   │   │   ├── sign-in
 │   │   │   │   │   └── page.tsx
-│   │   │   │   └── sign-up
-│   │   │   │       └── page.tsx
-│   │   │   ├── forgot-password
-│   │   │   │   └── page.tsx
-│   │   │   ├── sign-in
-│   │   │   │   └── page.tsx
-│   │   │   ├── sign-up
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── (dashboard)
+│   │   │   │   ├── sign-up
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── layout.tsx
+│   │   │   ├── (dashboard)
+│   │   │   │   ├── dashboard
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── settings
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── users
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── layout.tsx
+│   │   │   ├── error.tsx
+│   │   │   ├── global-error.tsx
+│   │   │   ├── globals.css
+│   │   │   ├── icon.svg
+│   │   │   ├── layout.tsx
+│   │   │   ├── loading.tsx
+│   │   │   ├── not-found.tsx
+│   │   │   └── page.tsx
+│   │   ├── components
+│   │   │   ├── shared
+│   │   │   │   ├── confirm-dialog
+│   │   │   │   │   └── confirm-dialog.tsx
+│   │   │   │   ├── data-table
+│   │   │   │   │   └── data-table.tsx
+│   │   │   │   ├── empty-state
+│   │   │   │   │   └── empty-state.tsx
+│   │   │   │   ├── layout
+│   │   │   │   │   ├── app-shell.tsx
+│   │   │   │   │   ├── header.tsx
+│   │   │   │   │   └── sidebar.tsx
+│   │   │   │   ├── loading
+│   │   │   │   │   └── loading-state.tsx
+│   │   │   │   ├── page-header
+│   │   │   │   │   └── page-header.tsx
+│   │   │   │   ├── can.tsx
+│   │   │   │   └── permission-denied.tsx
+│   │   │   └── ui
+│   │   │       ├── alert-dialog.tsx
+│   │   │       ├── badge.tsx
+│   │   │       ├── button.tsx
+│   │   │       ├── card.tsx
+│   │   │       ├── checkbox.tsx
+│   │   │       ├── dialog.tsx
+│   │   │       ├── dropdown-menu.tsx
+│   │   │       ├── input.tsx
+│   │   │       ├── label.tsx
+│   │   │       ├── select.tsx
+│   │   │       ├── separator.tsx
+│   │   │       ├── skeleton.tsx
+│   │   │       └── table.tsx
+│   │   ├── config
+│   │   │   ├── env.ts
+│   │   │   ├── navigation.ts
+│   │   │   ├── permissions.ts
+│   │   │   └── site.ts
+│   │   ├── constants
+│   │   │   └── app.ts
+│   │   ├── features
+│   │   │   ├── auth
+│   │   │   │   ├── api
+│   │   │   │   │   ├── get-current-user.ts
+│   │   │   │   │   ├── recover-account.ts
+│   │   │   │   │   ├── sign-in.ts
+│   │   │   │   │   └── sign-out.ts
+│   │   │   │   ├── components
+│   │   │   │   │   ├── account-form.tsx
+│   │   │   │   │   ├── auth-guard.tsx
+│   │   │   │   │   └── sign-in-form.tsx
+│   │   │   │   ├── hooks
+│   │   │   │   │   └── use-session.ts
+│   │   │   │   ├── lib
+│   │   │   │   ├── schemas
+│   │   │   │   │   └── auth.schema.ts
+│   │   │   │   ├── stores
+│   │   │   │   │   └── auth.store.ts
+│   │   │   │   ├── types
+│   │   │   │   │   └── auth.type.ts
+│   │   │   │   └── constants.ts
 │   │   │   ├── dashboard
-│   │   │   │   └── page.tsx
+│   │   │   │   └── components
+│   │   │   │       └── dashboard-overview.tsx
 │   │   │   ├── settings
-│   │   │   │   └── page.tsx
-│   │   │   ├── users
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── error.tsx
-│   │   ├── global-error.tsx
-│   │   ├── globals.css
-│   │   ├── icon.svg
-│   │   ├── layout.tsx
-│   │   ├── loading.tsx
-│   │   ├── not-found.tsx
-│   │   └── page.tsx
-│   ├── components
-│   │   ├── shared
-│   │   │   ├── confirm-dialog
-│   │   │   │   └── confirm-dialog.tsx
-│   │   │   ├── data-table
-│   │   │   │   └── data-table.tsx
-│   │   │   ├── empty-state
-│   │   │   │   └── empty-state.tsx
-│   │   │   ├── layout
-│   │   │   │   ├── app-shell.tsx
-│   │   │   │   ├── header.tsx
-│   │   │   │   └── sidebar.tsx
-│   │   │   ├── loading
-│   │   │   │   └── loading-state.tsx
-│   │   │   ├── page-header
-│   │   │   │   └── page-header.tsx
-│   │   │   ├── can.tsx
-│   │   │   └── permission-denied.tsx
-│   │   └── ui
-│   │       ├── alert-dialog.tsx
-│   │       ├── badge.tsx
-│   │       ├── button.tsx
-│   │       ├── card.tsx
-│   │       ├── checkbox.tsx
-│   │       ├── dialog.tsx
-│   │       ├── dropdown-menu.tsx
-│   │       ├── input.tsx
-│   │       ├── label.tsx
-│   │       ├── select.tsx
-│   │       ├── separator.tsx
-│   │       ├── skeleton.tsx
-│   │       └── table.tsx
-│   ├── config
-│   │   ├── env.ts
-│   │   ├── navigation.ts
-│   │   ├── permissions.ts
-│   │   └── site.ts
-│   ├── constants
-│   │   └── app.ts
-│   ├── features
-│   │   ├── auth
+│   │   │   │   ├── api
+│   │   │   │   │   ├── get-settings.ts
+│   │   │   │   │   └── update-settings.ts
+│   │   │   │   ├── components
+│   │   │   │   │   └── settings-panel.tsx
+│   │   │   │   ├── hooks
+│   │   │   │   │   └── use-settings.ts
+│   │   │   │   ├── schemas
+│   │   │   │   │   └── settings.schema.ts
+│   │   │   │   └── types
+│   │   │   │       └── settings.type.ts
+│   │   │   └── users
+│   │   │       ├── api
+│   │   │       │   ├── create-user.ts
+│   │   │       │   ├── delete-user.ts
+│   │   │       │   ├── get-user.ts
+│   │   │       │   ├── get-users.ts
+│   │   │       │   └── update-user.ts
+│   │   │       ├── components
+│   │   │       │   ├── user-form.tsx
+│   │   │       │   └── user-list.tsx
+│   │   │       ├── hooks
+│   │   │       │   ├── use-user-mutations.ts
+│   │   │       │   └── use-users.ts
+│   │   │       ├── schemas
+│   │   │       │   └── user.schema.ts
+│   │   │       ├── types
+│   │   │       │   └── user.type.ts
+│   │   │       └── constants.ts
+│   │   ├── hooks
+│   │   │   ├── use-debounce.ts
+│   │   │   ├── use-media-query.ts
+│   │   │   └── use-permission.ts
+│   │   ├── i18n
+│   │   │   └── request.ts
+│   │   ├── lib
 │   │   │   ├── api
-│   │   │   │   ├── get-current-user.ts
-│   │   │   │   ├── recover-account.ts
-│   │   │   │   ├── sign-in.ts
-│   │   │   │   └── sign-out.ts
-│   │   │   ├── components
-│   │   │   │   ├── account-form.tsx
-│   │   │   │   ├── auth-guard.tsx
-│   │   │   │   └── sign-in-form.tsx
-│   │   │   ├── hooks
-│   │   │   │   └── use-session.ts
-│   │   │   ├── schemas
-│   │   │   │   └── auth.schema.ts
-│   │   │   ├── stores
-│   │   │   │   └── auth.store.ts
-│   │   │   ├── types
-│   │   │   │   └── auth.type.ts
-│   │   │   └── constants.ts
-│   │   ├── dashboard
-│   │   │   └── components
-│   │   │       └── dashboard-overview.tsx
-│   │   ├── settings
-│   │   │   ├── api
-│   │   │   │   ├── get-settings.ts
-│   │   │   │   └── update-settings.ts
-│   │   │   ├── components
-│   │   │   │   └── settings-panel.tsx
-│   │   │   ├── hooks
-│   │   │   │   └── use-settings.ts
-│   │   │   ├── schemas
-│   │   │   │   └── settings.schema.ts
-│   │   │   └── types
-│   │   │       └── settings.type.ts
-│   │   └── users
-│   │       ├── api
-│   │       │   ├── create-user.ts
-│   │       │   ├── delete-user.ts
-│   │       │   ├── get-user.ts
-│   │       │   ├── get-users.ts
-│   │       │   └── update-user.ts
-│   │       ├── components
-│   │       │   ├── user-form.tsx
-│   │       │   └── user-list.tsx
-│   │       ├── hooks
-│   │       │   ├── use-user-mutations.ts
-│   │       │   └── use-users.ts
-│   │       ├── schemas
-│   │       │   └── user.schema.ts
-│   │       ├── types
-│   │       │   └── user.type.ts
-│   │       └── constants.ts
-│   ├── hooks
-│   │   ├── use-debounce.ts
-│   │   ├── use-media-query.ts
-│   │   └── use-permission.ts
-│   ├── i18n
-│   │   └── request.ts
-│   ├── lib
-│   │   ├── api
-│   │   │   ├── api-error.ts
-│   │   │   ├── client.ts
-│   │   │   ├── endpoints.ts
-│   │   │   └── query-client.ts
-│   │   ├── auth
-│   │   │   ├── permission.ts
-│   │   │   ├── session.ts
-│   │   │   └── token.ts
-│   │   └── utils
-│   │       ├── cn.ts
-│   │       ├── date.ts
-│   │       ├── format.ts
-│   │       ├── number.ts
-│   │       └── string.ts
-│   ├── mocks
-│   │   ├── adapter.ts
-│   │   └── settings.ts
-│   ├── providers
-│   │   ├── app-provider.tsx
-│   │   ├── query-provider.tsx
-│   │   └── theme-provider.tsx
-│   ├── stores
-│   │   ├── app.store.ts
-│   │   ├── sidebar.store.ts
-│   │   └── ui.store.ts
-│   ├── types
-│   │   ├── api.ts
-│   │   ├── common.ts
-│   │   └── pagination.ts
-│   └── proxy.ts
-├── tests
-│   ├── e2e
-│   │   └── starter.spec.ts
-│   └── integration
-│       └── api-client.spec.ts
-├── .dockerignore
-├── .env.example
+│   │   │   │   ├── api-error.ts
+│   │   │   │   ├── client.ts
+│   │   │   │   ├── endpoints.ts
+│   │   │   │   └── query-client.ts
+│   │   │   ├── auth
+│   │   │   │   ├── permission.ts
+│   │   │   │   ├── session.ts
+│   │   │   │   └── token.ts
+│   │   │   └── utils
+│   │   │       ├── cn.ts
+│   │   │       ├── date.ts
+│   │   │       ├── format.ts
+│   │   │       ├── number.ts
+│   │   │       └── string.ts
+│   │   ├── mocks
+│   │   │   ├── adapter.ts
+│   │   │   └── settings.ts
+│   │   ├── providers
+│   │   │   ├── app-provider.tsx
+│   │   │   ├── query-provider.tsx
+│   │   │   └── theme-provider.tsx
+│   │   ├── stores
+│   │   │   ├── app.store.ts
+│   │   │   ├── sidebar.store.ts
+│   │   │   └── ui.store.ts
+│   │   ├── types
+│   │   │   ├── api.ts
+│   │   │   ├── common.ts
+│   │   │   └── pagination.ts
+│   │   └── proxy.ts
+│   ├── tests
+│   │   ├── e2e
+│   │   │   └── starter.spec.ts
+│   │   └── integration
+│   │       └── api-client.spec.ts
+│   ├── .dockerignore
+│   ├── .env.example
+│   ├── components.json
+│   ├── Dockerfile
+│   ├── eslint.config.mjs
+│   ├── knip.json
+│   ├── next-env.d.ts
+│   ├── next.config.ts
+│   ├── package.json
+│   ├── playwright.config.ts
+│   ├── pnpm-lock.yaml
+│   ├── pnpm-workspace.yaml
+│   ├── postcss.config.mjs
+│   ├── README.md
+│   └── tsconfig.json
 ├── .gitignore
 ├── AGENTS.md
 ├── CLAUDE.md
-├── components.json
 ├── compose.yaml
 ├── DESIGN.md
-├── Dockerfile
-├── eslint.config.mjs
-├── knip.json
-├── next-env.d.ts
-├── next.config.ts
-├── package.json
-├── playwright.config.ts
-├── pnpm-lock.yaml
-├── pnpm-workspace.yaml
-├── postcss.config.mjs
 ├── PRODUCT.md
-├── README.md
-└── tsconfig.json
+└── README.md

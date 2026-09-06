@@ -18,7 +18,7 @@ test("protected routes, validation, login and logout", async ({ page }) => {
     page.getByRole("heading", { name: "Welcome, Alex" }),
   ).toBeVisible();
   await page.screenshot({
-    path: "docs/screenshots/dashboard-desktop.png",
+    path: "../docs/screenshots/dashboard-desktop.png",
     fullPage: true,
   });
   await page.getByRole("button", { name: "Sign out", exact: true }).click();
@@ -29,7 +29,7 @@ test("users create, edit, search, delete and empty state", async ({ page }) => {
   await page.getByRole("link", { name: "Users", exact: true }).click();
   await expect(page.getByText("Olivia Rhye")).toBeVisible();
   await page.screenshot({
-    path: "docs/screenshots/users-desktop.png",
+    path: "../docs/screenshots/users-desktop.png",
     fullPage: true,
   });
   await page.getByRole("button", { name: "Add user", exact: true }).click();
@@ -98,7 +98,7 @@ test("mobile navigation is usable without page overflow", async ({ page }) => {
     ),
   ).toBe(true);
   await page.screenshot({
-    path: "docs/screenshots/users-mobile.png",
+    path: "../docs/screenshots/users-mobile.png",
     fullPage: true,
   });
 });
