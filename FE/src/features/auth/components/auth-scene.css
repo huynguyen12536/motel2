@@ -4,6 +4,12 @@
   min-height: 100dvh;
   background: #f8fbff;
   color: #111827;
+  font-family:
+    var(--font-be-vietnam-pro),
+    "Be Vietnam Pro",
+    Inter,
+    system-ui,
+    sans-serif;
 }
 
 .auth-scene :focus-visible {
@@ -46,6 +52,7 @@
 .auth-card {
   width: 460px;
   max-width: calc(100vw - 32px);
+  margin-top: -4vh;
   padding: 40px;
   border: 1px solid rgb(226 232 240 / 0.85);
   border-radius: 22px;
@@ -54,8 +61,52 @@
     0 20px 50px rgb(15 23 42 / 0.08),
     0 8px 20px rgb(15 23 42 / 0.04);
   backdrop-filter: blur(18px);
-  transform: translateY(-2vh);
   animation: auth-card-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.auth-locale {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  display: flex;
+  gap: 2px;
+}
+
+.auth-locale button {
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+.auth-locale button.is-active {
+  background: rgb(255 255 255 / 0.78);
+  color: #0f172a;
+}
+
+.auth-locale button:hover {
+  background: rgb(255 255 255 / 0.55);
+  color: #0f172a;
+}
+
+.auth-page-footer {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: #94a3b8;
+  text-align: center;
 }
 
 .login-brand {
@@ -126,6 +177,11 @@
 .login-form {
   display: flex;
   flex-direction: column;
+}
+
+.login-fields {
+  display: flex;
+  flex-direction: column;
   gap: 18px;
 }
 
@@ -161,14 +217,20 @@
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   background: rgb(255 255 255 / 0.9);
+  font-family: inherit;
   font-size: 15px;
   font-weight: 400;
   color: #0f172a;
   box-shadow: none;
+  outline: none;
   transition:
     border-color 150ms ease,
     box-shadow 150ms ease,
     background 150ms ease;
+}
+
+.auth-scene [data-slot="input"].login-input:focus-visible {
+  --tw-ring-shadow: 0 0 #0000;
 }
 
 .auth-scene [data-slot="input"].login-input::placeholder {
@@ -231,6 +293,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.login-remember-label {
+  margin: 0;
   font-size: 14px;
   font-weight: 400;
   color: #334155;
@@ -241,6 +307,12 @@
   height: 18px;
   border-color: #cbd5e1;
   box-shadow: none;
+}
+
+.auth-scene [data-slot="checkbox"].login-checkbox:focus-visible {
+  --tw-ring-shadow: 0 0 #0000;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
 }
 
 .auth-scene [data-slot="checkbox"].login-checkbox[data-state="checked"] {
@@ -264,7 +336,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  margin: 0;
+  margin: 0 0 18px;
   padding: 12px 14px;
   border: 1px solid #fecaca;
   border-radius: 10px;
@@ -286,6 +358,7 @@
   border: 0;
   border-radius: 12px;
   background: #2563eb;
+  font-family: inherit;
   font-size: 15px;
   font-weight: 600;
   color: #fff;
@@ -342,6 +415,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 10px;
   background: #fff;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   color: #334155;
