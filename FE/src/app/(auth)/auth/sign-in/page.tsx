@@ -1,5 +1,10 @@
 import { SignInForm } from "@/features/auth/components/sign-in-form";
-export const metadata = { title: "Sign in" };
+import { AuthScene } from "@/features/auth/components/auth-scene";
+export const metadata = { title: "Đăng nhập" };
 export default function SignInPage() {
-  return <SignInForm />;
+  return (
+    <AuthScene>
+      <SignInForm />
+    </AuthScene>
+  );
 }

@@ -2,20 +2,22 @@ import { test, expect, type Page } from "@playwright/test";
 async function login(page: Page) {
   await page.goto("/auth/sign-in");
   await page
-    .getByLabel("Email address", { exact: true })
-    .fill("admin@example.com");
-  await page.getByLabel("Password", { exact: true }).fill("Password123!");
-  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+    .getByLabel("Tên đăng nhập hoặc email", { exact: true })
+    .fill("admin@apa.local");
+  await page.getByLabel("Mật khẩu", { exact: true }).fill("Demo@123");
+  await page.getByRole("button", { name: "Đăng nhập", exact: true }).click();
   await expect(page).toHaveURL(/\/dashboard$/);
 }
 test("protected routes, validation, login and logout", async ({ page }) => {
   await page.goto("/users");
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
-  await page.getByRole("button", { name: "Sign in", exact: true }).click();
-  await expect(page.getByText("Enter a valid email address.")).toBeVisible();
+  await page.getByRole("button", { name: "Đăng nhập", exact: true }).click();
+  await expect(
+    page.getByText("Vui lòng nhập tên đăng nhập hoặc email."),
+  ).toBeVisible();
   await login(page);
   await expect(
-    page.getByRole("heading", { name: "Welcome, Alex" }),
+    page.getByRole("heading", { name: "Welcome, Quản" }),
   ).toBeVisible();
   await page.screenshot({
     path: "../docs/screenshots/dashboard-desktop.png",
@@ -76,7 +78,7 @@ test("language, theme, settings and session reset", async ({ page }) => {
   await page.reload();
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
   await expect(
-    page.getByRole("heading", { name: "Chào mừng trở lại" }),
+    page.getByRole("heading", { name: "Đăng nhập", exact: true }),
   ).toBeVisible();
 });
 test("mobile navigation is usable without page overflow", async ({ page }) => {

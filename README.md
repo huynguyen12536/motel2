@@ -55,7 +55,15 @@ Defined under `FE/src/app/`.
 
 Backend framework and database are not initialized in this repository split.
 
-## Local frontend
+## Local development
+
+Shared infrastructure (PostgreSQL + Redis only):
+
+```bash
+docker compose --env-file FE/.env up -d postgres redis
+```
+
+Frontend on the host (not Docker):
 
 ```bash
 cd FE

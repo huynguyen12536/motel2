@@ -1,5 +1,5 @@
 import { ApiError } from "@/lib/api/api-error";
-import { PERMISSIONS } from "@/config/permissions";
+import { MOCK_AUTH_USER, mockSignIn } from "@/features/auth/mocks/mock-auth";
 import type {
   CurrentUser,
   AuthResponse,
@@ -8,16 +8,7 @@ import type { User } from "@/features/users/types/user.type";
 import type { UserValues } from "@/features/users/schemas/user.schema";
 import type { PaginationParams, PaginatedResponse } from "@/types/pagination";
 let signedIn = false;
-const currentUser: CurrentUser = {
-  id: "demo-admin",
-  name: "Alex Morgan",
-  email: "admin@example.com",
-  role: "admin",
-  permissions: [
-    ...Object.values(PERMISSIONS.USER),
-    ...Object.values(PERMISSIONS.SETTINGS),
-  ],
-};
+const currentUser: CurrentUser = { ...MOCK_AUTH_USER };
 let users: User[] = [
   ["1", "Olivia Rhye", "olivia@example.com", "admin", "active"],
   ["2", "Phoenix Baker", "phoenix@example.com", "editor", "active"],
@@ -44,15 +35,10 @@ function requireSession() {
 }
 export const mockAdapter = {
   async login(email: string, password: string): Promise<AuthResponse> {
-    await delay();
-    if (email !== "admin@example.com" || password !== "Password123!")
-      throw new ApiError(
-        401,
-        "Use the demo credentials shown below.",
-        "INVALID_CREDENTIALS",
-      );
+    const result = await mockSignIn(email, password);
     signedIn = true;
-    return { accessToken: "demo-memory-only", user: currentUser };
+    Object.assign(currentUser, result.user);
+    return result;
   },
   async me() {
     await delay();

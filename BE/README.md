@@ -1,57 +1,34 @@
 # WMS APA Nano Backend
 
-Backend service for WMS APA Nano.
+Express + TypeScript API. Routes live under `/api/v1/`.
 
-Status:
+## Local development
 
-Architecture scaffold only.
+PostgreSQL and Redis run from the repository Compose file:
 
-Backend framework:
-Not finalized.
+```bash
+docker compose --env-file FE/.env up -d postgres redis --wait
+```
 
-Database:
-Not initialized in this refactor task.
+Copy `BE/.env.example` to `BE/.env`. Set `POSTGRES_PASSWORD` (and `REDIS_PASSWORD`) to the same values as `FE/.env`. Default API port is `8080` so it matches `NEXT_PUBLIC_API_URL`.
 
-Do not treat this folder as a runnable API. Module directories are domain boundaries only.
+```bash
+cd BE
+pnpm install
+pnpm db:ping
+pnpm dev
+```
 
-## Intended API convention
+Health:
 
-When a framework is chosen, HTTP routes should live under `/api/v1/`:
+- `GET http://127.0.0.1:8080/health`
+- `GET http://127.0.0.1:8080/api/v1/health`
 
-- `/api/v1/auth/...`
-- `/api/v1/materials/...`
-- `/api/v1/inventory/...`
-- `/api/v1/inbound/...`
-- `/api/v1/outbound/...`
-- `/api/v1/quality-control/...`
-- `/api/v1/reports/...`
+## Layout
 
-## Module boundaries
-
-- `auth`, `users`, `roles`, `permissions`
-- `materials`, `material-categories`, `units`, `suppliers`
-- `departments`, `employees`
-- `warehouses`, `warehouse-locations`
-- `material-lots`
-- `inventory`, `inventory-movements`
-- `inbound`, `outbound`
-- `quality-control`
-- `transfers`, `disposals`, `stock-counts`
-- `reports`, `notifications`
-- `sap-integration`
-- `audit-logs`
-- `ai/warehouse-assistant`
-- `ai/invoice-ocr`
-- `ai/demand-forecast`
-- `ai/inventory-health`
-- `ai/expiry-risk`
-
-## Shared layout
-
-- `src/config` — configuration
-- `src/database` — persistence (not initialized)
-- `src/infrastructure` — adapters (HTTP, SAP, queues)
-- `src/shared` — cross-module types/utilities
+- `src/config` — env, logger, CORS, security headers
+- `src/database` — PostgreSQL pool (`pg`)
+- `src/infrastructure/http` — Express app and middleware
+- `src/shared` — cross-module utilities
+- `src/modules` — domain modules (not implemented yet)
 - `migrations/` — schema migrations (not initialized)
-- `scripts/` — operational scripts
-- `tests/` — backend tests

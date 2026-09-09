@@ -1,8 +1,13 @@
 name: wms-apa-nano
+# Default: shared infrastructure only (postgres, redis).
+#   docker compose --env-file FE/.env up -d postgres redis
+# Optional full stack (also builds the frontend container):
+#   docker compose --env-file FE/.env --profile full up -d --build --wait
 # ${VAR:-default}: use FE/.env when present, otherwise the default.
-#   docker compose --env-file FE/.env up -d --build --wait
 services:
   frontend:
+    profiles:
+      - full
     build:
       context: ./FE
       dockerfile: Dockerfile

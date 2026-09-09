@@ -1,8 +1,8 @@
-# Docker: Frontend + PostgreSQL + Redis
+# Docker: PostgreSQL + Redis (shared infrastructure)
 
-Đã kiểm chứng 2026-09-06: Docker build thành công, cả ba container healthy, PostgreSQL SELECT 1 và Redis PING thành công; 5 browser E2E tests chạy trực tiếp trên frontend container đều qua. Lint, typecheck, Knip cũng qua.
+Development mặc định chỉ chạy PostgreSQL và Redis. Frontend và backend chạy trên host (`pnpm dev` trong `FE/` / `BE/`), không chạy trong Docker.
 
-## Chạy
+## Chạy infrastructure
 
 Docker Desktop phải chạy Linux containers.
 
@@ -10,16 +10,23 @@ Docker Desktop phải chạy Linux containers.
 cd FE
 pnpm env:init
 cd ..
-docker compose --env-file FE/.env up -d --build --wait
+docker compose --env-file FE/.env up -d postgres redis --wait
 docker compose ps
 ```
 
-Frontend image builds from `FE/`. Compose reads `FE/.env` for interpolation; any missing or empty variable uses the default in `compose.yaml` (same values as `FE/.env.example`). `FE/.env` is optional for Compose (`required: false`).
-Mở http://localhost:3000. Env local đã được tạo với mật khẩu ngẫu nhiên; script không ghi đè file có sẵn.
-Trên máy hiện tại, .env dùng APP_PORT=3002 do cổng 3000 bị chiếm: mở http://localhost:3002. Template mặc định vẫn là 3000.
-Không cần install Node dependencies trên host nếu .env đã tồn tại và chỉ chạy Docker.
+Compose đọc `FE/.env` cho interpolation; biến thiếu hoặc trống dùng default trong `compose.yaml`. `FE/.env` optional (`required: false`).
 
-Frontend chạy production standalone bằng user node, có healthcheck. PostgreSQL và Redis có named volumes và healthchecks; Redis bật AOF. Frontend không phụ thuộc DB readiness vì vẫn là frontend gọi backend qua HTTP.
+Không start container frontend/backend. Frontend local: `cd FE && pnpm dev` (http://localhost:3000). Backend chưa có runtime; khi có sẽ chạy trên host, không qua Compose mặc định.
+
+## Optional full stack
+
+Chỉ khi cần image frontend:
+
+```bash
+docker compose --env-file FE/.env --profile full up -d --build --wait
+```
+
+PostgreSQL và Redis có named volumes và healthchecks; Redis bật AOF.
 
 ## Kết nối
 
@@ -40,7 +47,7 @@ PostgreSQL 18 mount volume tại /var/lib/postgresql theo [official image](https
 ## Quản lý
 
 ```bash
-docker compose logs -f frontend
+docker compose logs -f postgres redis
 docker compose stop
 docker compose start
 docker compose down
@@ -55,7 +62,7 @@ Production cần domain/TLS, secret management và backup phù hợp; file Compo
 FE/Dockerfile: multi-stage dependencies/build/runtime.
 DOCKER_BUILD=true chỉ đặt trong builder để xuất standalone; pnpm build/start ngoài Docker giữ hành vi thông thường.
 FE/.dockerignore: loại .env thật, dependencies host và artifacts khỏi build context.
-compose.yaml (repository root): frontend build context `./FE`, plus PostgreSQL and Redis volumes.
+compose.yaml (repository root): postgres + redis by default; frontend is behind profile `full`.
 FE/.env.example: template không chứa mật khẩu thật; FE/.env được gitignore.
 
 Chạy E2E trên container đang chạy (PowerShell):
