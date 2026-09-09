@@ -229,10 +229,6 @@
     background 150ms ease;
 }
 
-.auth-scene [data-slot="input"].login-input:focus-visible {
-  --tw-ring-shadow: 0 0 #0000;
-}
-
 .auth-scene [data-slot="input"].login-input::placeholder {
   color: #94a3b8;
 }
@@ -242,9 +238,18 @@
 }
 
 .auth-scene [data-slot="input"].login-input:focus-visible {
+  --tw-ring-shadow: 0 0 #0000;
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
   outline: none;
+}
+
+.auth-scene [data-slot="input"].login-input:-webkit-autofill,
+.auth-scene [data-slot="input"].login-input:-webkit-autofill:hover,
+.auth-scene [data-slot="input"].login-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f172a;
+  box-shadow: 0 0 0 1000px #fff inset;
+  caret-color: #0f172a;
 }
 
 .auth-scene [data-slot="input"].login-input[aria-invalid="true"] {
@@ -473,12 +478,12 @@
 @keyframes auth-card-enter {
   from {
     opacity: 0;
-    transform: translateY(10px) scale(0.985);
+    transform: translateY(12px) scale(0.985);
   }
 
   to {
     opacity: 1;
-    transform: translateY(-2vh) scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -520,9 +525,9 @@
   .auth-card {
     width: calc(100vw - 24px);
     max-width: calc(100vw - 24px);
+    margin-top: 0;
     padding: 28px 22px;
     border-radius: 18px;
-    transform: none;
   }
 
   .login-title {
