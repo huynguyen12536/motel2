@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { cn } from "@/lib/utils/cn";
-import { AuthLocaleSwitch } from "@/features/auth/components/auth-locale-switch";
+import { AuthLocaleSwitch } from "./auth-locale-switch";
 import "./auth-scene.css";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -19,10 +20,14 @@ export function AuthScene({ children }: { children: ReactNode }) {
         beVietnamPro.variable,
         beVietnamPro.className,
       )}
+      suppressHydrationWarning
     >
-      <img
-        src="/images/auth/wms-login-bg.png"
+      <Image
+        src="/images/auth/BackgroundLogin.png"
         alt=""
+        fill
+        priority
+        sizes="100vw"
         className="auth-scene__image"
         aria-hidden="true"
       />

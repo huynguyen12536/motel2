@@ -7,7 +7,25 @@ import type {
 import type { User } from "@/features/users/types/user.type";
 import type { UserValues } from "@/features/users/schemas/user.schema";
 import type { PaginationParams, PaginatedResponse } from "@/types/pagination";
+
+const DEMO_SESSION_KEY = "wms-demo-signed-in";
+
 let signedIn = false;
+let sessionHydrated = false;
+
+function hydrateDemoSession() {
+  if (sessionHydrated || typeof window === "undefined") return;
+  sessionHydrated = true;
+  signedIn = window.sessionStorage.getItem(DEMO_SESSION_KEY) === "1";
+}
+
+function setDemoSession(value: boolean) {
+  signedIn = value;
+  if (typeof window === "undefined") return;
+  if (value) window.sessionStorage.setItem(DEMO_SESSION_KEY, "1");
+  else window.sessionStorage.removeItem(DEMO_SESSION_KEY);
+}
+
 const currentUser: CurrentUser = { ...MOCK_AUTH_USER };
 let users: User[] = [
   ["1", "Olivia Rhye", "olivia@example.com", "admin", "active"],
@@ -31,12 +49,13 @@ async function delay() {
   await new Promise((resolve) => setTimeout(resolve, 250));
 }
 function requireSession() {
+  hydrateDemoSession();
   if (!signedIn) throw new ApiError(401, "Please sign in.", "UNAUTHENTICATED");
 }
 export const mockAdapter = {
   async login(email: string, password: string): Promise<AuthResponse> {
     const result = await mockSignIn(email, password);
-    signedIn = true;
+    setDemoSession(true);
     Object.assign(currentUser, result.user);
     return result;
   },
@@ -47,7 +66,7 @@ export const mockAdapter = {
   },
   async logout() {
     await delay();
-    signedIn = false;
+    setDemoSession(false);
   },
   async listUsers(params: PaginationParams): Promise<PaginatedResponse<User>> {
     await delay();

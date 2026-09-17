@@ -1,17 +1,17 @@
 ---
-name: Workspace
-description: Restrained enterprise admin starter
+name: WMS APA Nano
+description: Restrained enterprise warehouse operations UI
 colors:
-  primary: "#245e50"
+  primary: "#2563eb"
   primary-foreground: "#ffffff"
-  accent: "#e4efeb"
-  background: "#f8f9fb"
-  foreground: "#182329"
+  accent: "#dbeafe"
+  background: "#f4f7fb"
+  foreground: "#0f172a"
   card: "#ffffff"
-  muted: "#eef1f3"
-  muted-foreground: "#58646e"
-  border: "#dce2e6"
-  destructive: "#bb3030"
+  muted: "#eef2f7"
+  muted-foreground: "#64748b"
+  border: "#e2e8f0"
+  destructive: "#dc2626"
 typography:
   display:
     fontFamily: "Arial, Helvetica, sans-serif"
@@ -100,11 +100,11 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Clear Workspace"**
+**Creative North Star: "The Clear Warehouse Board"**
 
-A clean, modern enterprise workspace for finding members, editing access, and adjusting preferences. The explicitly selected minimal direction favors readable records, restrained color, and familiar navigation. Mode: Operate.
+A clean, modern enterprise workspace for APA Nano warehouse operations: shift pulse, movements, and exceptions first; members and preferences as supporting tools. Mode: Operate.
 
-Neutral bordered surfaces support routine desktop work. Auth uses a split brand panel; the signed-in shell uses a fixed sidebar, header, and centered main column. A mobile navigation drawer and locally scrolling tables preserve access to the same tasks. System sans-serif avoids external font requests in this offline starter.
+Neutral bordered surfaces support routine desktop work. Auth uses a full-bleed warehouse scene with a centered glass card and blue actions. The signed-in shell uses a fixed sidebar, header, and centered main column. Dashboard is a split board: live pulse strip, today’s movements, and attention/quick actions.
 
 Product copy lives in `messages/` (en, fr, de, vi). This file is visual only. Demo metrics and demo sessions stay labelled.
 
@@ -120,15 +120,15 @@ Semantic CSS variables in `src/app/globals.css` are the runtime source. Frontmat
 
 ### Primary
 
-Forest green (`primary`) fills primary buttons, the auth brand panel, current sidebar items, and active membership. `primary-foreground` is the text on those filled fields. Pale sage (`accent`) marks current navigation, the demo chip, and active status.
+Operations blue (`primary`) fills primary buttons, current sidebar items, and active membership. `primary-foreground` is the text on those filled fields. Soft ice blue (`accent`) marks current navigation, the demo chip, and active status.
 
 ### Neutral
 
 Cool paper (`background`) is the canvas. White (`card`) is the content surface (sidebar, header, tables, settings). Ink (`foreground`) carries primary information; slate (`muted-foreground`) supports secondary text. Mist (`muted`) supplies subdued fills, table headers, and count chips. Hairline (`border`) supplies 1px separation. Alert red (`destructive`) identifies errors and destructive actions.
 
-**The Purposeful Accent Rule.** Use forest green for primary actions, current navigation, and active status; keep secondary information neutral.
+**The Purposeful Accent Rule.** Use operations blue for primary actions, current navigation, and active status; keep secondary information neutral.
 
-**The Auth Field Rule.** Forest green may fill the left auth panel at large breakpoints. Everywhere else it stays on actions, current nav, icons, and status — not on page backgrounds.
+**The Auth Field Rule.** Auth keeps a warehouse scene with blue CTAs. Everywhere else blue stays on actions, current nav, icons, and status — not on page backgrounds.
 
 ## Typography
 

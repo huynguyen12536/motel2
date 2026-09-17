@@ -26,36 +26,64 @@
   --font-sans: Arial, Helvetica, sans-serif;
 }
 :root {
-  --background: #f8f9fb;
-  --foreground: #182329;
+  --background: #f4f7fb;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --primary: #245e50;
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
-  --muted: #eef1f3;
-  --muted-foreground: #58646e;
-  --accent: #e4efeb;
-  --destructive: #bb3030;
-  --border: #dce2e6;
+  --muted: #eef2f7;
+  --muted-foreground: #64748b;
+  --accent: #dbeafe;
+  --destructive: #dc2626;
+  --border: #e2e8f0;
   --radius: 0.75rem;
 }
 .dark {
-  --background: #131a1e;
-  --foreground: #edf2f4;
-  --card: #1b252b;
-  --primary: #9ed6bd;
-  --primary-foreground: #14241c;
-  --muted: #29343b;
-  --muted-foreground: #acb8bf;
-  --accent: #28453c;
-  --destructive: #ff9090;
-  --border: #39464e;
+  --background: #0b1220;
+  --foreground: #e2e8f0;
+  --card: #111827;
+  --primary: #60a5fa;
+  --primary-foreground: #0b1220;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #1e3a5f;
+  --destructive: #f87171;
+  --border: #334155;
 }
 @layer base {
-  * {
-    @apply border-border;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    max-width: 100%;
+    overflow-x: clip;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
   body {
     @apply bg-background text-foreground antialiased;
+    max-width: 100%;
+    overflow-x: clip;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
   }
   button:not(:disabled),
   a {

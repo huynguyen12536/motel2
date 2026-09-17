@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { getLocale, getMessages } from "next-intl/server";
 import { AppProvider } from "@/providers/app-provider";
 import { site } from "@/config/site";
 import "./globals.css";
+
 export const metadata: Metadata = {
   title: { default: site.name, template: `%s | ${site.name}` },
   description: site.description,
 };
+
 export default async function RootLayout({
   children,
 }: {
@@ -17,6 +20,10 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <Script
+          src="/scripts/strip-password-manager-attrs.js"
+          strategy="beforeInteractive"
+        />
         <AppProvider locale={locale} messages={messages}>
           {children}
         </AppProvider>

@@ -1,99 +1,82 @@
 "use client";
-import Link from "next/link";
-import { ArrowUpRight, UsersRound, Settings2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { PageHeader } from "@/components/shared/page-header/page-header";
+import { motion, useReducedMotion } from "motion/react";
+import { DashboardKpiGrid } from "@/features/dashboard/components/dashboard-kpi-grid";
+import { RecentDocumentsCard } from "@/features/dashboard/components/recent-documents-card";
+import { PendingQueueCard } from "@/features/dashboard/components/pending-queue-card";
+import { QualityStatusCard } from "@/features/dashboard/components/quality-status-card";
+import { ExpiringLotsCard } from "@/features/dashboard/components/expiring-lots-card";
+import { InventoryMovementCard } from "@/features/dashboard/components/inventory-movement-card";
+import { DASHBOARD_FOOTER_DATE } from "@/features/dashboard/constants/dashboard.constants";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Can } from "@/components/shared/can";
-import { PERMISSIONS } from "@/config/permissions";
-import { env } from "@/config/env";
-import { useSession } from "@/features/auth/hooks/use-session";
-import { formatNumber } from "@/lib/utils/number";
+  dashboardKpis,
+  expiringLots,
+  inventoryMovement,
+  pendingQueue,
+  qualityStatus,
+  qualityStatusTotalLots,
+  recentDocuments,
+} from "@/features/dashboard/mocks/dashboard.mock";
+import "./dashboard.css";
+
+const rise = {
+  hidden: { opacity: 0, y: 6 },
+  show: { opacity: 1, y: 0 },
+};
+
 export function DashboardOverview() {
-  const t = useTranslations();
-  const { data } = useSession();
+  const reduceMotion = useReducedMotion();
+  const transition = reduceMotion
+    ? { duration: 0 }
+    : { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
+
   return (
-    <>
-      <PageHeader
-        title={t("greeting", { name: data?.name.split(" ")[0] ?? "" })}
-        description={t("dashboardDescription")}
-      />
-      <div className="mb-8 grid gap-5 sm:grid-cols-3">
-        {[
-          { label: "teamMembers", value: 9 },
-          { label: "activeMembers", value: 7 },
-          { label: "pendingInvites", value: 2 },
-        ].map((item) => (
-          <Card key={item.label} className="shadow-none">
-            <CardHeader>
-              <CardDescription>{t(item.label)}</CardDescription>
-              <CardTitle className="text-3xl tabular-nums">
-                {env.demoMode ? formatNumber(item.value) : "—"}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-xs text-muted-foreground">
-              {t(env.demoMode ? "sampleMetric" : "connectMetric")}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-      <section className="rounded-xl border bg-card p-6 md:p-8">
-        <h2 className="text-xl font-semibold">{t("workspaceOverview")}</h2>
-        <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
-          {t("workspaceOverviewDescription")}
-        </p>
-        <div className="mt-7 divide-y">
-          <Can permission={PERMISSIONS.USER.READ}>
-            <Link href="/users" className="group flex items-center gap-4 py-5">
-              <UsersRound className="size-5 text-primary" />
-              <div className="flex-1">
-                <h3 className="text-sm font-semibold group-hover:underline">
-                  {t("manageTeam")}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {t("manageTeamDescription")}
-                </p>
-              </div>
-              <ArrowUpRight className="size-5 text-muted-foreground" />
-            </Link>
-          </Can>
-          <Can permission={PERMISSIONS.SETTINGS.READ}>
-            <Link
-              href="/settings"
-              className="group flex items-center gap-4 py-5"
-            >
-              <Settings2 className="size-5 text-primary" />
-              <div className="flex-1">
-                <h3 className="text-sm font-semibold group-hover:underline">
-                  {t("personalizeWorkspace")}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {t("personalizeDescription")}
-                </p>
-              </div>
-              <ArrowUpRight className="size-5 text-muted-foreground" />
-            </Link>
-          </Can>
-        </div>
-      </section>
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-        <p>{t(env.demoMode ? "demoBanner" : "readyBanner")}</p>
-        <Can permission={PERMISSIONS.USER.READ}>
-          <Button variant="outline" asChild>
-            <Link href="/users">
-              {t("viewUsers")}
-              <ArrowUpRight />
-            </Link>
-          </Button>
-        </Can>
-      </div>
-    </>
+    <div className="wms-dash">
+      <motion.div
+        className="wms-dash__body"
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: {},
+          show: {
+            transition: { staggerChildren: reduceMotion ? 0 : 0.045 },
+          },
+        }}
+      >
+        <motion.header className="wms-page-head" variants={rise} transition={transition}>
+          <div className="wms-page-head__text">
+            <h1 className="wms-page-title">Tổng quan kho</h1>
+          </div>
+          <div className="wms-page-head__controls">
+            <p className="wms-page-date">{DASHBOARD_FOOTER_DATE}</p>
+            <label className="sr-only" htmlFor="dash-period">
+              Kỳ báo cáo
+            </label>
+            <select id="dash-period" className="wms-page-period" defaultValue="7d">
+              <option value="7d">7 ngày qua</option>
+              <option value="30d">30 ngày qua</option>
+              <option value="90d">90 ngày qua</option>
+            </select>
+          </div>
+        </motion.header>
+
+        <motion.div variants={rise} transition={transition}>
+          <DashboardKpiGrid items={dashboardKpis} />
+        </motion.div>
+
+        <motion.div className="wms-mid" variants={rise} transition={transition}>
+          <RecentDocumentsCard items={recentDocuments} />
+          <PendingQueueCard items={pendingQueue} />
+        </motion.div>
+
+        <motion.div className="wms-bottom" variants={rise} transition={transition}>
+          <QualityStatusCard
+            items={qualityStatus}
+            totalLots={qualityStatusTotalLots}
+          />
+          <ExpiringLotsCard items={expiringLots} />
+          <InventoryMovementCard points={inventoryMovement} />
+        </motion.div>
+      </motion.div>
+    </div>
   );
 }

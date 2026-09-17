@@ -1,5 +1,6 @@
 "use client";
 import type { InputHTMLAttributes, Ref } from "react";
+import { useTranslations } from "next-intl";
 import { Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -20,6 +21,7 @@ export function PasswordField({
     ref?: Ref<HTMLInputElement>;
   };
 }) {
+  const t = useTranslations();
   return (
     <div className="login-field">
       <svg
@@ -51,7 +53,7 @@ export function PasswordField({
         className="login-input"
         type={visible ? "text" : "password"}
         autoComplete="current-password"
-        placeholder="Nhập mật khẩu"
+        placeholder={t("password")}
         aria-invalid={invalid}
         aria-describedby={invalid ? describedBy : undefined}
         {...registration}
@@ -59,7 +61,7 @@ export function PasswordField({
       <button
         type="button"
         className="login-password-toggle"
-        aria-label={visible ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+        aria-label={visible ? t("hidePassword") : t("showPassword")}
         aria-pressed={visible}
         onClick={onToggle}
       >

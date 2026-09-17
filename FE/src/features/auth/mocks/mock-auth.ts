@@ -36,5 +36,5 @@ export async function mockSignIn(
       "INVALID_CREDENTIALS",
     );
   }
-  return { accessToken: "demo-memory-only", user: MOCK_AUTH_USER };
+  return { accessToken: "demo-session-token", user: MOCK_AUTH_USER };
 }

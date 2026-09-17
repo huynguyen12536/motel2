@@ -1,7 +1,7 @@
 import { z } from "zod";
 const parsed = z
   .object({
-    appName: z.string().min(1).default("Workspace"),
+    appName: z.string().min(1).default("WMS APA Nano"),
     apiUrl: z.url().default("http://localhost:8080/api/v1"),
     demoMode: z.enum(["true", "false"]).default("true"),
     credentials: z.enum(["true", "false"]).default("true"),

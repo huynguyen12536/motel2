@@ -1,34 +1,33 @@
 import { test, expect, type Page } from "@playwright/test";
 async function login(page: Page) {
   await page.goto("/auth/sign-in");
-  await page
-    .getByLabel("Tên đăng nhập hoặc email", { exact: true })
-    .fill("admin@apa.local");
-  await page.getByLabel("Mật khẩu", { exact: true }).fill("Demo@123");
-  await page.getByRole("button", { name: "Đăng nhập", exact: true }).click();
+  await page.getByLabel("Email", { exact: true }).fill("admin@apa.local");
+  await page.getByLabel("Password", { exact: true }).fill("Demo@123");
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
   await expect(page).toHaveURL(/\/dashboard$/);
 }
 test("protected routes, validation, login and logout", async ({ page }) => {
   await page.goto("/users");
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
-  await page.getByRole("button", { name: "Đăng nhập", exact: true }).click();
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
   await expect(
-    page.getByText("Vui lòng nhập tên đăng nhập hoặc email."),
+    page.getByText("Enter your email or username."),
   ).toBeVisible();
   await login(page);
   await expect(
-    page.getByRole("heading", { name: "Welcome, Quản" }),
+    page.getByRole("heading", { name: "Tổng quan kho", exact: true }),
   ).toBeVisible();
   await page.screenshot({
     path: "../docs/screenshots/dashboard-desktop.png",
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Sign out", exact: true }).click();
+  await page.getByRole("button", { name: "Nguyễn Văn A", exact: true }).click();
+  await page.getByRole("menuitem", { name: "Sign out", exact: true }).click();
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
 });
 test("users create, edit, search, delete and empty state", async ({ page }) => {
   await login(page);
-  await page.getByRole("link", { name: "Users", exact: true }).click();
+  await page.getByRole("link", { name: "Người dùng", exact: true }).click();
   await expect(page.getByText("Olivia Rhye")).toBeVisible();
   await page.screenshot({
     path: "../docs/screenshots/users-desktop.png",
@@ -61,7 +60,7 @@ test("users create, edit, search, delete and empty state", async ({ page }) => {
 });
 test("language, theme, settings and session reset", async ({ page }) => {
   await login(page);
-  await page.getByRole("link", { name: "Settings", exact: true }).click();
+  await page.getByRole("link", { name: "Cấu hình", exact: true }).click();
   await page.getByLabel("Workspace name").fill("New workspace");
   await page.getByRole("button", { name: "Save changes" }).click();
   await expect(
@@ -78,16 +77,16 @@ test("language, theme, settings and session reset", async ({ page }) => {
   await page.reload();
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
   await expect(
-    page.getByRole("heading", { name: "Đăng nhập", exact: true }),
+    page.getByRole("heading", { name: "Sign in", exact: true }),
   ).toBeVisible();
 });
 test("mobile navigation is usable without page overflow", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await login(page);
-  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Mở menu" }).click();
   await page
     .getByRole("dialog")
-    .getByRole("link", { name: "Users", exact: true })
+    .getByRole("link", { name: "Người dùng", exact: true })
     .click();
   await expect(
     page.getByRole("heading", { name: "Users", exact: true }),

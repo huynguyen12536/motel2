@@ -1,5 +1,6 @@
 import { AuthGuard } from "@/features/auth/components/auth-guard";
-import { AppShell } from "@/components/shared/layout/app-shell";
+import { AppShell } from "@/components/layout/app-shell";
+
 export default function DashboardLayout({
   children,
 }: {

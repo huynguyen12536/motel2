@@ -2,11 +2,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Controller } from "react-hook-form";
-import { CircleAlert, Cuboid, LoaderCircle, LogIn } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ArrowRight, CircleAlert, LoaderCircle } from "lucide-react";
 import { useSignIn } from "@/features/auth/hooks/use-sign-in";
 import { PasswordField } from "@/features/auth/components/password-field";
-import { MOCK_CREDENTIALS } from "@/features/auth/mocks/mock-auth";
-import { env } from "@/config/env";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -46,26 +45,21 @@ function MicrosoftMark() {
 }
 
 export function SignInForm() {
+  const t = useTranslations();
   const { form, mutation, expired } = useSignIn();
   const [passwordVisible, setPasswordVisible] = useState(false);
   return (
-    <div>
+    <div className="login-panel">
       <div className="login-brand">
-        <span className="login-brand__mark" aria-hidden="true">
-          <Cuboid size={18} />
-        </span>
-        <div>
-          <p className="login-brand__name">WMS APA Nano</p>
-          <p className="login-brand__subtitle">Warehouse Management System</p>
-        </div>
+        <span className="login-brand__mark" aria-hidden="true" role="img" />
+        <p className="login-brand__name">{t("productName")}</p>
       </div>
+
       <div className="login-heading">
-        <p className="login-eyebrow">Chào mừng trở lại</p>
-        <h1 className="login-title">Đăng nhập</h1>
-        <p className="login-subtitle">
-          Truy cập hệ thống quản lý kho WMS APA Nano
-        </p>
+        <h1 className="login-title">{t("signIn")}</h1>
+        <p className="login-subtitle">{t("signInDescription")}</p>
       </div>
+
       <form
         noValidate
         className="login-form"
@@ -73,22 +67,21 @@ export function SignInForm() {
       >
         {(expired || (mutation.isError && !mutation.isPending)) && (
           <p role="alert" className="login-alert">
-            <CircleAlert size={17} aria-hidden="true" />
-            {expired
-              ? "Phiên đã hết hạn. Vui lòng đăng nhập lại."
-              : "Tên đăng nhập hoặc mật khẩu không chính xác."}
+            <CircleAlert size={16} aria-hidden="true" />
+            {expired ? t("sessionExpired") : t("invalidCredentials")}
           </p>
         )}
+
         <div className="login-fields">
           <div>
             <Label htmlFor="email" className="login-label">
-              Tên đăng nhập hoặc email
+              {t("emailShort")}
             </Label>
             <div className="login-field">
               <svg
                 className="login-field__icon"
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
@@ -115,7 +108,7 @@ export function SignInForm() {
                 className="login-input"
                 type="text"
                 autoComplete="username"
-                placeholder="Nhập tên đăng nhập hoặc email"
+                placeholder="you@company.com"
                 aria-invalid={!!form.formState.errors.email}
                 aria-describedby={
                   form.formState.errors.email ? "email-error" : undefined
@@ -125,13 +118,14 @@ export function SignInForm() {
             </div>
             {form.formState.errors.email ? (
               <p id="email-error" className="login-field-error">
-                Vui lòng nhập tên đăng nhập hoặc email.
+                {t("emailRequired")}
               </p>
             ) : null}
           </div>
+
           <div>
             <Label htmlFor="password" className="login-label">
-              Mật khẩu
+              {t("password")}
             </Label>
             <PasswordField
               id="password"
@@ -143,11 +137,12 @@ export function SignInForm() {
             />
             {form.formState.errors.password ? (
               <p id="password-error" className="login-field-error">
-                Vui lòng nhập mật khẩu.
+                {t("passwordRequired")}
               </p>
             ) : null}
           </div>
         </div>
+
         <div className="login-meta">
           <div className="login-remember">
             <Controller
@@ -163,46 +158,43 @@ export function SignInForm() {
               )}
             />
             <Label htmlFor="remember" className="login-remember-label">
-              Ghi nhớ đăng nhập
+              {t("remember")}
             </Label>
           </div>
           <Link href="/auth/forgot-password" className="login-forgot">
-            Quên mật khẩu?
+            {t("forgotPassword")}
           </Link>
         </div>
+
         <button
           className="login-submit"
           type="submit"
           disabled={mutation.isPending || mutation.isSuccess}
         >
+          {mutation.isPending ? t("signingIn") : t("signIn")}
           {mutation.isPending ? (
-            <LoaderCircle size={18} className="animate-spin" />
+            <LoaderCircle size={16} className="animate-spin" />
           ) : (
-            <LogIn size={18} />
+            <ArrowRight size={16} />
           )}
-          {mutation.isPending ? "Đang đăng nhập..." : "Đăng nhập"}
         </button>
       </form>
-      <div className="login-divider">hoặc đăng nhập bằng</div>
+
+      <div className="login-divider">{t("orContinue")}</div>
+
       <div className="login-socials">
-        <button type="button" className="login-social">
+        <button type="button" className="login-social" aria-label="Google">
           <GoogleMark />
-          Google
         </button>
-        <button type="button" className="login-social">
+        <button type="button" className="login-social" aria-label="Microsoft">
           <MicrosoftMark />
-          Microsoft
         </button>
       </div>
+
       <p className="login-footer">
-        Chưa có tài khoản?{" "}
-        <a href="mailto:admin@apa.local">Liên hệ quản trị hệ thống</a>
+        {t("noAccount")}{" "}
+        <a href="mailto:admin@apa.local">{t("contactAdmin")}</a>
       </p>
-      {env.demoMode ? (
-        <p className="login-demo">
-          Tài khoản demo: {MOCK_CREDENTIALS.email} / {MOCK_CREDENTIALS.password}
-        </p>
-      ) : null}
     </div>
   );
 }
