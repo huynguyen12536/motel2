@@ -56,8 +56,10 @@ export function UserMenu() {
 
       <DropdownMenuContent
         align="end"
+        side="bottom"
         sideOffset={8}
-        className="wms-account-menu min-w-[320px] border-0 bg-transparent p-0 shadow-none"
+        collisionPadding={12}
+        className="wms-account-menu z-[60] min-w-[320px] max-h-[min(480px,calc(100dvh-96px))] border-0 bg-transparent p-0 shadow-none"
       >
         <div className="wms-account-panel">
           <div className="wms-account-card">

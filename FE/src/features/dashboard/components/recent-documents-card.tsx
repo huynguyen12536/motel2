@@ -13,10 +13,10 @@ export function RecentDocumentsCard({ items }: { items: RecentDocument[] }) {
         </a>
       </div>
       {items.length === 0 ? (
-        <p className="wms-empty">Không có phiếu gần đây.</p>
+        <p className="wms-empty">Không có dữ liệu.</p>
       ) : (
-        <>
-          <div className="wms-table-wrap wms-table-desktop" tabIndex={0}>
+        <div className="wms-card__scroll" tabIndex={0}>
+          <div className="wms-table-wrap wms-table-desktop">
             <table className="wms-table wms-table--docs">
               <thead>
                 <tr>
@@ -28,8 +28,12 @@ export function RecentDocumentsCard({ items }: { items: RecentDocument[] }) {
                 </tr>
               </thead>
               <tbody>
-                {items.map((row) => (
-                  <tr key={row.id}>
+                {items.map((row, index) => (
+                  <tr
+                    key={row.id}
+                    className="wms-row-enter"
+                    style={{ animationDelay: `${index * 25}ms` }}
+                  >
                     <td className="wms-table__code" title={row.code}>
                       {row.code}
                     </td>
@@ -60,7 +64,7 @@ export function RecentDocumentsCard({ items }: { items: RecentDocument[] }) {
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </section>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { Be_Vietnam_Pro } from "next/font/google";
+import { IBM_Plex_Sans } from "next/font/google";
 import { useTranslations } from "next-intl";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useSidebarStore } from "@/stores/sidebar.store";
@@ -12,11 +12,11 @@ import { MobileSidebar } from "@/components/layout/mobile-sidebar";
 import { cn } from "@/lib/utils/cn";
 import "./app-shell.css";
 
-const beVietnamPro = Be_Vietnam_Pro({
+const appFont = IBM_Plex_Sans({
   subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-be-vietnam-pro",
+  variable: "--font-app",
 });
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -34,8 +34,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div
       className={cn(
         "wms-shell",
-        beVietnamPro.variable,
-        beVietnamPro.className,
+        appFont.variable,
+        appFont.className,
         iconCollapsed && "wms-shell--collapsed",
         compact && "wms-shell--compact",
       )}
@@ -48,19 +48,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </a>
 
       {showFixedSidebar ? (
-        <DesktopSidebar collapsed={collapsed} compact={compact} />
+        <DesktopSidebar
+          collapsed={collapsed}
+          compact={compact}
+          showCollapse={isDesktop}
+        />
       ) : null}
 
       <MobileSidebar open={open && !showFixedSidebar} />
 
       <div className="wms-shell__main">
-        <Topbar
-          showCollapse={isDesktop}
-          collapsed={collapsed}
-          showMenuButton={!showFixedSidebar}
-        />
         <main id="main-content" className="wms-shell__content">
-          {children}
+          <Topbar showMenuButton={!showFixedSidebar} />
+          <div className="wms-shell__page">{children}</div>
         </main>
       </div>
     </div>

@@ -23,7 +23,7 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
-  --font-sans: Arial, Helvetica, sans-serif;
+  --font-sans: var(--font-app), "IBM Plex Sans", system-ui, sans-serif;
 }
 :root {
   --background: #f4f7fb;

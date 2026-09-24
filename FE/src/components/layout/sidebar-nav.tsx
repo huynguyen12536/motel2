@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { navigationGroups } from "@/config/navigation";
 import { usePermission } from "@/hooks/use-permission";
 import { cn } from "@/lib/utils/cn";
@@ -96,7 +96,15 @@ export function SidebarNav({
   );
 }
 
-export function SidebarBrand({ collapsed = false }: { collapsed?: boolean }) {
+export function SidebarBrand({
+  collapsed = false,
+  showCollapse = false,
+}: {
+  collapsed?: boolean;
+  showCollapse?: boolean;
+}) {
+  const toggleCollapsed = useSidebarStore((state) => state.toggleCollapsed);
+
   return (
     <div className="wms-side__brand">
       <Image
@@ -113,6 +121,20 @@ export function SidebarBrand({ collapsed = false }: { collapsed?: boolean }) {
           <p className="wms-side__brand-sub">Hệ thống quản lý kho vật liệu</p>
         </div>
       ) : null}
+      {showCollapse ? (
+        <button
+          type="button"
+          className="wms-side__collapse"
+          aria-label={collapsed ? "Mở rộng sidebar" : "Thu gọn sidebar"}
+          onClick={toggleCollapsed}
+        >
+          {collapsed ? (
+            <PanelLeftOpen size={16} aria-hidden="true" />
+          ) : (
+            <PanelLeftClose size={16} aria-hidden="true" />
+          )}
+        </button>
+      ) : null}
     </div>
   );
 }
@@ -120,9 +142,11 @@ export function SidebarBrand({ collapsed = false }: { collapsed?: boolean }) {
 export function DesktopSidebar({
   collapsed,
   compact,
+  showCollapse,
 }: {
   collapsed: boolean;
   compact: boolean;
+  showCollapse: boolean;
 }) {
   const iconOnly = collapsed || compact;
   return (
@@ -135,7 +159,7 @@ export function DesktopSidebar({
       aria-label="Sidebar"
     >
       <div className={cn("wms-side", iconOnly && "wms-side--collapsed")}>
-        <SidebarBrand collapsed={iconOnly} />
+        <SidebarBrand collapsed={iconOnly} showCollapse={showCollapse} />
         <SidebarNav collapsed={iconOnly} />
       </div>
     </aside>

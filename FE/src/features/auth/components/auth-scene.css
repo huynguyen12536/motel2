@@ -8,9 +8,8 @@
   background: #f8fbff;
   color: #111827;
   font-family:
-    var(--font-be-vietnam-pro),
-    "Be Vietnam Pro",
-    Inter,
+    var(--font-app),
+    "IBM Plex Sans",
     system-ui,
     sans-serif;
 }
@@ -128,9 +127,8 @@
     0 16px 32px rgb(15 23 42 / 0.08),
     0 4px 10px rgb(15 23 42 / 0.04);
   font-family:
-    var(--font-be-vietnam-pro),
-    "Be Vietnam Pro",
-    Inter,
+    var(--font-app),
+    "IBM Plex Sans",
     system-ui,
     sans-serif;
 }

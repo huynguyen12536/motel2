@@ -1,82 +1,137 @@
 "use client";
+import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { DashboardKpiGrid } from "@/features/dashboard/components/dashboard-kpi-grid";
+import { InventoryMovementCard } from "@/features/dashboard/components/inventory-movement-card";
+import { QualityStatusCard } from "@/features/dashboard/components/quality-status-card";
+import { MaterialGroupChart } from "@/features/dashboard/components/material-group-chart";
 import { RecentDocumentsCard } from "@/features/dashboard/components/recent-documents-card";
 import { PendingQueueCard } from "@/features/dashboard/components/pending-queue-card";
-import { QualityStatusCard } from "@/features/dashboard/components/quality-status-card";
-import { ExpiringLotsCard } from "@/features/dashboard/components/expiring-lots-card";
-import { InventoryMovementCard } from "@/features/dashboard/components/inventory-movement-card";
+import { WarehouseAreaOverview } from "@/features/dashboard/components/warehouse-area-overview";
 import { DASHBOARD_FOOTER_DATE } from "@/features/dashboard/constants/dashboard.constants";
 import {
-  dashboardKpis,
-  expiringLots,
-  inventoryMovement,
+  DASHBOARD_PERIOD_OPTIONS,
+  filterRecentDocuments,
+  getDashboardSnapshot,
   pendingQueue,
-  qualityStatus,
-  qualityStatusTotalLots,
   recentDocuments,
+  warehouseAreaOverview,
 } from "@/features/dashboard/mocks/dashboard.mock";
+import type { DashboardPeriodKey } from "@/features/dashboard/types/dashboard.types";
 import "./dashboard.css";
 
-const rise = {
-  hidden: { opacity: 0, y: 6 },
-  show: { opacity: 1, y: 0 },
-};
+function sectionMotion(reduce: boolean | null, delay: number) {
+  if (reduce) {
+    return {
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      transition: { duration: 0 },
+    };
+  }
+  return {
+    initial: { opacity: 0, y: 8 },
+    animate: { opacity: 1, y: 0 },
+    transition: {
+      duration: 0.28,
+      delay: delay / 1000,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  };
+}
 
 export function DashboardOverview() {
   const reduceMotion = useReducedMotion();
-  const transition = reduceMotion
-    ? { duration: 0 }
-    : { duration: 0.28, ease: [0.22, 1, 0.36, 1] as const };
+  const [period, setPeriod] = useState<DashboardPeriodKey>("7d");
+
+  const snapshot = useMemo(() => getDashboardSnapshot(period), [period]);
+  const documents = useMemo(
+    () => filterRecentDocuments(recentDocuments, period),
+    [period],
+  );
 
   return (
-    <div className="wms-dash">
-      <motion.div
-        className="wms-dash__body"
-        initial="hidden"
-        animate="show"
-        variants={{
-          hidden: {},
-          show: {
-            transition: { staggerChildren: reduceMotion ? 0 : 0.045 },
-          },
-        }}
-      >
-        <motion.header className="wms-page-head" variants={rise} transition={transition}>
+    <motion.div
+      className="wms-dash"
+      initial={reduceMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: reduceMotion ? 0 : 0.18 }}
+    >
+      <div className="wms-dash__body">
+        <motion.header
+          className="wms-page-head"
+          {...sectionMotion(reduceMotion, 0)}
+        >
           <div className="wms-page-head__text">
             <h1 className="wms-page-title">Tổng quan kho</h1>
+            <p className="wms-page-subtitle">
+              Giám sát tồn kho, chất lượng và vận hành GMP-WHO
+            </p>
           </div>
           <div className="wms-page-head__controls">
             <p className="wms-page-date">{DASHBOARD_FOOTER_DATE}</p>
             <label className="sr-only" htmlFor="dash-period">
-              Kỳ báo cáo
+              Lọc kỳ báo cáo
             </label>
-            <select id="dash-period" className="wms-page-period" defaultValue="7d">
-              <option value="7d">7 ngày qua</option>
-              <option value="30d">30 ngày qua</option>
-              <option value="90d">90 ngày qua</option>
+            <select
+              id="dash-period"
+              className="wms-page-period"
+              value={period}
+              onChange={(event) =>
+                setPeriod(event.target.value as DashboardPeriodKey)
+              }
+            >
+              {DASHBOARD_PERIOD_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
         </motion.header>
 
-        <motion.div variants={rise} transition={transition}>
-          <DashboardKpiGrid items={dashboardKpis} />
+        <motion.div key={`kpi-${period}`} {...sectionMotion(reduceMotion, 50)}>
+          <DashboardKpiGrid items={snapshot.kpis} />
         </motion.div>
 
-        <motion.div className="wms-mid" variants={rise} transition={transition}>
-          <RecentDocumentsCard items={recentDocuments} />
-          <PendingQueueCard items={pendingQueue} />
-        </motion.div>
-
-        <motion.div className="wms-bottom" variants={rise} transition={transition}>
-          <QualityStatusCard
-            items={qualityStatus}
-            totalLots={qualityStatusTotalLots}
+        <motion.section
+          className="wms-analytics"
+          aria-label="Phân tích kho"
+          {...sectionMotion(reduceMotion, 120)}
+        >
+          <InventoryMovementCard
+            key={`inv-${period}`}
+            initialRange={
+              period === "90d" ? "3m" : period === "30d" ? "30d" : "7d"
+            }
           />
-          <ExpiringLotsCard items={expiringLots} />
-          <InventoryMovementCard points={inventoryMovement} />
-        </motion.div>
-      </motion.div>
-    </div>
+          <QualityStatusCard
+            key={`quality-${period}`}
+            items={snapshot.qualityStatus}
+            totalLots={snapshot.qualityTotalLots}
+          />
+          <MaterialGroupChart
+            key={`materials-${period}`}
+            items={snapshot.materialGroups}
+          />
+        </motion.section>
+
+        <motion.section
+          className="wms-ops"
+          aria-label="Vận hành"
+          {...sectionMotion(reduceMotion, 180)}
+        >
+          <RecentDocumentsCard key={`docs-${period}`} items={documents} />
+          <PendingQueueCard items={pendingQueue} />
+        </motion.section>
+
+        <motion.section
+          className="wms-areas"
+          aria-label="Tình trạng kho theo khu vực"
+          {...sectionMotion(reduceMotion, 220)}
+        >
+          <WarehouseAreaOverview items={warehouseAreaOverview} />
+        </motion.section>
+      </div>
+    </motion.div>
   );
 }

@@ -125,6 +125,7 @@ export const navigationGroups: NavigationGroup[] = [
         label: "Kho & vị trí",
         href: "/master/locations",
         icon: Warehouse,
+        ready: true,
       },
       {
         id: "suppliers",

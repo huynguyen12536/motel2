@@ -1,33 +1,43 @@
 "use client";
-import {
-  Bell,
-  Grid3X3,
-  Mail,
-  Menu,
-  PanelLeftClose,
-  PanelLeftOpen,
-  Search,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Grid3X3, Menu, Search } from "lucide-react";
 import { useSidebarStore } from "@/stores/sidebar.store";
 import { UserMenu } from "@/components/layout/user-menu";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
+import {
+  TopbarBellIcon,
+  TopbarMailIcon,
+} from "@/components/layout/topbar-icons";
 import { dashboardUser } from "@/features/dashboard/mocks/dashboard.mock";
+import { cn } from "@/lib/utils/cn";
 
 const SEARCH_PLACEHOLDER = "Tìm vật liệu, mã số lô, nhà cung cấp...";
+const SCROLL_GLASS_AT = 12;
 
-export function Topbar({
-  showCollapse,
-  collapsed,
-  showMenuButton,
-}: {
-  showCollapse: boolean;
-  collapsed: boolean;
-  showMenuButton: boolean;
-}) {
-  const toggleCollapsed = useSidebarStore((state) => state.toggleCollapsed);
+export function Topbar({ showMenuButton }: { showMenuButton: boolean }) {
   const openDrawer = useSidebarStore((state) => state.openDrawer);
+  const barRef = useRef<HTMLElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const bar = barRef.current;
+    if (!bar) return;
+    const scroller = bar.closest(".wms-shell__content");
+    if (!(scroller instanceof HTMLElement)) return;
+
+    const onScroll = () => {
+      setScrolled(scroller.scrollTop > SCROLL_GLASS_AT);
+    };
+    onScroll();
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    return () => scroller.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="wms-topbar">
+    <header
+      ref={barRef}
+      className={cn("wms-topbar", scrolled && "wms-topbar--scrolled")}
+    >
       <div className="wms-topbar__left">
         {showMenuButton ? (
           <button
@@ -37,20 +47,6 @@ export function Topbar({
             onClick={openDrawer}
           >
             <Menu size={20} aria-hidden="true" />
-          </button>
-        ) : null}
-        {showCollapse ? (
-          <button
-            type="button"
-            className="wms-circle-btn"
-            aria-label={collapsed ? "Mở rộng sidebar" : "Thu gọn sidebar"}
-            onClick={toggleCollapsed}
-          >
-            {collapsed ? (
-              <PanelLeftOpen size={18} aria-hidden="true" />
-            ) : (
-              <PanelLeftClose size={18} aria-hidden="true" />
-            )}
           </button>
         ) : null}
       </div>
@@ -72,19 +68,32 @@ export function Topbar({
         >
           <Search size={18} aria-hidden="true" />
         </button>
-        <button type="button" className="wms-circle-btn" aria-label="Ứng dụng nhanh">
+        <button
+          type="button"
+          className="wms-circle-btn wms-circle-btn--icon"
+          aria-label="Ứng dụng nhanh"
+        >
           <Grid3X3 size={18} aria-hidden="true" />
         </button>
-        <button type="button" className="wms-circle-btn" aria-label="Tin nhắn">
-          <Mail size={18} aria-hidden="true" />
+        <button
+          type="button"
+          className="wms-circle-btn wms-circle-btn--mail"
+          aria-label="Tin nhắn"
+        >
+          <TopbarMailIcon size={18} />
           <span className="wms-circle-btn__badge">{dashboardUser.mailBadge}</span>
         </button>
-        <button type="button" className="wms-circle-btn" aria-label="Thông báo">
-          <Bell size={18} aria-hidden="true" />
+        <button
+          type="button"
+          className="wms-circle-btn wms-circle-btn--bell"
+          aria-label="Thông báo"
+        >
+          <TopbarBellIcon size={18} />
           <span className="wms-circle-btn__badge">
             {dashboardUser.notificationBadge}
           </span>
         </button>
+        <ThemeToggle />
         <UserMenu />
       </div>
     </header>

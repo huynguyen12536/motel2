@@ -1,0 +1,11 @@
+# Warehouse GLB assets
+#
+# Drop real .glb files here, then set glbUrl in:
+#   src/features/warehouse/config/warehouse-models.ts
+#
+# Current:
+#   warehouse-main.glb  → Kho nguyên liệu (K01)
+#     Named meshes: Zone_A, Zone_B, Zone_C, Zone_Q
+#
+# Until a file is added and wired (glbUrl), the viewer
+# renders an explicit placeholder — never a fake model.

@@ -9,23 +9,31 @@ export const DASHBOARD_COLORS = {
   textMuted: "#94A3B8",
   pageBg: "#F4F8FC",
   card: "#FFFFFF",
-  border: "#E2E8F0",
+  border: "#E6EDF5",
   borderSubtle: "#EDF2F7",
   success: "#16A34A",
   warning: "#F59E0B",
   danger: "#DC2626",
   info: "#0EA5E9",
   purple: "#7C3AED",
-  receivedBar: "#93C5FD",
-  issuedBar: "#2563EB",
-  stockLine: "#16A34A",
+  /* BI-style soft series (lavender → blue) */
+  chartLavender: "#C4B5FD",
+  chartPeriwinkle: "#A5B4FC",
+  chartIndigo: "#818CF8",
+  chartBlue: "#60A5FA",
+  chartDeep: "#3B82F6",
+  receivedBar: "#C4B5FD",
+  issuedBar: "#818CF8",
+  stockLine: "#4F46E5",
+  stockFill: "#A5B4FC",
+  barPrimary: "#A5B4FC",
 } as const;
 
 export const QUALITY_COLORS: Record<QualityStatusCode, string> = {
-  PASSED: DASHBOARD_COLORS.success,
-  QUARANTINE: DASHBOARD_COLORS.warning,
-  FAILED: DASHBOARD_COLORS.danger,
-  ON_HOLD: DASHBOARD_COLORS.purple,
+  PASSED: "#34D399",
+  QUARANTINE: "#FBBF24",
+  FAILED: "#F87171",
+  ON_HOLD: "#A78BFA",
 };
 
 export const DASHBOARD_SEARCH_PLACEHOLDER =

@@ -1,0 +1,64 @@
+.scene {
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #05070a;
+}
+
+.frame {
+  width: 100%;
+  height: 100svh;
+  min-height: 36rem;
+}
+
+.loading {
+  display: grid;
+  width: 100%;
+  height: 100svh;
+  place-content: center;
+  place-items: center;
+  gap: 1rem;
+  color: #dfe7e0;
+  background: #05070a;
+}
+
+.loadingMark {
+  width: 1.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e0231c;
+  box-shadow: 0 0 2rem rgb(224 35 28 / 45%);
+  animation: kage-pulse 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.loadingText {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@keyframes kage-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.72);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 40rem) {
+  .frame {
+    min-height: 100svh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loadingMark {
+    animation: none;
+  }
+}

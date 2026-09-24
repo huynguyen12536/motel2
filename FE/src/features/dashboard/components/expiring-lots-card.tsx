@@ -13,27 +13,33 @@ export function ExpiringLotsCard({ items }: { items: ExpiringLot[] }) {
         </a>
       </div>
       {items.length === 0 ? (
-        <p className="wms-empty">Không có lô sắp hết hạn.</p>
+        <p className="wms-empty">Không có dữ liệu.</p>
       ) : (
-        <>
-          <div className="wms-table-wrap wms-table-desktop" tabIndex={0}>
+        <div className="wms-card__scroll" tabIndex={0}>
+          <div className="wms-table-wrap wms-table-desktop">
             <table className="wms-table wms-table--lots">
               <thead>
                 <tr>
                   <th scope="col">Tên vật liệu</th>
                   <th scope="col">Mã lô</th>
                   <th scope="col">Hạn sử dụng</th>
+                  <th scope="col">Số lượng</th>
                   <th scope="col">Trạng thái</th>
                 </tr>
               </thead>
               <tbody>
-                {items.map((lot) => (
-                  <tr key={lot.id}>
+                {items.map((lot, index) => (
+                  <tr
+                    key={lot.id}
+                    className="wms-row-enter"
+                    style={{ animationDelay: `${index * 25}ms` }}
+                  >
                     <td title={lot.materialName}>{lot.materialName}</td>
                     <td className="wms-table__code" title={lot.lotCode}>
                       {lot.lotCode}
                     </td>
                     <td title={lot.expiryDate}>{lot.expiryDate}</td>
+                    <td title={lot.quantity}>{lot.quantity}</td>
                     <td>
                       <StatusBadge status={lot.status} label={lot.statusLabel} />
                     </td>
@@ -50,14 +56,14 @@ export function ExpiringLotsCard({ items }: { items: ExpiringLot[] }) {
                 </p>
                 <div className="wms-mobile-card__row">
                   <p className="wms-mobile-card__meta">
-                    {lot.lotCode} · {lot.expiryDate}
+                    {lot.lotCode} · {lot.expiryDate} · {lot.quantity}
                   </p>
                   <StatusBadge status={lot.status} label={lot.statusLabel} />
                 </div>
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </section>
   );
