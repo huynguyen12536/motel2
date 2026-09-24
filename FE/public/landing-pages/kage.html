@@ -2664,7 +2664,7 @@ function buildWarehouseWorld() {
     }
     root.add(g);
   };
-  rackRow(-1, -12.4); rackRow(1, 12.4);
+  /* Detailed rack rows are supplied by the locally cached GLB aisle below. */
 
   /* receiving scan portal and animated scan plane */
   const gate = new THREE.Group();
@@ -2700,20 +2700,38 @@ function buildWarehouseWorld() {
     return model;
   };
   const loadModel = url => new Promise((resolve, reject) => loader.load(url, g => resolve(prepareModel(g.scene)), undefined, reject));
+  const normalizeHeight = (model, targetHeight) => {
+    const bounds = new THREE.Box3().setFromObject(model);
+    const size = bounds.getSize(new THREE.Vector3());
+    const scale = targetHeight / Math.max(size.y, .001);
+    model.scale.multiplyScalar(scale);
+    const grounded = new THREE.Box3().setFromObject(model);
+    model.position.y -= grounded.min.y;
+    return model;
+  };
   const assetPromise = Promise.all([
-    loadModel('secret-pathways-assets/models/forklift.glb'),
-    loadModel('secret-pathways-assets/models/warehouse-worker.glb')
-  ]).then(([forkliftModel, workerModel]) => {
+    loadModel('secret-pathways-assets/models/forklift-realistic.glb'),
+    loadModel('secret-pathways-assets/models/warehouse-worker-detailed.glb'),
+    loadModel('secret-pathways-assets/models/warehouse-aisle-realistic.glb')
+  ]).then(([forkliftModel, workerModel, aisleModel]) => {
+    normalizeHeight(forkliftModel, 3.25);
+    normalizeHeight(workerModel, 2.05);
+    normalizeHeight(aisleModel, 9.4);
+    [[-12.8, -32, Math.PI / 2], [12.8, -32, -Math.PI / 2]].forEach(([x, z, ry]) => {
+      const aisle = aisleModel.clone(true);
+      aisle.position.x += x; aisle.position.z += z; aisle.rotation.y = ry;
+      root.add(aisle);
+    });
     [[7.4, -30, 0, 1.32], [-7.6, -52, 2.4, 1.12]].forEach(([x, z, phase, scale]) => {
       const lift = new THREE.Group();
-      const model = forkliftModel.clone(true); model.scale.setScalar(scale); model.rotation.y = Math.PI;
+      const model = forkliftModel.clone(true); model.scale.multiplyScalar(scale); model.rotation.y = Math.PI;
       lift.add(model); lift.position.set(x, 0, z);
       lift.userData = { x0:x, z0:z, phase, speed:.18 + phase * .015 };
       root.add(lift); WORLD.forklifts.push(lift);
     });
     [[-6.2, -18, .3, -1], [5.7, -42, 2.1, 1], [-8.4, -58, 4.2, 1]].forEach(([x, z, phase, direction]) => {
       const worker = new THREE.Group();
-      const model = workerModel.clone(true); model.scale.setScalar(1.28);
+      const model = workerModel.clone(true);
       worker.add(model); worker.position.set(x, 0, z);
       worker.userData = { x0:x, z0:z, phase, direction };
       root.add(worker); WORLD.workers.push(worker);
