@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +22,7 @@ const DEMO_DEFAULTS: SignInValues = {
 };
 
 export function useSignIn() {
+  "use no memo"; // React Hook Form exposes mutable registration/state; do not cache its render bindings.
   const router = useRouter();
   const client = useQueryClient();
   const expired = useAuthStore((state) => state.expired);
@@ -33,9 +34,11 @@ export function useSignIn() {
       : { email: "", password: "", remember: false },
   });
 
+  const demoInitialized = useRef(false);
   useEffect(() => {
-    // Re-apply demo creds after mount — password managers often clear type=password.
-    if (!env.demoMode) return;
+    // Re-apply demo creds once after mount — password managers often clear type=password.
+    if (!env.demoMode || demoInitialized.current) return;
+    demoInitialized.current = true;
     form.reset(DEMO_DEFAULTS);
   }, [form]);
 
@@ -48,7 +51,7 @@ export function useSignIn() {
       token.set(data.accessToken);
       client.setQueryData(AUTH_QUERY_KEY, data.user);
       setExpired(false);
-      router.replace("/dashboard");
+      router.replace(env.demoMode ? "/dashboard" : "/settings");
     },
   });
   return { form, mutation, expired };

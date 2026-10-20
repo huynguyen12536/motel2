@@ -1,0 +1,200 @@
+{
+  "observedAt": "2026-10-19T15:15:41.179Z",
+  "containers": [
+    {
+      "name": "motel-api-1",
+      "id": "8e836633915f6d107cc3ade69ad4bd50ffe7cacd92213613a9ea86392fa7a011",
+      "created": "2026-10-19T02:46:01.158569076Z",
+      "started": "2026-10-19T13:31:25.204142629Z",
+      "health": "healthy",
+      "configured": {
+        "MASTER_DATABASE_URL": true,
+        "MASTER_DIRECT_URL": true,
+        "NEON_API_KEY": false,
+        "NEON_PROJECT_ID": false,
+        "NEON_BRANCH_ID": false,
+        "NEON_PROVISIONING_DIRECT_URL": false,
+        "PLATFORM_ADMIN_SECRET": false,
+        "JWT_ACCESS_SECRET": true,
+        "TENANT_CREDENTIAL_KEY": false,
+        "TENANT_CREDENTIAL_KEYS": false
+      },
+      "flags": {
+        "TENANT_PROVISIONING_ENABLED": false,
+        "TENANT_ADMIN_BOOTSTRAP_ENABLED": false,
+        "TENANT_MIGRATION_ROLLOUT_ENABLED": false
+      },
+      "ports": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "8080"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "type": "bind",
+          "target": "/app/logger"
+        },
+        {
+          "type": "bind",
+          "target": "/app/src"
+        }
+      ]
+    },
+    {
+      "name": "motel-postgres-1",
+      "id": "b5a37a13b8695880886a9ffd8b1ed699966f61f4a2b62c90460e4ac06b9c78dd",
+      "created": "2026-10-19T02:45:58.556913153Z",
+      "started": "2026-10-19T13:31:25.200417436Z",
+      "health": "healthy",
+      "configured": {
+        "MASTER_DATABASE_URL": true,
+        "MASTER_DIRECT_URL": true,
+        "NEON_API_KEY": false,
+        "NEON_PROJECT_ID": false,
+        "NEON_BRANCH_ID": false,
+        "NEON_PROVISIONING_DIRECT_URL": false,
+        "PLATFORM_ADMIN_SECRET": false,
+        "JWT_ACCESS_SECRET": false,
+        "TENANT_CREDENTIAL_KEY": false,
+        "TENANT_CREDENTIAL_KEYS": false
+      },
+      "flags": {
+        "TENANT_PROVISIONING_ENABLED": false,
+        "TENANT_ADMIN_BOOTSTRAP_ENABLED": false,
+        "TENANT_MIGRATION_ROLLOUT_ENABLED": false
+      },
+      "ports": {
+        "5432/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "5432"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "wms-apa-nano_postgres_data",
+          "target": "/var/lib/postgresql"
+        }
+      ]
+    },
+    {
+      "name": "motel-rabbitmq-1",
+      "id": "c48b0e13c6251baacd1d7f03e6f4389f55e7f24590eb66e42f9345ff0c78d044",
+      "created": "2026-10-19T02:44:52.056458212Z",
+      "started": "2026-10-19T13:31:25.205477595Z",
+      "health": "healthy",
+      "configured": {
+        "MASTER_DATABASE_URL": false,
+        "MASTER_DIRECT_URL": false,
+        "NEON_API_KEY": false,
+        "NEON_PROJECT_ID": false,
+        "NEON_BRANCH_ID": false,
+        "NEON_PROVISIONING_DIRECT_URL": false,
+        "PLATFORM_ADMIN_SECRET": false,
+        "JWT_ACCESS_SECRET": false,
+        "TENANT_CREDENTIAL_KEY": false,
+        "TENANT_CREDENTIAL_KEYS": false
+      },
+      "flags": {
+        "TENANT_PROVISIONING_ENABLED": false,
+        "TENANT_ADMIN_BOOTSTRAP_ENABLED": false,
+        "TENANT_MIGRATION_ROLLOUT_ENABLED": false
+      },
+      "ports": {
+        "15672/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "15672"
+          }
+        ],
+        "5672/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "5672"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "type": "bind",
+          "target": "/etc/rabbitmq/rabbitmq.conf"
+        },
+        {
+          "type": "volume",
+          "name": "motel-phase1_rabbitmq_data",
+          "target": "/var/lib/rabbitmq"
+        }
+      ]
+    },
+    {
+      "name": "motel-redis-1",
+      "id": "373ce923cac6fab2dde9207932c46a8d176f8c0592c3cd315066b7b83974fbc3",
+      "created": "2026-10-19T02:44:52.060455576Z",
+      "started": "2026-10-19T13:31:25.198766515Z",
+      "health": "healthy",
+      "configured": {
+        "MASTER_DATABASE_URL": false,
+        "MASTER_DIRECT_URL": false,
+        "NEON_API_KEY": false,
+        "NEON_PROJECT_ID": false,
+        "NEON_BRANCH_ID": false,
+        "NEON_PROVISIONING_DIRECT_URL": false,
+        "PLATFORM_ADMIN_SECRET": false,
+        "JWT_ACCESS_SECRET": false,
+        "TENANT_CREDENTIAL_KEY": false,
+        "TENANT_CREDENTIAL_KEYS": false
+      },
+      "flags": {
+        "TENANT_PROVISIONING_ENABLED": false,
+        "TENANT_ADMIN_BOOTSTRAP_ENABLED": false,
+        "TENANT_MIGRATION_ROLLOUT_ENABLED": false
+      },
+      "ports": {
+        "6379/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "6379"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "motel-phase1_redis_data",
+          "target": "/data"
+        }
+      ]
+    },
+    {
+      "name": "motel-tenant-provisioning-worker-1",
+      "id": "4b3473f6df4b1bfc5e5d801c0d96fca53284306e032a4f7e7dcc3f9fd0d84e30",
+      "created": "2026-10-19T14:43:07.842416577Z",
+      "started": "2026-10-19T14:43:08.245928659Z",
+      "health": "healthy",
+      "configured": {
+        "MASTER_DATABASE_URL": false,
+        "MASTER_DIRECT_URL": false,
+        "NEON_API_KEY": false,
+        "NEON_PROJECT_ID": false,
+        "NEON_BRANCH_ID": false,
+        "NEON_PROVISIONING_DIRECT_URL": false,
+        "PLATFORM_ADMIN_SECRET": false,
+        "JWT_ACCESS_SECRET": false,
+        "TENANT_CREDENTIAL_KEY": false,
+        "TENANT_CREDENTIAL_KEYS": false
+      },
+      "flags": {
+        "TENANT_PROVISIONING_ENABLED": false,
+        "TENANT_ADMIN_BOOTSTRAP_ENABLED": false,
+        "TENANT_MIGRATION_ROLLOUT_ENABLED": false
+      },
+      "ports": {},
+      "mounts": []
+    }
+  ]
+}

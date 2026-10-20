@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import { AppSelect } from "@/components/shared/app-select";
 import type {
   LocationStatus,
   WarehouseLocation,
@@ -53,35 +54,21 @@ export function WarehouseLocationTable({
             onChange={(event) => setQuery(event.target.value)}
             aria-label="Tìm kiếm vị trí"
           />
-          <select
+          <AppSelect
             className="wms-wh-select"
             value={effectiveZone}
-            onChange={(event) => setZoneFilter(event.target.value)}
+            onValueChange={setZoneFilter}
             disabled={Boolean(selectedZoneId)}
-            aria-label="Lọc khu vực"
-          >
-            <option value="all">Tất cả khu vực</option>
-            {zones.map((zone) => (
-              <option key={zone.id} value={zone.id}>
-                {zone.name}
-              </option>
-            ))}
-          </select>
-          <select
+            label="Lọc khu vực"
+            options={[{ value: "all", label: "Tất cả khu vực" }, ...zones.map((zone) => ({ value: zone.id, label: zone.name }))]}
+          />
+          <AppSelect
             className="wms-wh-select"
             value={status}
-            onChange={(event) =>
-              setStatus(event.target.value as LocationStatus | "all")
-            }
-            aria-label="Lọc trạng thái"
-          >
-            <option value="all">Tất cả trạng thái</option>
-            {Object.entries(LOCATION_STATUS_META).map(([key, meta]) => (
-              <option key={key} value={key}>
-                {meta.label}
-              </option>
-            ))}
-          </select>
+            onValueChange={(value) => setStatus(value as LocationStatus | "all")}
+            label="Lọc trạng thái"
+            options={[{ value: "all", label: "Tất cả trạng thái" }, ...Object.entries(LOCATION_STATUS_META).map(([value, meta]) => ({ value, label: meta.label }))]}
+          />
         </div>
       </div>
 

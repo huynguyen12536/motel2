@@ -1,2 +1,7 @@
 allowBuilds:
+  '@prisma/engines': true
   esbuild: true
+  prisma: true
+  '@scarf/scarf': false
+  '@parcel/watcher': false
+  unrs-resolver: false

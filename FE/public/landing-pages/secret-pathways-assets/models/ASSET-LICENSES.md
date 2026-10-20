@@ -43,3 +43,11 @@ redistributed for commercial or non-commercial purposes without attribution.
 - Source: https://3dassets.dev/assets/hardware-store-and-diy-warehouse-warehou-f3ddb545-starter-scene
 - Original model: https://cdn.3dassets.dev/assets/23990/v1/model.glb
 - Licence: https://creativecommons.org/publicdomain/zero/1.0/
+
+## Smooth concrete floor material
+
+- Files: `../textures/smooth-concrete-diffuse.jpg`, `smooth-concrete-normal.jpg`, `smooth-concrete-roughness.jpg`
+- Asset: Smooth Concrete Floor
+- Source: https://polyhaven.com/a/smooth_concrete_floor
+- Author: Dimitrios Savva
+- Licence: CC0 1.0

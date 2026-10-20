@@ -9,6 +9,7 @@ import {
   TopbarMailIcon,
 } from "@/components/layout/topbar-icons";
 import { dashboardUser } from "@/features/dashboard/mocks/dashboard.mock";
+import { env } from "@/config/env";
 import { cn } from "@/lib/utils/cn";
 
 const SEARCH_PLACEHOLDER = "Tìm vật liệu, mã số lô, nhà cung cấp...";
@@ -81,7 +82,7 @@ export function Topbar({ showMenuButton }: { showMenuButton: boolean }) {
           aria-label="Tin nhắn"
         >
           <TopbarMailIcon size={18} />
-          <span className="wms-circle-btn__badge">{dashboardUser.mailBadge}</span>
+          {env.demoMode&&<span className="wms-circle-btn__badge">{dashboardUser.mailBadge}</span>}
         </button>
         <button
           type="button"
@@ -89,9 +90,9 @@ export function Topbar({ showMenuButton }: { showMenuButton: boolean }) {
           aria-label="Thông báo"
         >
           <TopbarBellIcon size={18} />
-          <span className="wms-circle-btn__badge">
+            {env.demoMode&&<span className="wms-circle-btn__badge">
             {dashboardUser.notificationBadge}
-          </span>
+            </span>}
         </button>
         <ThemeToggle />
         <UserMenu />

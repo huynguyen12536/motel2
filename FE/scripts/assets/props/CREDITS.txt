@@ -1,0 +1,7 @@
+Prop models merged into the cold-storage warehouse GLB.
+
+- forklift.glb — Forklift by KolosStudios, CC-BY 3.0. https://poly.pizza/m/DTQBuenKJY
+- truck.glb — Truck by Quaternius, CC0 1.0. https://poly.pizza/m/cXw6oiFtZ8
+- metal-door.glb — Metal Door by Quaternius, CC0 1.0. https://poly.pizza/m/PCJv96DB6b
+- control-panel.glb — Control Panel by Nicholas Dauchot, CC-BY 3.0. https://poly.pizza/m/2Gc9faNtDcC
+- fuse-box.glb — Fuse Box by zeoxo, CC-BY 3.0. https://poly.pizza/m/dCzy46eI_IT

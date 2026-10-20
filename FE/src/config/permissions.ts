@@ -8,5 +8,6 @@ export const PERMISSIONS = {
   SETTINGS: { READ: "settings.read", UPDATE: "settings.update" },
 } as const;
 export type Permission =
+  | `${"platform"|"tenant"}.${string}:${string}`
   | (typeof PERMISSIONS.USER)[keyof typeof PERMISSIONS.USER]
   | (typeof PERMISSIONS.SETTINGS)[keyof typeof PERMISSIONS.SETTINGS];

@@ -1,0 +1,84 @@
+services:
+  api:
+    build:
+      target: development
+    env_file:
+      - path: ./BE/.env.docker.local
+        required: true
+    environment:
+      NODE_ENV: development
+      APP_NAME: motel-be
+      DATABASE_URL: ""
+      TENANT_DATABASE_URL: ""
+      TENANT_DIRECT_URL: ""
+      POSTGRES_SSL: "false"
+      DATABASE_VERIFY: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./BE/src:/app/src
+      - ./BE/logger:/app/logger
+  postgres:
+    image: postgres:18-bookworm
+    env_file:
+      - path: ./BE/.env.docker.local
+        required: true
+    labels:
+      motel.database.environment: development
+    environment:
+      POSTGRES_DB: motel
+      POSTGRES_USER: motel
+    ports:
+      - "127.0.0.1:${DEV_POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks: [infrastructure]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  rabbitmq:
+    ports:
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
+  redis:
+    ports:
+      - "127.0.0.1:6379:6379"
+  tenant-provisioning-worker:
+    profiles: [workers]
+    image: motel-worker
+    build:
+      context: ./BE
+      target: worker
+    init: true
+    env_file:
+      - path: ./BE/.env.worker
+        required: false
+    environment:
+      NODE_ENV: production
+      TENANT_PROVISIONING_ENABLED: ${TENANT_PROVISIONING_ENABLED:-false}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: ${RABBITMQ_USER:?Set RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST:-/}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      REDIS_URL: ""
+      DATABASE_VERIFY: "false"
+    networks: [infrastructure]
+    restart: unless-stopped
+    stop_grace_period: 45s
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+volumes:
+  postgres_data:
+    external: true
+    name: wms-apa-nano_postgres_data

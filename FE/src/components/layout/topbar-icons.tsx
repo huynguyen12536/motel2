@@ -25,14 +25,6 @@ export function TopbarMailIcon({ size = 18 }: { size?: number }) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        className="wms-top-icon__flap-back"
-        d="M4.2 8.4 12 4.8 19.8 8.4"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
     </svg>
   );
 }

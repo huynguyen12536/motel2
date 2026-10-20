@@ -15,6 +15,9 @@ import { useTranslations } from "next-intl";
 import { signOut } from "@/features/auth/api/sign-out";
 import { clearSession } from "@/lib/auth/session";
 import { dashboardUser } from "@/features/dashboard/mocks/dashboard.mock";
+import { useSession } from "@/features/auth/hooks/use-session";
+import { env } from "@/config/env";
+import { usePermission } from "@/hooks/use-permission";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +30,15 @@ export function UserMenu() {
   const t = useTranslations();
   const router = useRouter();
   const client = useQueryClient();
-  const user = dashboardUser;
+  const session = useSession(),
+    can = usePermission();
+  const user = env.demoMode
+    ? dashboardUser
+    : {
+        name: session.data?.name ?? "",
+        role: session.data?.role ?? "",
+        initials: (session.data?.name ?? "").slice(0, 2).toUpperCase(),
+      };
   const logout = useMutation({
     mutationFn: signOut,
     onSuccess: async () => {
@@ -61,7 +72,10 @@ export function UserMenu() {
         collisionPadding={12}
         className="wms-account-menu z-[60] min-w-[320px] max-h-[min(480px,calc(100dvh-96px))] border-0 bg-transparent p-0 shadow-none"
       >
-        <div className="wms-account-panel">
+        <div
+          className="wms-account-panel wms-glass-panel"
+          data-material="floating"
+        >
           <div className="wms-account-card">
             <div className="wms-account-card__row">
               <span className="wms-account-card__avatar" aria-hidden="true">
@@ -73,28 +87,32 @@ export function UserMenu() {
               </div>
             </div>
             <DropdownMenuSeparator className="wms-account-card__rule" />
-            <Link href="/settings" className="wms-account-card__action">
-              <UserRound size={16} aria-hidden="true" />
-              Xem hồ sơ &amp; cài đặt tài khoản
-            </Link>
+            {can("settings.read") && (
+              <Link href="/settings" className="wms-account-card__action">
+                <UserRound size={16} aria-hidden="true" />
+                Xem hồ sơ &amp; cài đặt tài khoản
+              </Link>
+            )}
           </div>
 
           <div className="wms-account-list">
-            <DropdownMenuItem asChild className="wms-account-item">
-              <Link href="/settings">
-                <span className="wms-account-item__icon" aria-hidden="true">
-                  <Settings size={18} />
-                </span>
-                <span className="wms-account-item__label">
-                  Cài đặt và quyền riêng tư
-                </span>
-                <ChevronRight
-                  size={18}
-                  className="wms-account-item__chevron"
-                  aria-hidden="true"
-                />
-              </Link>
-            </DropdownMenuItem>
+            {can("settings.read") && (
+              <DropdownMenuItem asChild className="wms-account-item">
+                <Link href="/settings">
+                  <span className="wms-account-item__icon" aria-hidden="true">
+                    <Settings size={18} />
+                  </span>
+                  <span className="wms-account-item__label">
+                    Cài đặt và quyền riêng tư
+                  </span>
+                  <ChevronRight
+                    size={18}
+                    className="wms-account-item__chevron"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </DropdownMenuItem>
+            )}
 
             <DropdownMenuItem asChild className="wms-account-item">
               <a href="mailto:admin@apa.local">

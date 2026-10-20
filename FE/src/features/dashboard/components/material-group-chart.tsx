@@ -1,96 +1,46 @@
 "use client";
-import {
-  Bar,
-  BarChart,
-  LabelList,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { DASHBOARD_COLORS } from "@/features/dashboard/constants/dashboard.constants";
+import { useTranslations } from "next-intl";
+import { useRef } from "react";
+import { useReducedMotion } from "motion/react";
+import { useCountUp } from "@/features/dashboard/hooks/use-count-up";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { formatDashboardNumber } from "@/features/dashboard/utils/dashboard.utils";
 import type { MaterialGroup } from "@/features/dashboard/types/dashboard.types";
 
-function GroupTooltip({
-  active,
-  payload,
-}: {
-  active?: boolean;
-  payload?: Array<{ payload: MaterialGroup }>;
-}) {
-  if (!active || !payload?.length) return null;
-  const item = payload[0].payload;
-  return (
-    <div className="wms-chart-tooltip">
-      <p className="wms-chart-tooltip__title">{item.name}</p>
-      <p className="wms-chart-tooltip__value">
-        {formatDashboardNumber(item.value)} vật liệu
-      </p>
-    </div>
-  );
-}
+const COLORS = ["var(--chart-1)", "#1fd2d8", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"];
 
 export function MaterialGroupChart({ items }: { items: MaterialGroup[] }) {
+  const t = useTranslations("chartUI");
   const sorted = [...items].sort((a, b) => b.value - a.value);
-  const summary =
-    sorted.length > 0
-      ? `Top nhóm: ${sorted[0].name} với ${sorted[0].value} vật liệu.`
-      : "Chưa có dữ liệu nhóm vật liệu.";
-
+  const total = sorted.reduce((sum, item) => sum + item.value, 0);
+  const cardRef = useRef<HTMLElement>(null);
+  const animated = useCountUp(total, 1000, cardRef);
+  const reducedMotion = useReducedMotion();
   return (
-    <section className="wms-card wms-card--analytics wms-card--bi" aria-label={summary}>
-      <div className="wms-card__head">
-        <h2 className="wms-card__title">Top 5 nhóm vật liệu</h2>
-      </div>
-      {sorted.length === 0 ? (
-        <p className="wms-empty">
-          Chưa có dữ liệu trong khoảng thời gian này.
-        </p>
-      ) : (
-        <div className="wms-chart wms-chart--bars wms-chart--bi">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={sorted}
-              layout="vertical"
-              margin={{ top: 4, right: 36, left: 0, bottom: 4 }}
-              barCategoryGap="18%"
-            >
-              <XAxis type="number" hide domain={[0, "dataMax + 40"]} />
-              <YAxis
-                type="category"
-                dataKey="name"
-                width={112}
-                tick={{ fill: "#64748B", fontSize: 12, fontWeight: 500 }}
-                axisLine={false}
-                tickLine={false}
-              />
-              <Tooltip
-                content={<GroupTooltip />}
-                cursor={{ fill: "rgba(165,180,252,0.12)" }}
-                animationDuration={120}
-              />
-              <Bar
-                dataKey="value"
-                fill={DASHBOARD_COLORS.barPrimary}
-                radius={[0, 8, 8, 0]}
-                barSize={16}
-                isAnimationActive
-                animationBegin={150}
-                animationDuration={600}
-                animationEasing="ease-out"
-              >
-                <LabelList
-                  dataKey="value"
-                  position="right"
-                  className="wms-chart-label wms-chart-label--strong"
-                  fontSize={12}
-                  fontWeight={600}
-                  fill="#4338CA"
-                />
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+    <section ref={cardRef} className="wms-card wms-card--analytics wms-card--bi">
+      <header className="wms-card__head"><h2 className="wms-card__title">{t("groupsTitle")}</h2></header>
+      {!sorted.length || total === 0 ? <p className="wms-empty">{t("empty")}</p> : (
+        <div className="wms-reference-breakdown">
+          <div className="wms-reference-breakdown__chart" role="img" aria-label={sorted.map((item) => `${item.name}: ${formatDashboardNumber(item.value)}`).join(", ")}>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie data={sorted} dataKey="value" nameKey="name" innerRadius="68%" outerRadius="88%" paddingAngle={2}
+                  startAngle={90} endAngle={-270} stroke="none" isAnimationActive={!reducedMotion} animationDuration={900} animationEasing="ease-out">
+                  {sorted.map((item, index) => <Cell key={item.id} fill={COLORS[index % COLORS.length]} />)}
+                </Pie>
+                <Tooltip contentStyle={{ background: "#142746", border: 0, borderRadius: 9, color: "#fff", fontSize: 12 }} itemStyle={{ color: "#fff" }} />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="wms-reference-breakdown__center"><strong>{formatDashboardNumber(animated)}</strong><span>{t("shownGroups")}</span></div>
+          </div>
+          <ul className="wms-reference-breakdown__legend">
+            {sorted.map((item, index) => (
+              <li key={item.id}>
+                <span className="wms-reference-breakdown__swatch" style={{ background: COLORS[index % COLORS.length] }} aria-hidden="true" />
+                <span>{item.name}</span><strong>{formatDashboardNumber(item.value)}</strong>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </section>

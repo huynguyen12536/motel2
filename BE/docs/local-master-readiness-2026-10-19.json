@@ -1,0 +1,43 @@
+{
+  "observedAt": "2026-10-19T15:12:12.577Z",
+  "containerId": "b5a37a13b8695880886a9ffd8b1ed699966f61f4a2b62c90460e4ac06b9c78dd",
+  "master": "motel_master",
+  "history": [
+    {
+      "migration_name": "20261014000000_initialize",
+      "checksum": "43636b583ef766e0459613bf05ef7f83e77c0952731643b665dab7625557d57a",
+      "finished_at": "2026-10-19T02:46:21.204Z",
+      "rolled_back_at": null
+    },
+    {
+      "migration_name": "20261018000000_tenant_registry",
+      "checksum": "6342e9af79ea8eba9170a8d2d6f3032363e4da067996478084b6fda83c7341e7",
+      "finished_at": "2026-10-19T02:46:21.239Z",
+      "rolled_back_at": null
+    }
+  ],
+  "checkConstraints": [
+    {
+      "conname": "outbox_attempt_count_nonnegative"
+    },
+    {
+      "conname": "provisioning_attempt_count_nonnegative"
+    },
+    {
+      "conname": "tenant_database_identity_values"
+    },
+    {
+      "conname": "tenant_database_provider_value"
+    },
+    {
+      "conname": "tenant_database_provisioned_identity"
+    }
+  ],
+  "partialIndexes": [
+    {
+      "indexname": "tenant_provisioning_one_inflight_key",
+      "indexdef": "CREATE UNIQUE INDEX tenant_provisioning_one_inflight_key ON public.\"TenantProvisioning\" USING btree (\"tenantId\") WHERE (status = ANY (ARRAY['PENDING'::\"ProvisioningStatus\", 'RUNNING'::\"ProvisioningStatus\"]))"
+    }
+  ],
+  "testDatabases": []
+}

@@ -1,7 +1,8 @@
 "use client";
-import { IBM_Plex_Sans } from "next/font/google";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useScrollChain } from "@/hooks/use-scroll-chain";
 import { useSidebarStore } from "@/stores/sidebar.store";
 import {
   DesktopSidebar,
@@ -10,17 +11,16 @@ import {
 import { Topbar } from "@/components/layout/topbar";
 import { MobileSidebar } from "@/components/layout/mobile-sidebar";
 import { cn } from "@/lib/utils/cn";
+import { PageFrame } from "@/components/shared/layout/page-frame";
 import "./app-shell.css";
-
-const appFont = IBM_Plex_Sans({
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-app",
-});
+import "./page-layout.css";
+import "./reference-theme.css";
+import "./materials.css";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const t = useTranslations();
+  const pathname=usePathname();
+  const pageRef = useScrollChain();
   useHydrateSidebarCollapse();
   const open = useSidebarStore((state) => state.open);
   const collapsed = useSidebarStore((state) => state.collapsed);
@@ -33,9 +33,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={cn(
-        "wms-shell",
-        appFont.variable,
-        appFont.className,
+        "wms-shell compta-theme",
+        pathname.startsWith("/settings")&&"wms-shell--settings",
         iconCollapsed && "wms-shell--collapsed",
         compact && "wms-shell--compact",
       )}
@@ -60,7 +59,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="wms-shell__main">
         <main id="main-content" className="wms-shell__content">
           <Topbar showMenuButton={!showFixedSidebar} />
-          <div className="wms-shell__page">{children}</div>
+          <div ref={pageRef} className="wms-shell__page"><PageFrame>{children}</PageFrame></div>
         </main>
       </div>
     </div>

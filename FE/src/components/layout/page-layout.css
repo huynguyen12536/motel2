@@ -1,0 +1,103 @@
+/* Shared operations layout, using the workspace theme tokens. */
+[data-slot="page-header"] {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+[data-slot="page-frame"] :is(section[id], header[id]) {
+  scroll-margin-top: calc(var(--shell-topbar) + 16px);
+}
+
+.wms-section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+
+.wms-section-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wms-section-nav a:hover { background: var(--accent); color: var(--foreground); }
+.wms-section-nav a[aria-current] {
+  border-color: var(--border);
+  background: var(--card);
+  color: var(--primary);
+}
+
+[data-slot="record-panel"] {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.wms-record-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wms-record-panel__header h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.wms-record-panel__toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+[data-slot="record-panel"] [data-slot="data-table"] { border: 0; border-radius: 0; }
+[data-slot="data-table"] > [data-slot="table-container"] { max-height: min(56dvh, 640px); overflow: auto; }
+[data-slot="data-table"] [data-slot="table-header"] { position: sticky; top: 0; z-index: 1; background: var(--muted); }
+[data-slot="data-table"] [data-slot="table-head"] { height: 40px; font-size: 11px; letter-spacing: 0.025em; }
+[data-slot="data-table"] [data-slot="table-cell"] { font-size: 13px; }
+
+.wms-settings-layout { display: grid; align-items: start; gap: 16px; min-width: 0; }
+.wms-settings-content { display: grid; gap: 16px; min-width: 0; }
+.wms-settings-content > section {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+}
+.wms-settings-content > section > h2 { margin-bottom: 20px; font-size: 16px; font-weight: 600; }
+.wms-settings-content form { max-width: 640px; }
+.wms-workspace-form { display: grid; gap: 20px; }
+.wms-workspace-form > button { justify-self: start; }
+.wms-preference-row { display: grid; align-items: center; gap: 12px; }
+.wms-settings-content > section:target { border-color: var(--primary); }
+
+@media (min-width: 640px) {
+  .wms-preference-row { grid-template-columns: minmax(120px, 1fr) minmax(0, 1fr); }
+}
+
+@media (max-width: 639px), (pointer: coarse) {
+  .wms-section-nav a { min-height: 44px; }
+}
+
+@media (min-width: 1024px) {
+  .wms-settings-layout { grid-template-columns: 200px minmax(0, 1fr); }
+  .wms-section-nav--vertical {
+    position: sticky;
+    top: calc(var(--shell-topbar) + 16px);
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 639px) {
+  .wms-record-panel__toolbar { width: 100%; }
+  .wms-record-panel__toolbar > .relative { flex: 1 1 180px; }
+}

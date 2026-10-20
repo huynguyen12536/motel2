@@ -42,11 +42,11 @@ export const warehouses: Warehouse[] = [
   {
     id: "k04",
     code: "K04",
-    name: "Kho mát 2–8°C",
-    description: "Kho lạnh kiểm soát nhiệt độ 2–8°C.",
-    zoneCount: 2,
-    locationCount: 42,
-    utilization: 91,
+    name: "Kho lạnh thành phẩm",
+    description: "Kho lạnh 2–8°C dành cho thành phẩm, có giám sát nhiệt độ liên tục.",
+    zoneCount: 4,
+    locationCount: 128,
+    utilization: 87,
   },
   {
     id: "k05",
@@ -56,6 +56,15 @@ export const warehouses: Warehouse[] = [
     zoneCount: 2,
     locationCount: 18,
     utilization: 74,
+  },
+  {
+    id: "k06",
+    code: "K06",
+    name: "Kho lạnh nguyên liệu",
+    description: "Kho lạnh 2–8°C dành cho nguyên liệu và bán thành phẩm.",
+    zoneCount: 4,
+    locationCount: 136,
+    utilization: 82,
   },
 ];
 
@@ -144,7 +153,50 @@ export const warehouseZones: WarehouseZone[] = [
     position: [4, 0.55, 0],
     size: [4.5, 1.1, 5],
   },
+  makeZone("zone-p3", "k02", "P3", "Khu carton & pallet", 9, 68, 32, "Bao bì vận chuyển và pallet chờ cấp phát."),
+  makeZone("zone-f1", "k03", "F1", "Thành phẩm A", -10.1, 82, 44, "Thành phẩm đã xuất xưởng, ưu tiên đơn gần."),
+  makeZone("zone-f2", "k03", "F2", "Thành phẩm B", -3.4, 74, 38, "Thành phẩm theo lô và tuyến phân phối."),
+  makeZone("zone-f3", "k03", "F3", "Khu soạn hàng", 3.4, 66, 30, "Soạn và ghép đơn trước khi xuất kho."),
+  makeZone("zone-f4", "k03", "F4", "Khu staging", 10.1, 78, 36, "Tập kết thành phẩm chờ bàn giao vận chuyển."),
+  makeZone("zone-cold-1", "k04", "C1", "Kho lạnh thành phẩm A", -16, 88, 38, "Buồng lạnh thành phẩm, panel PU 100 mm, dàn lạnh và kệ selective."),
+  makeZone("zone-cold-2", "k04", "C2", "Kho lạnh thành phẩm B", 0, 84, 34, "Buồng lạnh thành phẩm tách biệt theo điều kiện bảo quản."),
+  makeZone("zone-cold-3", "k04", "C3", "Khu soạn hàng lạnh", 16, 80, 30, "Khu gom và soạn hàng trước khi xuất kho."),
+  makeZone("zone-cold-4", "k04", "C4", "Phòng máy lạnh", -16, 95, 26, "Máy nén, bình chứa lỏng, manifold và tủ điều khiển."),
+  makeZone("zone-cold-raw-1", "k06", "C1", "Kho lạnh nguyên liệu A", -16, 82, 40, "Nguyên liệu lạnh theo lô và hạn dùng."),
+  makeZone("zone-cold-raw-2", "k06", "C2", "Kho lạnh nguyên liệu B", 0, 80, 36, "Nguyên liệu bảo quản lạnh và đông."),
+  makeZone("zone-cold-raw-3", "k06", "C3", "Khu staging nguyên liệu", 16, 78, 32, "Khu tập kết nguyên liệu trước cấp phát."),
+  makeZone("zone-cold-raw-4", "k06", "C4", "Phòng máy lạnh", -16, 94, 28, "Thiết bị lạnh và tuyến ống kỹ thuật."),
+  makeZone("zone-qc-1", "k05", "Q1", "Chờ lấy mẫu", -9, 72, 12, "Lô mới nhập chờ QC lấy mẫu."),
+  makeZone("zone-qc-2", "k05", "Q2", "Đang kiểm nghiệm", 0, 79, 14, "Lô đang được kiểm nghiệm chất lượng."),
+  makeZone("zone-qc-3", "k05", "Q3", "Chờ quyết định", 9, 70, 10, "Lô chờ phê duyệt hoặc xử lý sai lệch."),
 ];
+
+function makeZone(
+  id: string,
+  warehouseId: string,
+  code: string,
+  name: string,
+  x: number,
+  utilization: number,
+  locationCount: number,
+  description: string,
+): WarehouseZone {
+  const occupiedCount = Math.round((locationCount * utilization) / 100);
+  return {
+    id,
+    warehouseId,
+    code,
+    name,
+    floor: "1F",
+    description,
+    locationCount,
+    occupiedCount,
+    emptyCount: locationCount - occupiedCount,
+    utilization,
+    position: [x, 1.8, 0],
+    size: [6, 3.8, 14],
+  };
+}
 
 export const warehouseRacks: WarehouseRack[] = [
   { id: "rack-a01", zoneId: "zone-a", aisle: "01", name: "Kệ 01" },

@@ -19,18 +19,18 @@ Repository knowledge graph.
 ## High-Level Architecture
 
 Browser / Mobile
-       ↓
+↓
 Gateway
-       ↓
- ┌─────┴─────┐
- ▼           ▼
-FE          /api
-Next.js      ↓
-             BE
-             ↓
-          Database
-             ↓
-             SAP
+↓
+┌─────┴─────┐
+▼ ▼
+FE /api
+Next.js ↓
+BE
+↓
+Database
+↓
+SAP
 
 In production the intended same-origin layout is:
 
@@ -53,15 +53,24 @@ Defined under `FE/src/app/`.
 - `/api/v1/quality-control/...`
 - `/api/v1/reports/...`
 
-Backend framework and database are not initialized in this repository split.
+The backend now uses NestJS on the existing Express application, with separate
+Master/Tenant Prisma schemas and one shared motel infrastructure stack.
+See [backend setup and verification](BE/README.md).
 
 ## Local development
 
-Shared infrastructure (PostgreSQL + Redis only):
+One shared Docker project named motel serves the whole repository. The only Compose files are
+compose.yaml and compose.dev.yaml. Development adds local PostgreSQL and the workers profile;
+production uses Neon and includes no PostgreSQL container.
 
-```bash
-docker compose --env-file FE/.env up -d postgres redis
-```
+From BE/:
+
+    pnpm docker:up
+    pnpm docker:stop
+    pnpm docker:start
+
+Use pnpm docker:rebuild after image changes. See [infrastructure](BE/docs/infrastructure.md)
+for the canonical root Compose files, reused volumes and local database setup.
 
 Frontend on the host (not Docker):
 

@@ -3,6 +3,7 @@ import { env } from "@/config/env";
 import { token } from "@/lib/auth/token";
 import { ApiError, normalizeApiError } from "@/lib/api/api-error";
 import { ENDPOINTS } from "@/lib/api/endpoints";
+import { sessionRequest } from "@/features/authorization/session-client";
 
 const options = {
   baseURL: env.apiUrl,
@@ -17,8 +18,8 @@ let refreshPromise: Promise<string> | null = null;
 export function refreshAccessToken() {
   if (!refreshPromise) {
     const generation = token.generation();
-    refreshPromise = refreshClient
-      .post<{ accessToken: string }>(ENDPOINTS.auth.refresh)
+    const request=env.demoMode?refreshClient.post<{accessToken:string}>(ENDPOINTS.auth.refresh):sessionRequest("refresh").then(data=>({data}));
+    refreshPromise = request
       .then(({ data }) => {
         if (generation !== token.generation())
           throw new ApiError(
@@ -60,6 +61,7 @@ apiClient.interceptors.request.use((config) => {
 apiClient.interceptors.response.use(
   (response) => response,
   async (error: unknown) => {
+    if(axios.isAxiosError(error)&&error.response?.status===403&&typeof window!=="undefined")window.dispatchEvent(new Event("permissions-changed"));
     if (
       axios.isAxiosError(error) &&
       error.response?.status === 401 &&
@@ -67,7 +69,7 @@ apiClient.interceptors.response.use(
     ) {
       const config = error.config;
       const canRefresh =
-        !config.url?.startsWith("/auth/") || config.url === ENDPOINTS.auth.me;
+        !config.url?.startsWith("/auth/") || config.url === ENDPOINTS.auth.me || config.url === "/auth/me/permissions";
       if (canRefresh) {
         if (config.headers.get("X-Auth-Retry")) {
           expireSession();

@@ -22,6 +22,125 @@
   font-family: var(--shell-font);
 }
 
+/* Unified warehouse control-room skin. Layout dimensions remain unchanged. */
+.wms-shell {
+  --shell-primary: #1261a6;
+  --shell-border: #cfdae6;
+  --shell-bg: #edf3f9;
+  --shell-text: #102033;
+  --shell-muted: #607489;
+  background: #edf3f9;
+}
+
+.wms-shell__content {
+  background-color: #edf3f9;
+  background-image:
+    radial-gradient(circle at 78% 8%, rgb(49 183 231 / 0.12), transparent 29rem),
+    radial-gradient(circle at 12% 92%, rgb(18 97 166 / 0.09), transparent 34rem),
+    linear-gradient(135deg, rgb(255 255 255 / 0.84), rgb(231 240 248 / 0.92));
+  background-attachment: local;
+}
+
+.wms-shell__page {
+  position: relative;
+  z-index: 1;
+  animation: wms-shell-page-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.wms-side {
+  background-color: #07192d;
+  background-image:
+    radial-gradient(circle at 50% 0, rgb(49 183 231 / 0.15), transparent 19rem),
+    linear-gradient(180deg, rgb(7 25 45 / 0.84), rgb(3 14 27 / 0.98)),
+    url("/images/sidebar-bg.png");
+  box-shadow: 14px 0 40px rgb(5 19 34 / 0.12);
+}
+
+.wms-side__brand {
+  border-color: rgb(110 214 243 / 0.16);
+}
+
+.wms-side__brand-title {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wms-side__brand-sub,
+.wms-side__group-label {
+  color: #7f9bb2;
+  letter-spacing: 0.12em;
+}
+
+.wms-side__item {
+  border: 1px solid transparent;
+  color: #b9cad8;
+}
+
+.wms-side__item:hover {
+  border-color: rgb(110 214 243 / 0.12);
+  background: rgb(110 214 243 / 0.08);
+}
+
+.wms-side__item--active {
+  border-color: rgb(110 214 243 / 0.3);
+  background: linear-gradient(90deg, rgb(49 183 231 / 0.22), rgb(18 97 166 / 0.08));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 9px 24px rgb(0 0 0 / 0.14);
+}
+
+.wms-side__item--active::before {
+  display: none;
+}
+
+.wms-topbar {
+  border-color: rgb(166 188 208 / 0.48);
+  background: rgb(248 252 255 / 0.78);
+  backdrop-filter: blur(18px) saturate(145%);
+  box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.65);
+}
+
+.wms-topbar__search {
+  border: 1px solid rgb(187 203 218 / 0.65);
+  border-radius: 12px;
+  background: rgb(239 245 250 / 0.86);
+}
+
+.wms-circle-btn {
+  border: 1px solid rgb(187 203 218 / 0.72);
+  border-radius: 12px;
+  background: rgb(241 246 250 / 0.92);
+  color: #17334d;
+}
+
+.wms-circle-btn:hover {
+  border-color: rgb(49 183 231 / 0.45);
+  background: #e2f2fa;
+  color: #1261a6;
+}
+
+.dark .wms-shell__content {
+  background-color: #061321;
+  background-image:
+    radial-gradient(circle at 78% 8%, rgb(49 183 231 / 0.11), transparent 29rem),
+    linear-gradient(145deg, #081827, #04101d);
+}
+
+.dark .wms-topbar {
+  border-color: rgb(80 120 151 / 0.36);
+  background: rgb(6 19 33 / 0.8);
+}
+
+.dark .wms-topbar__search,
+.dark .wms-circle-btn {
+  border-color: #24435d;
+  background: rgb(15 42 65 / 0.88);
+}
+
+@keyframes wms-shell-page-enter {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 .wms-shell::-webkit-scrollbar {
   display: none;
   width: 0;
@@ -698,27 +817,15 @@
   pointer-events: none;
 }
 
-.wms-circle-btn--mail {
-  perspective: 120px;
-}
-
-.wms-circle-btn--mail .wms-top-icon--mail {
-  transform-style: preserve-3d;
-}
-
 .wms-top-icon__flap {
-  transform-origin: 12px 8px;
-  transform-box: fill-box;
-}
-
-.wms-top-icon__flap-back {
-  opacity: 0.28;
-  transform-origin: 12px 8px;
+  /* The hinge uses SVG viewBox coordinates, not the path's own bounding box. */
+  transform-box: view-box;
+  transform-origin: 12px 8.4px;
 }
 
 .wms-circle-btn--mail:hover .wms-top-icon__flap,
 .wms-circle-btn--mail:focus-visible .wms-top-icon__flap {
-  animation: wms-mail-flap 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: wms-mail-flap 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .wms-circle-btn--bell:hover .wms-top-icon__bell-body,
@@ -736,10 +843,12 @@
 @keyframes wms-mail-flap {
   0%,
   100% {
-    transform: rotateX(0deg);
+    transform: scaleY(1);
   }
-  40% {
-    transform: rotateX(-150deg);
+  40%,
+  55% {
+    /* A projected fold keeps the hinge fixed in every SVG renderer. */
+    transform: scaleY(-1);
   }
 }
 
@@ -1044,4 +1153,115 @@
 .wms-drawer {
   width: min(280px, 88vw);
   height: 100%;
+}
+
+/* Operational palette; shell dimensions and navigation behavior stay unchanged. */
+.wms-shell {
+  --shell-primary: var(--primary);
+  --shell-border: var(--border);
+  --shell-bg: var(--background);
+  --shell-text: var(--foreground);
+  --shell-muted: var(--muted-foreground);
+  --shell-font: var(--font-app), "Source Sans 3", sans-serif;
+  background: var(--background);
+}
+
+.wms-shell__content,
+.dark .wms-shell__content {
+  background: var(--card);
+}
+
+.wms-shell__page {
+  display: flex;
+  min-height: calc(100% - var(--shell-topbar));
+  padding: 12px;
+  animation: none;
+}
+
+@media (min-width: 1024px) {
+  .wms-shell__page { padding: 16px; }
+}
+
+.wms-side,
+.dark .wms-side {
+  background: var(--color-navy);
+  box-shadow: none;
+}
+
+.wms-side__brand-title {
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.wms-side__brand-sub,
+.wms-side__group-btn,
+.wms-side__group-label,
+.wms-side__item,
+.wms-side__item svg {
+  color: #dce8fa;
+}
+
+.wms-side__group-label { letter-spacing: 0.04em; }
+
+.wms-side__item--active,
+.dark .wms-side__item--active {
+  border-color: transparent;
+  background: var(--color-sidebar-active);
+  color: #fff;
+  box-shadow: none;
+}
+
+.wms-side__item--active svg,
+.wms-side__item--active:hover svg { color: #fff; }
+
+.wms-side__item:hover,
+.dark .wms-side__item:hover {
+  border-color: transparent;
+  background: rgb(255 255 255 / 0.1);
+}
+
+.wms-side__item--active:hover,
+.dark .wms-side__item--active:hover {
+  background: var(--color-sidebar-active);
+}
+
+.wms-side__item--active::before { display: none; }
+
+.wms-topbar,
+.wms-topbar--scrolled,
+.dark .wms-topbar,
+.dark .wms-topbar--scrolled {
+  border-color: var(--border);
+  background: var(--card);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.wms-topbar__search,
+.wms-circle-btn,
+.dark .wms-topbar__search,
+.dark .wms-circle-btn {
+  border: 1px solid var(--border);
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+.wms-topbar__search input::placeholder,
+.dark .wms-topbar__search input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.wms-circle-btn:hover,
+.dark .wms-circle-btn:hover {
+  border-color: var(--primary);
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.wms-circle-btn__badge { background: var(--destructive); }
+
+.wms-topbar__search:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }

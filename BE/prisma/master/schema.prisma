@@ -1,0 +1,246 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../../src/generated/master-authorized"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+  previewFeatures     = ["partialIndexes"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model PlatformUser {
+  id             String            @id @default(uuid()) @db.Uuid
+  email          String            @unique @db.VarChar(254)
+  name           String            @db.VarChar(200)
+  passwordHash   String            @db.VarChar(256)
+  status         String            @default("ACTIVE") @db.VarChar(16)
+  bootstrapOwner String?           @unique @db.VarChar(64)
+  createdAt      DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime          @updatedAt @db.Timestamptz(3)
+  sessions       PlatformSession[]
+  authorizationRoles AuthzUserRole[]
+}
+
+model PlatformSession {
+  id          String       @id @default(uuid()) @db.Uuid
+  userId      String       @db.Uuid
+  user        PlatformUser @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  refreshHash String       @db.VarChar(64)
+  version     Int          @default(1)
+  createdAt   DateTime     @default(now()) @db.Timestamptz(3)
+  expiresAt   DateTime     @db.Timestamptz(3)
+  revokedAt   DateTime?    @db.Timestamptz(3)
+
+  @@index([userId, revokedAt])
+}
+
+model AuthzState {
+  id             Int      @id @default(1)
+  domain         String   @unique @db.VarChar(64)
+  revision       Int      @default(1)
+  catalogVersion String   @db.VarChar(64)
+  initializedAt  DateTime @default(now()) @db.Timestamptz(3)
+}
+
+model AuthzPermission {
+  code        String                @id @db.VarChar(100)
+  resource    String                @db.VarChar(80)
+  action      String                @db.VarChar(24)
+  description String                @db.VarChar(200)
+  roles       AuthzRolePermission[]
+
+  @@unique([resource, action])
+}
+
+model AuthzRole {
+  id            String                @id @default(uuid()) @db.Uuid
+  code          String                @unique @db.VarChar(64)
+  name          String                @db.VarChar(120)
+  description   String                @default("") @db.VarChar(500)
+  systemManaged Boolean               @default(false)
+  createdBy     String                @db.VarChar(100)
+  createdAt     DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime              @updatedAt @db.Timestamptz(3)
+  permissions   AuthzRolePermission[]
+  users         AuthzUserRole[]
+}
+
+model AuthzRolePermission {
+  roleId         String          @db.Uuid
+  permissionCode String          @db.VarChar(100)
+  role           AuthzRole       @relation(fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  permission     AuthzPermission @relation(fields: [permissionCode], references: [code], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([roleId, permissionCode])
+}
+
+model AuthzUserRole {
+  userId     String    @db.Uuid
+  identity PlatformUser @relation(fields:[userId],references:[id],onDelete:Restrict,onUpdate:Restrict)
+  roleId     String    @db.Uuid
+  role       AuthzRole @relation(fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  assignedBy String    @db.VarChar(100)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+}
+
+model AuthzAudit {
+  id        String   @id @default(uuid()) @db.Uuid
+  actorId   String   @db.VarChar(100)
+  action    String   @db.VarChar(64)
+  targetId  String   @db.VarChar(100)
+  revision  Int
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([createdAt])
+}
+
+enum TenantStatus {
+  PENDING_PROVISIONING
+  PROVISIONING
+  ACTIVE
+  SUSPENDED
+  PROVISIONING_FAILED
+}
+
+enum ProvisioningStatus {
+  PENDING
+  RUNNING
+  SUCCEEDED
+  FAILED
+}
+
+enum OutboxStatus {
+  PENDING
+  PUBLISHED
+  FAILED
+}
+
+model Tenant {
+  id           String               @id @default(uuid()) @db.Uuid
+  code         String               @unique @db.VarChar(64)
+  name         String               @db.VarChar(200)
+  slug         String               @unique @db.VarChar(63)
+  status       TenantStatus         @default(PENDING_PROVISIONING)
+  createdAt    DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime             @updatedAt @db.Timestamptz(3)
+  activatedAt  DateTime?            @db.Timestamptz(3)
+  suspendedAt  DateTime?            @db.Timestamptz(3)
+  database     TenantDatabase?
+  provisioning TenantProvisioning[]
+  migrations   TenantMigrationRun[]
+
+  @@index([createdAt(sort: Desc), id(sort: Desc)])
+  @@index([status, createdAt(sort: Desc), id(sort: Desc)])
+}
+
+model TenantDatabase {
+  id                String    @id @default(uuid()) @db.Uuid
+  tenantId          String    @unique @db.Uuid
+  tenant            Tenant    @relation(fields: [tenantId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  provider          String    @default("neon") @db.VarChar(32)
+  databaseName      String?   @db.VarChar(63)
+  neonProjectId     String?   @db.VarChar(255)
+  neonBranchId      String?   @db.VarChar(255)
+  neonDatabaseId    String?   @db.VarChar(255)
+  databaseHost      String?   @db.VarChar(255)
+  databasePort      Int       @default(5432)
+  applicationRole   String?   @db.VarChar(63)
+  credentialVersion String?   @db.VarChar(32)
+  ownershipToken    String?   @db.Uuid
+  schemaVersion     String?   @db.VarChar(100)
+  provisionedAt     DateTime? @db.Timestamptz(3)
+  createdAt         DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime  @updatedAt @db.Timestamptz(3)
+
+  @@unique([provider, neonProjectId, neonBranchId, databaseName], map: "tenant_database_resource_identity_key")
+  @@unique([provider, neonProjectId, neonBranchId, neonDatabaseId], map: "tenant_database_resource_id_key")
+}
+
+model TenantProvisioning {
+  id               String             @id @default(uuid()) @db.Uuid
+  tenantId         String             @db.Uuid
+  tenant           Tenant             @relation(fields: [tenantId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  status           ProvisioningStatus @default(PENDING)
+  attemptCount     Int                @default(0)
+  requestedAt      DateTime?          @db.Timestamptz(3)
+  progress         String             @default("REGISTERED") @db.VarChar(32)
+  leaseToken       String?            @db.Uuid
+  leaseUntil       DateTime?          @db.Timestamptz(3)
+  nextAttemptAt    DateTime           @default(now()) @db.Timestamptz(3)
+  lastErrorCode    String?            @db.VarChar(100)
+  lastErrorMessage String?            @db.VarChar(500)
+  startedAt        DateTime?          @db.Timestamptz(3)
+  completedAt      DateTime?          @db.Timestamptz(3)
+  createdAt        DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime           @updatedAt @db.Timestamptz(3)
+
+  @@unique([tenantId], map: "tenant_provisioning_one_inflight_key", where: raw("(status = ANY (ARRAY['PENDING'::\"ProvisioningStatus\", 'RUNNING'::\"ProvisioningStatus\"]))"))
+  @@index([tenantId, createdAt(sort: Desc), id(sort: Desc)])
+  @@index([status, nextAttemptAt, leaseUntil])
+}
+
+model OutboxEvent {
+  id               String       @id @default(uuid()) @db.Uuid
+  eventType        String       @db.VarChar(100)
+  aggregateId      String       @db.Uuid
+  payload          Json
+  status           OutboxStatus @default(PENDING)
+  attemptCount     Int          @default(0)
+  createdAt        DateTime     @default(now()) @db.Timestamptz(3)
+  deduplicationKey String?      @unique @db.VarChar(200)
+  leaseToken       String?      @db.Uuid
+  leaseUntil       DateTime?    @db.Timestamptz(3)
+  nextAttemptAt    DateTime     @default(now()) @db.Timestamptz(3)
+  lastErrorCode    String?      @db.VarChar(100)
+  publishedAt      DateTime?    @db.Timestamptz(3)
+
+  @@index([status, nextAttemptAt, leaseUntil])
+  @@index([status, createdAt, id])
+  @@index([aggregateId, createdAt])
+}
+
+// Additional PostgreSQL CHECK constraints are maintained in the Prisma migration.
+// PostgreSQL catalogs are verified alongside Prisma diffs because CHECK is not modeled in PSL.
+
+model LoginRateBucket {
+  key         String   @id @db.VarChar(64)
+  count       Int      @default(1)
+  windowStart DateTime @default(now()) @db.Timestamptz(3)
+}
+
+model SecurityAuditEvent {
+  id            String   @id @default(uuid()) @db.Uuid
+  tenantId      String?  @db.Uuid
+  action        String   @db.VarChar(64)
+  actorId       String   @db.VarChar(100)
+  targetId      String?  @db.VarChar(100)
+  correlationId String   @db.Uuid
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([tenantId, createdAt])
+}
+
+model TenantMigrationRun {
+  id               String             @id @default(uuid()) @db.Uuid
+  rolloutId        String             @db.Uuid
+  tenantId         String             @db.Uuid
+  tenant           Tenant             @relation(fields: [tenantId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  authorizationRef String             @db.VarChar(100)
+  status           ProvisioningStatus @default(PENDING)
+  attemptCount     Int                @default(0)
+  leaseToken       String?            @db.Uuid
+  leaseUntil       DateTime?          @db.Timestamptz(3)
+  schemaVersion    String?            @db.VarChar(100)
+  lastErrorCode    String?            @db.VarChar(100)
+  createdAt        DateTime           @default(now()) @db.Timestamptz(3)
+  completedAt      DateTime?          @db.Timestamptz(3)
+
+  @@unique([rolloutId, tenantId])
+  @@unique([tenantId], map: "tenant_migration_one_inflight_key", where: raw("(status = ANY (ARRAY['PENDING'::\"ProvisioningStatus\", 'RUNNING'::\"ProvisioningStatus\"]))"))
+  @@index([status, leaseUntil])
+}

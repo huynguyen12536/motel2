@@ -1,6 +1,9 @@
 "use client";
 import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useTranslations } from "next-intl";
+import { AppSelect } from "@/components/shared/app-select";
+import { DatePicker } from "@/components/shared/date-picker";
+import { PageSectionNav } from "@/components/shared/layout/page-section-nav";
 import { DashboardKpiGrid } from "@/features/dashboard/components/dashboard-kpi-grid";
 import { InventoryMovementCard } from "@/features/dashboard/components/inventory-movement-card";
 import { QualityStatusCard } from "@/features/dashboard/components/quality-status-card";
@@ -8,10 +11,8 @@ import { MaterialGroupChart } from "@/features/dashboard/components/material-gro
 import { RecentDocumentsCard } from "@/features/dashboard/components/recent-documents-card";
 import { PendingQueueCard } from "@/features/dashboard/components/pending-queue-card";
 import { WarehouseAreaOverview } from "@/features/dashboard/components/warehouse-area-overview";
-import { DASHBOARD_FOOTER_DATE } from "@/features/dashboard/constants/dashboard.constants";
 import {
   DASHBOARD_PERIOD_OPTIONS,
-  filterRecentDocuments,
   getDashboardSnapshot,
   pendingQueue,
   recentDocuments,
@@ -20,47 +21,28 @@ import {
 import type { DashboardPeriodKey } from "@/features/dashboard/types/dashboard.types";
 import "./dashboard.css";
 
-function sectionMotion(reduce: boolean | null, delay: number) {
-  if (reduce) {
-    return {
-      initial: { opacity: 1 },
-      animate: { opacity: 1 },
-      transition: { duration: 0 },
-    };
-  }
-  return {
-    initial: { opacity: 0, y: 8 },
-    animate: { opacity: 1, y: 0 },
-    transition: {
-      duration: 0.28,
-      delay: delay / 1000,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  };
-}
-
 export function DashboardOverview() {
-  const reduceMotion = useReducedMotion();
+  const t = useTranslations("dashboardSections");
+  const controls = useTranslations("dashboardControls");
   const [period, setPeriod] = useState<DashboardPeriodKey>("7d");
+  // Demo documents use 13 Aug 2026 as their reference date; never label it "today".
+  const [documentDate, setDocumentDate] = useState(new Date(2026, 7, 13));
 
   const snapshot = useMemo(() => getDashboardSnapshot(period), [period]);
   const documents = useMemo(
-    () => filterRecentDocuments(recentDocuments, period),
-    [period],
+    () => recentDocuments.filter((item) => {
+      const date = item.createdAt.slice(0, 10).split("/").map(Number);
+      const timestamp = new Date(date[2], date[1] - 1, date[0]).getTime();
+      const age = Math.round((documentDate.getTime() - timestamp) / 86400000);
+      return age >= 0 && age <= Number(period.slice(0, -1));
+    }),
+    [period, documentDate],
   );
 
   return (
-    <motion.div
-      className="wms-dash"
-      initial={reduceMotion ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: reduceMotion ? 0 : 0.18 }}
-    >
+    <div className="wms-dash">
       <div className="wms-dash__body">
-        <motion.header
-          className="wms-page-head"
-          {...sectionMotion(reduceMotion, 0)}
-        >
+        <header id="dashboard-overview" className="wms-page-head">
           <div className="wms-page-head__text">
             <h1 className="wms-page-title">Tổng quan kho</h1>
             <p className="wms-page-subtitle">
@@ -68,35 +50,36 @@ export function DashboardOverview() {
             </p>
           </div>
           <div className="wms-page-head__controls">
-            <p className="wms-page-date">{DASHBOARD_FOOTER_DATE}</p>
+            <DatePicker value={documentDate} onChange={setDocumentDate} label={controls("date")} description={controls("dateNote")} />
             <label className="sr-only" htmlFor="dash-period">
-              Lọc kỳ báo cáo
+              {controls("period")}
             </label>
-            <select
+            <AppSelect
               id="dash-period"
               className="wms-page-period"
               value={period}
-              onChange={(event) =>
-                setPeriod(event.target.value as DashboardPeriodKey)
-              }
-            >
-              {DASHBOARD_PERIOD_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+              label={controls("period")}
+              onValueChange={(value) => setPeriod(value as DashboardPeriodKey)}
+              options={DASHBOARD_PERIOD_OPTIONS.map((option) => ({ value: option.value, label: controls(option.value) }))}
+            />
           </div>
-        </motion.header>
+        </header>
 
-        <motion.div key={`kpi-${period}`} {...sectionMotion(reduceMotion, 50)}>
+        <PageSectionNav label={t("label")} items={[
+          { id: "dashboard-overview", label: t("overview") },
+          { id: "dashboard-analysis", label: t("analysis") },
+          { id: "dashboard-operations", label: t("operations") },
+          { id: "dashboard-areas", label: t("areas") },
+        ]} />
+
+        <div key={`kpi-${period}`}>
           <DashboardKpiGrid items={snapshot.kpis} />
-        </motion.div>
+        </div>
 
-        <motion.section
+        <section
+          id="dashboard-analysis"
           className="wms-analytics"
           aria-label="Phân tích kho"
-          {...sectionMotion(reduceMotion, 120)}
         >
           <InventoryMovementCard
             key={`inv-${period}`}
@@ -113,25 +96,25 @@ export function DashboardOverview() {
             key={`materials-${period}`}
             items={snapshot.materialGroups}
           />
-        </motion.section>
+        </section>
 
-        <motion.section
+        <section
+          id="dashboard-operations"
           className="wms-ops"
           aria-label="Vận hành"
-          {...sectionMotion(reduceMotion, 180)}
         >
           <RecentDocumentsCard key={`docs-${period}`} items={documents} />
           <PendingQueueCard items={pendingQueue} />
-        </motion.section>
+        </section>
 
-        <motion.section
+        <section
+          id="dashboard-areas"
           className="wms-areas"
           aria-label="Tình trạng kho theo khu vực"
-          {...sectionMotion(reduceMotion, 220)}
         >
           <WarehouseAreaOverview items={warehouseAreaOverview} />
-        </motion.section>
+        </section>
       </div>
-    </motion.div>
+    </div>
   );
 }

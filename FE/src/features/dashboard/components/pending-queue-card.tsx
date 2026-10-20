@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import { AppSelect } from "@/components/shared/app-select";
 import {
   ChevronRight,
   ClipboardCheck,
@@ -36,22 +37,16 @@ export function PendingQueueCard({ items }: { items: PendingQueueItem[] }) {
       <div className="wms-card__head wms-card__head--queue">
         <h2 className="wms-card__title">Hàng chờ xử lý</h2>
         <div className="wms-queue__head-actions">
-          <label className="wms-range-select wms-range-select--inline">
+          <div className="wms-range-select wms-range-select--inline">
             <span className="sr-only">Lọc hàng chờ</span>
-            <select
+            <AppSelect
               className="wms-range-select__control"
               value={filter}
-              onChange={(event) =>
-                setFilter(event.target.value as PendingQueueFilterKey)
-              }
-            >
-              {PENDING_QUEUE_FILTER_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
+              label="Lọc hàng chờ"
+              onValueChange={(value) => setFilter(value as PendingQueueFilterKey)}
+              options={PENDING_QUEUE_FILTER_OPTIONS}
+            />
+          </div>
           <a href="#" className="wms-card__link">
             Xem toàn bộ
             <ChevronRight size={14} aria-hidden="true" />

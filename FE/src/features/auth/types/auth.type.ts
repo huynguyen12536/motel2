@@ -4,6 +4,9 @@ export interface CurrentUser {
   email: string;
   role: string;
   permissions: string[];
+  scope?:"platform"|"tenant";
+  tenantId?:string|null;
+  policyVersion?:number;
 }
 export interface AuthResponse {
   accessToken: string;

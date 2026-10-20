@@ -5,7 +5,7 @@ export const warehouseModels: Record<string, Warehouse3DModelConfig> = {
   k01: {
     id: "k01",
     name: "Kho nguyên liệu",
-    glbUrl: "/models/warehouse/warehouse-main.glb",
+    glbUrl: "/models/warehouse/warehouse-raw-materials.glb",
     fallbackType: "WAREHOUSE",
     meshMappings: {
       Zone_A: "zone-a",
@@ -14,17 +14,21 @@ export const warehouseModels: Record<string, Warehouse3DModelConfig> = {
       Zone_Q: "zone-q",
     },
     defaultCamera: {
-      position: [18, 14, 18],
-      target: [0, 0, 0],
+      position: [72, 56, 72],
+      target: [0, 1, 0],
     },
     floorMappings: null,
   },
   k02: {
     id: "k02",
     name: "Kho bao bì",
-    glbUrl: null,
+    glbUrl: "/models/warehouse/warehouse-packaging.glb",
     fallbackType: "WAREHOUSE",
-    meshMappings: {},
+    meshMappings: {
+      Zone_P1: "zone-p1",
+      Zone_P2: "zone-p2",
+      Zone_P3: "zone-p3",
+    },
     defaultCamera: {
       position: [16, 12, 16],
       target: [0, 0, 0],
@@ -34,9 +38,14 @@ export const warehouseModels: Record<string, Warehouse3DModelConfig> = {
   k03: {
     id: "k03",
     name: "Kho thành phẩm",
-    glbUrl: null,
+    glbUrl: "/models/warehouse/warehouse-finished-goods.glb",
     fallbackType: "WAREHOUSE",
-    meshMappings: {},
+    meshMappings: {
+      Zone_F1: "zone-f1",
+      Zone_F2: "zone-f2",
+      Zone_F3: "zone-f3",
+      Zone_F4: "zone-f4",
+    },
     defaultCamera: {
       position: [16, 12, 16],
       target: [0, 0, 0],
@@ -45,22 +54,48 @@ export const warehouseModels: Record<string, Warehouse3DModelConfig> = {
   },
   k04: {
     id: "k04",
-    name: "Kho mát 2–8°C",
-    glbUrl: null,
+    name: "Kho lạnh thành phẩm",
+    glbUrl: "/models/warehouse/warehouse-cold-finished.glb",
     fallbackType: "WAREHOUSE",
-    meshMappings: {},
+    meshMappings: {
+      Zone_C1: "zone-cold-1",
+      Zone_C2: "zone-cold-2",
+      Zone_C3: "zone-cold-3",
+      Zone_C4: "zone-cold-4",
+    },
     defaultCamera: {
-      position: [14, 11, 14],
-      target: [0, 0, 0],
+      position: [48, 38, 48],
+      target: [0, 2, 0],
+    },
+    floorMappings: null,
+  },
+  k06: {
+    id: "k06",
+    name: "Kho lạnh nguyên liệu",
+    glbUrl: "/models/warehouse/warehouse-cold-raw-materials.glb",
+    fallbackType: "WAREHOUSE",
+    meshMappings: {
+      Zone_C1: "zone-cold-raw-1",
+      Zone_C2: "zone-cold-raw-2",
+      Zone_C3: "zone-cold-raw-3",
+      Zone_C4: "zone-cold-raw-4",
+    },
+    defaultCamera: {
+      position: [48, 38, 48],
+      target: [0, 2, 0],
     },
     floorMappings: null,
   },
   k05: {
     id: "k05",
     name: "Khu cách ly",
-    glbUrl: null,
+    glbUrl: "/models/warehouse/warehouse-quarantine.glb",
     fallbackType: "WAREHOUSE",
-    meshMappings: {},
+    meshMappings: {
+      Zone_Q1: "zone-qc-1",
+      Zone_Q2: "zone-qc-2",
+      Zone_Q3: "zone-qc-3",
+    },
     defaultCamera: {
       position: [12, 10, 12],
       target: [0, 0, 0],

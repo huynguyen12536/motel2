@@ -1,0 +1,29 @@
+# Example only. Terminate verified public TLS at your approved gateway/load balancer.
+# This file is not mounted or deployed automatically.
+limit_req_zone $binary_remote_addr zone=tenant_login:10m rate=10r/m;
+upstream motel_api { server api:8080; keepalive 16; }
+server {
+    listen 8080;
+    server_name _;
+    client_max_body_size 1m;
+    location = /api/v1/auth/login {
+        limit_req zone=tenant_login burst=5 nodelay;
+        limit_req_status 429;
+        proxy_pass http://motel_api;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Request-ID $request_id;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Connection "";
+    }
+    location /api/ {
+        proxy_pass http://motel_api;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Request-ID $request_id;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Connection "";
+    }
+}

@@ -11,6 +11,7 @@ import { LoadingState } from "@/components/shared/loading/loading-state";
 import { Button } from "@/components/ui/button";
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const session = useSession();
+  const refetchSession = session.refetch;
   const router = useRouter();
   const client = useQueryClient();
   const t = useTranslations();
@@ -18,6 +19,18 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   const unauthorized =
     session.isError &&
     [401, 403].includes(normalizeApiError(session.error).status);
+  useEffect(() => {
+    const refreshPermissions = () => {
+      client.setQueriesData<{ permissions: string[] }>(
+        { queryKey: ["auth"] },
+        (old) => (old ? { ...old, permissions: [] } : old),
+      );
+      void refetchSession();
+    };
+    window.addEventListener("permissions-changed", refreshPermissions);
+    return () =>
+      window.removeEventListener("permissions-changed", refreshPermissions);
+  }, [client, refetchSession]);
   useEffect(() => {
     if (unauthorized) router.replace("/auth/sign-in");
   }, [unauthorized, router]);

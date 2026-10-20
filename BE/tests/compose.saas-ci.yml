@@ -1,0 +1,32 @@
+# Isolated CI host only; scripts/run-saas-ci.mjs refuses an existing motel project.
+name: motel
+services:
+  postgres:
+    image: postgres:18-bookworm
+    labels:
+      motel.database.environment: development
+      motel.ci.run: ${SAAS_CI_RUN:?CI ownership ID required}
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: ci_admin
+      POSTGRES_PASSWORD: ${CI_POSTGRES_PASSWORD:?Random CI password required}
+    ports: ["127.0.0.1:5432:5432"]
+    tmpfs: ["/var/lib/postgresql:rw"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ci_admin -d postgres"]
+      interval: 3s
+      retries: 20
+  rabbitmq:
+    image: rabbitmq:4-management
+    labels:
+      motel.ci.run: ${SAAS_CI_RUN:?CI ownership ID required}
+    environment:
+      RABBITMQ_DEFAULT_USER: ci_test
+      RABBITMQ_DEFAULT_PASS: ${CI_RABBITMQ_PASSWORD:?Random CI password required}
+    ports: ["127.0.0.1:5672:5672"]
+    tmpfs: ["/var/lib/rabbitmq:rw"]
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 3s
+      timeout: 5s
+      retries: 30

@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { logger } from "../../../config/logger.js";
+import { logger } from "../../../../logger/index.js";
 
 export function requestLogger(req: Request, res: Response, next: NextFunction): void {
   const startedAt = Date.now();
@@ -11,11 +11,11 @@ export function requestLogger(req: Request, res: Response, next: NextFunction): 
       {
         requestId: req.requestId,
         method: req.method,
-        url: req.originalUrl,
+        url: req.path,
         statusCode,
         durationMs: Date.now() - startedAt,
       },
-      `${req.method} ${req.originalUrl} ${statusCode}`,
+      `${req.method} ${req.path} ${statusCode}`,
     );
   });
 

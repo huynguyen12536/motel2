@@ -1,0 +1,11 @@
+.wms-date-trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--foreground); font: inherit; font-size: 12px; cursor: pointer; }
+.wms-date-trigger:hover { background: var(--accent); }
+.wms-date-popover { z-index: 60; max-width: calc(100vw - 24px); max-height: var(--radix-popover-content-available-height); overflow-y: auto; padding: 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); color: var(--foreground); box-shadow: var(--shadow-surface); }
+.wms-calendar { --rdp-accent-color: var(--primary); --rdp-accent-background-color: var(--accent); --rdp-day_button-height: 38px; --rdp-day_button-width: 38px; --rdp-day-height: 40px; --rdp-day-width: 40px; margin: 0; font-size: 13px; }
+.wms-calendar .rdp-selected .rdp-day_button { background: var(--primary); color: var(--primary-foreground); }
+.wms-calendar .rdp-day_button:hover { background: var(--accent); color: var(--foreground); }
+.wms-calendar__note { max-width: 280px; margin: 12px 0 0; color: var(--muted-foreground); font-size: 12px; line-height: 1.5; }
+@media (max-width: 639px) {
+  .wms-date-trigger { min-height: 44px; }
+  .wms-calendar { --rdp-day-height: 44px; --rdp-day-width: 44px; --rdp-day_button-height: 44px; --rdp-day_button-width: 44px; --rdp-nav_button-height: 44px; --rdp-nav_button-width: 44px; }
+}

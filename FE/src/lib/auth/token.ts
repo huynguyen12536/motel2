@@ -1,4 +1,5 @@
 const TOKEN_KEY = "wms-demo-token";
+const demo = process.env.NEXT_PUBLIC_DEMO_MODE !== "false";
 
 let accessToken: string | null = null;
 let generation = 0;
@@ -7,7 +8,7 @@ let hydrated = false;
 function hydrate() {
   if (hydrated || typeof window === "undefined") return;
   hydrated = true;
-  accessToken = window.sessionStorage.getItem(TOKEN_KEY);
+  accessToken = demo ? window.sessionStorage.getItem(TOKEN_KEY) : null;
 }
 
 export const token = {
@@ -19,7 +20,7 @@ export const token = {
   set: (value: string | null) => {
     hydrate();
     accessToken = value;
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !demo) return;
     if (value) window.sessionStorage.setItem(TOKEN_KEY, value);
     else window.sessionStorage.removeItem(TOKEN_KEY);
   },

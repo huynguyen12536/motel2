@@ -1,7 +1,1 @@
-export {
-  getPool,
-  query,
-  withTransaction,
-  pingDatabase,
-  closePool,
-} from "./postgres.js";
+export { MasterPrismaService, MasterDatabaseModule } from "./prisma.js";

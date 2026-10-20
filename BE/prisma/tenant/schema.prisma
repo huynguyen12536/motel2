@@ -1,0 +1,116 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../../src/generated/tenant-authorized"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TenantRole {
+  TENANT_ADMIN
+  TENANT_USER
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+model TenantBootstrap {
+  id                  Int       @id @default(1)
+  tenantId            String    @unique @db.Uuid
+  schemaVersion       String    @db.VarChar(100)
+  initializedAt       DateTime  @default(now()) @db.Timestamptz(3)
+  adminBootstrappedAt DateTime? @db.Timestamptz(3)
+}
+
+model User {
+  id           String        @id @default(uuid()) @db.Uuid
+  email        String        @unique @db.VarChar(254)
+  passwordHash String        @db.VarChar(256)
+  role         TenantRole    @default(TENANT_USER)
+  status       UserStatus    @default(ACTIVE)
+  createdAt    DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime      @updatedAt @db.Timestamptz(3)
+  sessions     AuthSession[]
+  authorizationRoles AuthzUserRole[]
+}
+
+model AuthSession {
+  id          String    @id @default(uuid()) @db.Uuid
+  userId      String    @db.Uuid
+  user        User      @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  refreshHash String    @db.VarChar(64)
+  version     Int       @default(1)
+  createdAt   DateTime  @default(now()) @db.Timestamptz(3)
+  expiresAt   DateTime  @db.Timestamptz(3)
+  revokedAt   DateTime? @db.Timestamptz(3)
+
+  @@index([userId, revokedAt])
+}
+
+model AuthzState {
+  id             Int      @id @default(1)
+  domain         String   @unique @db.VarChar(64)
+  revision       Int      @default(1)
+  catalogVersion String   @db.VarChar(64)
+  initializedAt  DateTime @default(now()) @db.Timestamptz(3)
+}
+
+model AuthzPermission {
+  code        String                @id @db.VarChar(100)
+  resource    String                @db.VarChar(80)
+  action      String                @db.VarChar(24)
+  description String                @db.VarChar(200)
+  roles       AuthzRolePermission[]
+
+  @@unique([resource, action])
+}
+
+model AuthzRole {
+  id            String                @id @default(uuid()) @db.Uuid
+  code          String                @unique @db.VarChar(64)
+  name          String                @db.VarChar(120)
+  description   String                @default("") @db.VarChar(500)
+  systemManaged Boolean               @default(false)
+  createdBy     String                @db.VarChar(100)
+  createdAt     DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime              @updatedAt @db.Timestamptz(3)
+  permissions   AuthzRolePermission[]
+  users         AuthzUserRole[]
+}
+
+model AuthzRolePermission {
+  roleId         String          @db.Uuid
+  permissionCode String          @db.VarChar(100)
+  role           AuthzRole       @relation(fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  permission     AuthzPermission @relation(fields: [permissionCode], references: [code], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([roleId, permissionCode])
+}
+
+model AuthzUserRole {
+  userId     String    @db.Uuid
+  identity User @relation(fields:[userId],references:[id],onDelete:Restrict,onUpdate:Restrict)
+  roleId     String    @db.Uuid
+  role       AuthzRole @relation(fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  assignedBy String    @db.VarChar(100)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+}
+
+model AuthzAudit {
+  id        String   @id @default(uuid()) @db.Uuid
+  actorId   String   @db.VarChar(100)
+  action    String   @db.VarChar(64)
+  targetId  String   @db.VarChar(100)
+  revision  Int
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([createdAt])
+}

@@ -1,0 +1,464 @@
+{
+  "observedAt": "2026-10-20T05:52:03.182Z",
+  "target": "owned-local-test-api",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/v1/health/live",
+      "scope": "public-or-health",
+      "permissions": [],
+      "authentication": "explicit public login/refresh or existing health policy",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/health/ready",
+      "scope": "public-or-health",
+      "permissions": [],
+      "authentication": "explicit public login/refresh or existing health policy",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tenants",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:create"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tenants",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tenants/{id}",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/tenants/{id}",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:update"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me/permissions",
+      "scope": "any",
+      "permissions": [],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/platform/auth/login",
+      "scope": "public-or-health",
+      "permissions": [],
+      "authentication": "explicit public login/refresh or existing health policy",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/platform/auth/refresh",
+      "scope": "public-or-health",
+      "permissions": [],
+      "authentication": "explicit public login/refresh or existing health policy",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/platform/auth/logout",
+      "scope": "platform",
+      "permissions": [],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/platform/auth/me",
+      "scope": "platform",
+      "permissions": [],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/platform/permissions",
+      "scope": "platform",
+      "permissions": [
+        "platform.permissions:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/platform/roles",
+      "scope": "platform",
+      "permissions": [
+        "platform.roles:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/platform/roles",
+      "scope": "platform",
+      "permissions": [
+        "platform.roles:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/platform/roles/{id}",
+      "scope": "platform",
+      "permissions": [
+        "platform.roles:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/platform/roles/{id}",
+      "scope": "platform",
+      "permissions": [
+        "platform.roles:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/platform/roles/{id}",
+      "scope": "platform",
+      "permissions": [
+        "platform.roles:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/platform/roles/{id}/permissions",
+      "scope": "platform",
+      "permissions": [
+        "platform.permissions:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/platform/users",
+      "scope": "platform",
+      "permissions": [
+        "platform.users:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/platform/users",
+      "scope": "platform",
+      "permissions": [
+        "platform.users:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/platform/users/{id}",
+      "scope": "platform",
+      "permissions": [
+        "platform.users:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/platform/users/{id}/roles",
+      "scope": "platform",
+      "permissions": [
+        "platform.users:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/platform/users/{id}/roles",
+      "scope": "platform",
+      "permissions": [
+        "platform.users:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenant/permissions",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.permissions:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenant/roles",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.roles:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/tenant/roles",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.roles:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenant/roles/{id}",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.roles:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/tenant/roles/{id}",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.roles:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/tenant/roles/{id}",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.roles:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/tenant/roles/{id}/permissions",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.permissions:assign"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenant/users",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.users:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/tenant/users",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.users:create"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/tenant/users/{id}",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.users:update"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenant/users/{id}/roles",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.users:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/tenant/users/{id}/roles",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.users:assign"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tenants/{id}/provision",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:provision"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tenants/{id}/provisioning/retry",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:retry"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tenants/{id}/provisioning",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tenants/{id}/provisioning/{provisioningId}",
+      "scope": "platform",
+      "permissions": [
+        "platform.tenants:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tenants/{id}/users/bootstrap",
+      "scope": "platform",
+      "permissions": [
+        "platform.users:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "scope": "public-or-health",
+      "permissions": [],
+      "authentication": "explicit public login/refresh or existing health policy",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "scope": "public-or-health",
+      "permissions": [],
+      "authentication": "explicit public login/refresh or existing health policy",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "scope": "public-or-health",
+      "permissions": [],
+      "authentication": "explicit public login/refresh or existing health policy",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenant/me",
+      "scope": "tenant",
+      "permissions": [],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "session, health and public-contract regressions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tenant/admin/identity",
+      "scope": "tenant",
+      "permissions": [
+        "tenant.settings:update"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tenant-migrations",
+      "scope": "platform",
+      "permissions": [
+        "platform.migrations:manage"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tenant-migrations/{id}",
+      "scope": "platform",
+      "permissions": [
+        "platform.migrations:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/saas/metrics",
+      "scope": "platform",
+      "permissions": [
+        "platform.metrics:read"
+      ],
+      "authentication": "verified scoped session/current identity",
+      "testCoverage": "HTTP 401/403 matrix; positive CRUD/flow tests"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import { PAGE_SIZE } from "@/constants/app";
 import { formatDate } from "@/lib/utils/date";
 import { initials } from "@/lib/utils/string";
 import { PageHeader } from "@/components/shared/page-header/page-header";
+import { RecordPanel } from "@/components/shared/layout/record-panel";
 import { DataTable } from "@/components/shared/data-table/data-table";
 import { LoadingState } from "@/components/shared/loading/loading-state";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog/confirm-dialog";
@@ -125,22 +126,15 @@ export function UserList() {
       <PageHeader
         title={t("users")}
         description={t("usersDescription")}
-        action={
-          can(PERMISSIONS.USER.CREATE) && (
-            <Button onClick={() => setEditing("new")}>
-              <Plus />
-              {t("addUser")}
-            </Button>
-          )
-        }
       />
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-        <h2 className="text-base font-semibold">
+      <RecordPanel
+        title={<>
           {t("allUsers")}{" "}
           <span className="ml-2 rounded-md bg-muted px-2 py-1 text-xs font-medium">
             {query.data?.total ?? "—"}
           </span>
-        </h2>
+        </>}
+        toolbar={<>
         <div className="relative w-full sm:w-72">
           <Search
             className="absolute left-3 top-2.5 size-4 text-muted-foreground"
@@ -158,7 +152,14 @@ export function UserList() {
             }}
           />
         </div>
-      </div>
+          {can(PERMISSIONS.USER.CREATE) && (
+            <Button onClick={() => setEditing("new")}>
+              <Plus />
+              {t("addUser")}
+            </Button>
+          )}
+        </>}
+      >
       {query.isPending ? (
         <LoadingState />
       ) : query.isError ? (
@@ -179,6 +180,7 @@ export function UserList() {
           pending={query.isFetching}
         />
       )}
+      </RecordPanel>
       <Dialog
         open={editing !== null}
         onOpenChange={(open) => {

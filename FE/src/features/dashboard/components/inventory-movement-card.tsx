@@ -1,247 +1,76 @@
 "use client";
-import { useMemo, useState } from "react";
-import {
-  Area,
-  Bar,
-  CartesianGrid,
-  ComposedChart,
-  LabelList,
-  Line,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { DASHBOARD_COLORS } from "@/features/dashboard/constants/dashboard.constants";
-import {
-  getInventoryMovement,
-  INVENTORY_RANGE_OPTIONS,
-} from "@/features/dashboard/mocks/dashboard.mock";
+import { useMemo, useState, useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { useCountUp } from "@/features/dashboard/hooks/use-count-up";
+import { useTranslations } from "next-intl";
+import { env } from "@/config/env";
+import { getInventoryMovement, INVENTORY_RANGE_OPTIONS } from "@/features/dashboard/mocks/dashboard.mock";
+import { formatDashboardNumber } from "@/features/dashboard/utils/dashboard.utils";
 import type { InventoryRangeKey } from "@/features/dashboard/types/dashboard.types";
 
-const SERIES_LEGEND = [
-  { key: "received", label: "Nhập", color: DASHBOARD_COLORS.receivedBar },
-  { key: "issued", label: "Xuất", color: DASHBOARD_COLORS.issuedBar },
-  { key: "stock", label: "Tồn", color: DASHBOARD_COLORS.stockLine },
-] as const;
+const SERIES = ["received", "issued", "stock"] as const;
+type Series = (typeof SERIES)[number];
 
-function MovementTooltip({
-  active,
-  label,
-  payload,
-}: {
-  active?: boolean;
-  label?: string;
-  payload?: Array<{
-    name?: string;
-    value?: number;
-    color?: string;
-    dataKey?: string | number;
-  }>;
-}) {
-  if (!active || !payload?.length) return null;
-
-  const seen = new Set<string>();
-  const rows = payload.filter((entry) => {
-    const id = String(entry.dataKey ?? entry.name ?? "");
-    if (!id || seen.has(id)) return false;
-    seen.add(id);
-    return true;
-  });
-
-  return (
-    <div className="wms-chart-tooltip">
-      <p className="wms-chart-tooltip__title">{label}</p>
-      <ul className="wms-chart-tooltip__list">
-        {rows.map((entry) => (
-          <li key={String(entry.dataKey ?? entry.name)}>
-            <span
-              className="wms-chart-tooltip__dot"
-              style={{ background: entry.color }}
-              aria-hidden="true"
-            />
-            {entry.name}: <strong>{entry.value}</strong>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export function InventoryMovementCard({
-  initialRange = "7d",
-}: {
-  initialRange?: InventoryRangeKey;
-}) {
+export function InventoryMovementCard({ initialRange = "7d" }: { initialRange?: InventoryRangeKey }) {
+  const t = useTranslations("chartUI");
   const [range, setRange] = useState<InventoryRangeKey>(initialRange);
+  const [series, setSeries] = useState<Series>("stock");
   const points = useMemo(() => getInventoryMovement(range), [range]);
-  const rangeLabel =
-    INVENTORY_RANGE_OPTIONS.find((item) => item.value === range)?.label ??
-    range;
-  const summary =
-    points.length > 0
-      ? `Tồn kho từ ${points[0].stock} lên ${points[points.length - 1].stock} trong ${rangeLabel}.`
-      : "Chưa có dữ liệu biến động tồn kho.";
+  const maximum = Math.max(1, ...points.map((point) => point[series]));
+  const step = Math.max(1, 10 ** Math.floor(Math.log10(maximum)) / 2);
+  const ceiling = Math.ceil(maximum / step) * step;
+  const latest = points.at(-1);
+  const cardRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+  const animatedTotal = useCountUp(latest?.[series] ?? 0, 1000, cardRef);
+  const rangeKeys = { "7d": "range7d", "30d": "range30d", "3m": "range3m", "12m": "range12m" } as const;
 
   return (
-    <section className="wms-card wms-card--analytics wms-card--bi" aria-label={summary}>
-      <div className="wms-card__head">
-        <div className="min-w-0">
-          <h2 className="wms-card__title">Biến động tồn kho</h2>
-          <p className="wms-card__subtitle">Nhập · Xuất · Tồn theo thời gian</p>
+    <section ref={cardRef} className="wms-card wms-card--analytics wms-card--bi wms-reference-revenue" aria-label={t("inventoryTitle")}>
+      <header className="wms-reference-chart__head">
+        <h2 className="wms-card__title">{t("inventoryTitle")}</h2>
+        {env.demoMode && <span className="wms-chart-demo">{t("demo")}</span>}
+        {latest && <strong className="wms-reference-chart__value" aria-label={formatDashboardNumber(latest[series])}><span aria-hidden="true">{formatDashboardNumber(animatedTotal)}</span></strong>}
+        {latest && <span className="wms-reference-chart__caption">{t("latest")} · {latest.date}</span>}
+      </header>
+      <div className="wms-reference-chart__controls">
+        <div className="wms-segmented" role="group" aria-label={t("period")}>
+          {INVENTORY_RANGE_OPTIONS.map((option) => (
+            <button key={option.value} type="button" aria-pressed={range === option.value} onClick={() => setRange(option.value)}>
+              {t(rangeKeys[option.value])}
+            </button>
+          ))}
         </div>
-        <div className="wms-chart-toolbar">
-          <label className="wms-range-select">
-            <span className="sr-only">Lọc khoảng thời gian biểu đồ</span>
-            <select
-              className="wms-range-select__control"
-              value={range}
-              onChange={(event) =>
-                setRange(event.target.value as InventoryRangeKey)
-              }
-            >
-              {INVENTORY_RANGE_OPTIONS.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
-          </label>
+        <div className="wms-segmented" role="group" aria-label={t("series")}>
+          {SERIES.map((key) => (
+            <button key={key} type="button" aria-pressed={series === key} onClick={() => setSeries(key)}>{t(key)}</button>
+          ))}
         </div>
       </div>
-      {points.length === 0 ? (
-        <p className="wms-empty">
-          Chưa có dữ liệu trong khoảng thời gian này.
-        </p>
-      ) : (
-        <>
-          <div className="wms-chart wms-chart--bi wms-chart--framed">
-            <ResponsiveContainer width="100%" height="100%">
-              <ComposedChart
-                key={range}
-                data={points}
-                margin={{ top: 28, right: 16, left: 4, bottom: 8 }}
-                barCategoryGap="28%"
-              >
-                <defs>
-                  <linearGradient id="wmsStockFill" x1="0" y1="0" x2="0" y2="1">
-                    <stop
-                      offset="0%"
-                      stopColor={DASHBOARD_COLORS.stockFill}
-                      stopOpacity={0.35}
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor={DASHBOARD_COLORS.stockFill}
-                      stopOpacity={0.02}
-                    />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid
-                  stroke="#E6EDF5"
-                  strokeDasharray="0"
-                  vertical={false}
-                />
-                <XAxis
-                  dataKey="date"
-                  tick={{ fill: "#64748B", fontSize: 11, fontWeight: 500 }}
-                  axisLine={{ stroke: "#CBD5E1", strokeWidth: 1 }}
-                  tickLine={{ stroke: "#CBD5E1" }}
-                  dy={8}
-                />
-                <YAxis
-                  tick={{ fill: "#64748B", fontSize: 11, fontWeight: 500 }}
-                  axisLine={{ stroke: "#CBD5E1", strokeWidth: 1 }}
-                  tickLine={{ stroke: "#CBD5E1" }}
-                  width={44}
-                  domain={[0, (dataMax: number) => Math.ceil(dataMax * 1.12)]}
-                />
-                <Tooltip
-                  content={<MovementTooltip />}
-                  cursor={{ fill: "rgba(129,140,248,0.08)" }}
-                  animationDuration={120}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="stock"
-                  name="Tồn"
-                  stroke="transparent"
-                  fill="url(#wmsStockFill)"
-                  legendType="none"
-                  tooltipType="none"
-                  isAnimationActive
-                  animationDuration={500}
-                  animationEasing="ease-out"
-                />
-                <Bar
-                  dataKey="received"
-                  name="Nhập"
-                  fill={DASHBOARD_COLORS.receivedBar}
-                  radius={[5, 5, 0, 0]}
-                  barSize={10}
-                  isAnimationActive
-                  animationBegin={80}
-                  animationDuration={450}
-                  animationEasing="ease-out"
-                />
-                <Bar
-                  dataKey="issued"
-                  name="Xuất"
-                  fill={DASHBOARD_COLORS.issuedBar}
-                  radius={[5, 5, 0, 0]}
-                  barSize={10}
-                  isAnimationActive
-                  animationBegin={110}
-                  animationDuration={450}
-                  animationEasing="ease-out"
-                />
-                <Line
-                  type="monotone"
-                  dataKey="stock"
-                  name="Tồn"
-                  stroke={DASHBOARD_COLORS.stockLine}
-                  strokeWidth={2.25}
-                  dot={{
-                    r: 3.5,
-                    fill: "#fff",
-                    strokeWidth: 2,
-                    stroke: DASHBOARD_COLORS.stockLine,
-                  }}
-                  activeDot={{ r: 5 }}
-                  isAnimationActive
-                  animationBegin={160}
-                  animationDuration={550}
-                  animationEasing="ease-out"
-                >
-                  <LabelList
-                    dataKey="stock"
-                    position="top"
-                    offset={8}
-                    className="wms-chart-label wms-chart-label--strong"
-                    fontSize={11}
-                    fontWeight={600}
-                    fill="#4338CA"
-                  />
-                </Line>
-              </ComposedChart>
-            </ResponsiveContainer>
+      {!points.length ? <p className="wms-empty">{t("empty")}</p> : (
+        <div className="wms-reference-bars" role="group" aria-label={`${t(series)} · ${t(rangeKeys[range])}`}>
+          <div className="wms-reference-bars__axis" aria-hidden="true">
+            {[1, 0.75, 0.5, 0.25, 0].map((fraction) => <span key={fraction}>{formatDashboardNumber(ceiling * fraction)}</span>)}
           </div>
-          <ul
-            className="wms-chart-legend wms-chart-legend--below"
-            aria-label="Chú thích biểu đồ"
-          >
-            {SERIES_LEGEND.map((item) => (
-              <li key={item.key} className="wms-chart-legend__item">
-                <span
-                  className="wms-chart-legend__dot"
-                  style={{ background: item.color }}
-                  aria-hidden="true"
-                />
-                {item.label}
-              </li>
-            ))}
-          </ul>
-        </>
+          <div className="wms-reference-bars__plot">
+            <div className="wms-reference-bars__grid" aria-hidden="true">{[0, 1, 2, 3, 4].map((line) => <span key={line} />)}</div>
+            <div key={`${range}-${series}`} className="wms-reference-bars__columns" style={{ gridTemplateColumns: `repeat(${points.length}, minmax(0, 1fr))` }}>
+              {points.map((point, index) => (
+                <div className="wms-reference-bars__column" key={point.date}>
+                  <motion.button type="button" className="wms-reference-bars__bar" data-current={index === points.length - 1 || undefined}
+                    initial={reducedMotion ? false : { scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }} viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: reducedMotion ? 0 : 0.65, delay: reducedMotion ? 0 : Math.min(index * 0.025, 0.2), ease: [0.16, 1, 0.3, 1] }}
+                    style={{ height: `${point[series] / ceiling * 100}%`, minHeight: 3, transformOrigin: "center bottom" }}
+                    aria-label={`${point.date}: ${t(series)} ${formatDashboardNumber(point[series])}`}>
+                    <span className="wms-reference-bars__tooltip">{point.date}<strong>{t(series)}: {formatDashboardNumber(point[series])}</strong></span>
+                  </motion.button>
+                  <span className="wms-reference-bars__label" data-current={index === points.length - 1 || undefined}>{point.date}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </section>
   );

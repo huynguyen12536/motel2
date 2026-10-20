@@ -1,35 +1,35 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-06T03:55:00.000Z",
-  "title": "Design System: Workspace",
+  "generatedAt": "2026-10-20T05:39:18.217314+00:00",
+  "title": "Design System: WMS APA Nano",
   "extensions": {
     "colorMeta": {
       "background": {
         "role": "neutral",
         "displayName": "Cool Paper",
         "tonalRamp": [
-          "oklch(15.00% 0.00286 264.54)",
-          "oklch(26.43% 0.00286 264.54)",
-          "oklch(37.86% 0.00286 264.54)",
-          "oklch(49.29% 0.00286 264.54)",
-          "oklch(60.71% 0.00286 264.54)",
-          "oklch(72.14% 0.00286 264.54)",
-          "oklch(83.57% 0.00286 264.54)",
-          "oklch(95.00% 0.00286 264.54)"
+          "oklch(15.00% 0.00287 264.54)",
+          "oklch(26.43% 0.00287 264.54)",
+          "oklch(37.86% 0.00287 264.54)",
+          "oklch(49.29% 0.00287 264.54)",
+          "oklch(60.71% 0.00287 264.54)",
+          "oklch(72.14% 0.00287 264.54)",
+          "oklch(83.57% 0.00287 264.54)",
+          "oklch(95.00% 0.00287 264.54)"
         ]
       },
       "foreground": {
         "role": "neutral",
-        "displayName": "Ink",
+        "displayName": "Deep Navy",
         "tonalRamp": [
-          "oklch(15.00% 0.01923 232.37)",
-          "oklch(26.43% 0.01923 232.37)",
-          "oklch(37.86% 0.01923 232.37)",
-          "oklch(49.29% 0.01923 232.37)",
-          "oklch(60.71% 0.01923 232.37)",
-          "oklch(72.14% 0.01923 232.37)",
-          "oklch(83.57% 0.01923 232.37)",
-          "oklch(95.00% 0.01923 232.37)"
+          "oklch(15.00% 0.14410 261.01)",
+          "oklch(26.43% 0.14410 261.01)",
+          "oklch(37.86% 0.14410 261.01)",
+          "oklch(49.29% 0.14410 261.01)",
+          "oklch(60.71% 0.14410 261.01)",
+          "oklch(72.14% 0.14410 261.01)",
+          "oklch(83.57% 0.14410 261.01)",
+          "oklch(95.00% 0.14410 261.01)"
         ]
       },
       "card": {
@@ -48,16 +48,16 @@
       },
       "primary": {
         "role": "primary",
-        "displayName": "Forest Green",
+        "displayName": "Operations Blue",
         "tonalRamp": [
-          "oklch(15.00% 0.06498 174.70)",
-          "oklch(26.43% 0.06498 174.70)",
-          "oklch(37.86% 0.06498 174.70)",
-          "oklch(49.29% 0.06498 174.70)",
-          "oklch(60.71% 0.06498 174.70)",
-          "oklch(72.14% 0.06498 174.70)",
-          "oklch(83.57% 0.06498 174.70)",
-          "oklch(95.00% 0.06498 174.70)"
+          "oklch(15.00% 0.23479 262.72)",
+          "oklch(26.43% 0.23479 262.72)",
+          "oklch(37.86% 0.23479 262.72)",
+          "oklch(49.29% 0.23479 262.72)",
+          "oklch(60.71% 0.23479 262.72)",
+          "oklch(72.14% 0.23479 262.72)",
+          "oklch(83.57% 0.23479 262.72)",
+          "oklch(95.00% 0.23479 262.72)"
         ]
       },
       "primary-foreground": {
@@ -78,114 +78,119 @@
         "role": "neutral",
         "displayName": "Mist",
         "tonalRamp": [
-          "oklch(15.00% 0.00419 236.50)",
-          "oklch(26.43% 0.00419 236.50)",
-          "oklch(37.86% 0.00419 236.50)",
-          "oklch(49.29% 0.00419 236.50)",
-          "oklch(60.71% 0.00419 236.50)",
-          "oklch(72.14% 0.00419 236.50)",
-          "oklch(83.57% 0.00419 236.50)",
-          "oklch(95.00% 0.00419 236.50)"
+          "oklch(15.00% 0.00859 247.92)",
+          "oklch(26.43% 0.00859 247.92)",
+          "oklch(37.86% 0.00859 247.92)",
+          "oklch(49.29% 0.00859 247.92)",
+          "oklch(60.71% 0.00859 247.92)",
+          "oklch(72.14% 0.00859 247.92)",
+          "oklch(83.57% 0.00859 247.92)",
+          "oklch(95.00% 0.00859 247.92)"
         ]
       },
       "muted-foreground": {
         "role": "neutral",
         "displayName": "Slate",
         "tonalRamp": [
-          "oklch(15.00% 0.02178 243.29)",
-          "oklch(26.43% 0.02178 243.29)",
-          "oklch(37.86% 0.02178 243.29)",
-          "oklch(49.29% 0.02178 243.29)",
-          "oklch(60.71% 0.02178 243.29)",
-          "oklch(72.14% 0.02178 243.29)",
-          "oklch(83.57% 0.02178 243.29)",
-          "oklch(95.00% 0.02178 243.29)"
+          "oklch(15.00% 0.04204 258.36)",
+          "oklch(26.43% 0.04204 258.36)",
+          "oklch(37.86% 0.04204 258.36)",
+          "oklch(49.29% 0.04204 258.36)",
+          "oklch(60.71% 0.04204 258.36)",
+          "oklch(72.14% 0.04204 258.36)",
+          "oklch(83.57% 0.04204 258.36)",
+          "oklch(95.00% 0.04204 258.36)"
         ]
       },
       "accent": {
         "role": "primary",
-        "displayName": "Pale Sage",
+        "displayName": "Pale Blue Grey",
         "tonalRamp": [
-          "oklch(15.00% 0.01283 172.36)",
-          "oklch(26.43% 0.01283 172.36)",
-          "oklch(37.86% 0.01283 172.36)",
-          "oklch(49.29% 0.01283 172.36)",
-          "oklch(60.71% 0.01283 172.36)",
-          "oklch(72.14% 0.01283 172.36)",
-          "oklch(83.57% 0.01283 172.36)",
-          "oklch(95.00% 0.01283 172.36)"
+          "oklch(15.00% 0.01325 262.38)",
+          "oklch(26.43% 0.01325 262.38)",
+          "oklch(37.86% 0.01325 262.38)",
+          "oklch(49.29% 0.01325 262.38)",
+          "oklch(60.71% 0.01325 262.38)",
+          "oklch(72.14% 0.01325 262.38)",
+          "oklch(83.57% 0.01325 262.38)",
+          "oklch(95.00% 0.01325 262.38)"
         ]
       },
       "destructive": {
         "role": "neutral",
         "displayName": "Alert Red",
         "tonalRamp": [
-          "oklch(15.00% 0.17603 25.65)",
-          "oklch(26.43% 0.17603 25.65)",
-          "oklch(37.86% 0.17603 25.65)",
-          "oklch(49.29% 0.17603 25.65)",
-          "oklch(60.71% 0.17603 25.65)",
-          "oklch(72.14% 0.17603 25.65)",
-          "oklch(83.57% 0.17603 25.65)",
-          "oklch(95.00% 0.17603 25.65)"
+          "oklch(15.00% 0.21516 27.33)",
+          "oklch(26.43% 0.21516 27.33)",
+          "oklch(37.86% 0.21516 27.33)",
+          "oklch(49.29% 0.21516 27.33)",
+          "oklch(60.71% 0.21516 27.33)",
+          "oklch(72.14% 0.21516 27.33)",
+          "oklch(83.57% 0.21516 27.33)",
+          "oklch(95.00% 0.21516 27.33)"
         ]
       },
       "border": {
         "role": "neutral",
         "displayName": "Hairline",
         "tonalRamp": [
-          "oklch(15.00% 0.00848 236.57)",
-          "oklch(26.43% 0.00848 236.57)",
-          "oklch(37.86% 0.00848 236.57)",
-          "oklch(49.29% 0.00848 236.57)",
-          "oklch(60.71% 0.00848 236.57)",
-          "oklch(72.14% 0.00848 236.57)",
-          "oklch(83.57% 0.00848 236.57)",
-          "oklch(95.00% 0.00848 236.57)"
+          "oklch(15.00% 0.00581 264.53)",
+          "oklch(26.43% 0.00581 264.53)",
+          "oklch(37.86% 0.00581 264.53)",
+          "oklch(49.29% 0.00581 264.53)",
+          "oklch(60.71% 0.00581 264.53)",
+          "oklch(72.14% 0.00581 264.53)",
+          "oklch(83.57% 0.00581 264.53)",
+          "oklch(95.00% 0.00581 264.53)"
         ]
       }
     },
     "themeOverrides": {
       "dark": {
-        "background": "#131a1e",
-        "foreground": "#edf2f4",
-        "card": "#1b252b",
-        "primary": "#9ed6bd",
-        "primary-foreground": "#14241c",
-        "muted": "#29343b",
-        "muted-foreground": "#acb8bf",
-        "accent": "#28453c",
-        "destructive": "#ff9090",
-        "border": "#39464e"
+        "primary": "#93b8f0",
+        "primary-foreground": "#16213e",
+        "accent": "#123a59",
+        "background": "#0c1422",
+        "foreground": "#f0f5ff",
+        "card": "#192b41",
+        "muted": "#112b44",
+        "muted-foreground": "#b4c5db",
+        "border": "#46617c",
+        "destructive": "#f87171"
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Auth split-panel headline only." },
-      "headline": { "displayName": "Headline", "purpose": "Page titles and dashboard KPI numerals." },
-      "title": { "displayName": "Title", "purpose": "Dialog titles and settings section headings." },
-      "body": { "displayName": "Body", "purpose": "Routine copy, buttons, and table cells." },
-      "label": { "displayName": "Label", "purpose": "Badges, chips, table headers, and helper text." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Auth split-panel headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Shared page titles including Settings; larger auth and dashboard treatments remain local."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Dialog titles and settings section headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Routine copy, buttons, and table cells."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Badges, chips, table headers, and helper text."
+      }
     },
     "shadows": [
       {
-        "name": "xs",
-        "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        "purpose": "Inputs, checkboxes, and outlined buttons."
+        "name": "surface",
+        "value": "0 1px 2px #3741510d, 0 8px 18px #3741511a, inset 0 1px 0 #ffffffbf",
+        "purpose": "Existing soft shell panels, current shell navigation, menus and dialogs; authorization data stays flat."
       },
       {
-        "name": "sm",
-        "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-        "purpose": "Default cards. KPI cards omit this shadow."
-      },
-      {
-        "name": "md",
-        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
-        "purpose": "Select and dropdown menus."
-      },
-      {
-        "name": "lg",
-        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
-        "purpose": "Dialogs and confirmations."
+        "name": "glass",
+        "value": "0 12px 32px rgb(22 42 80 / 0.14)",
+        "purpose": "Floating layers with opaque accessibility fallback."
       }
     ],
     "motion": [
@@ -198,9 +203,18 @@
         "name": "reduced-motion",
         "value": "0.01ms",
         "purpose": "Reduced-motion override."
+      },
+      {
+        "name": "control-transition",
+        "value": "160ms ease",
+        "purpose": "Control background, border and text transitions."
       }
     ],
     "breakpoints": [
+      {
+        "name": "details-stack",
+        "value": "450px"
+      },
       {
         "name": "sm",
         "value": "640px"
@@ -210,8 +224,20 @@
         "value": "768px"
       },
       {
-        "name": "lg",
+        "name": "settings-stack",
+        "value": "800px"
+      },
+      {
+        "name": "fixed-sidebar",
         "value": "1024px"
+      },
+      {
+        "name": "expanded-sidebar",
+        "value": "1280px"
+      },
+      {
+        "name": "wide-sidebar",
+        "value": "1440px"
       }
     ]
   },
@@ -222,42 +248,42 @@
       "refersTo": "button-primary",
       "description": "Implemented primary button variant.",
       "html": "<button class=\"ds-control ds-button\">Save user</button>",
-      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px Arial,Helvetica,sans-serif;height:36px;padding:8px 16px;border-radius:var(--radius-md,.5rem);border:0;background:var(--primary,#245e50);color:var(--primary-foreground,#ffffff);cursor:pointer}.ds-button:hover{background:color-mix(in srgb,var(--primary,#245e50) 90%,transparent)}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px \"Source Sans 3\",sans-serif;height:36px;padding:8px 16px;border-radius:10px;border:0;background:var(--primary,#044ce2);color:var(--primary-foreground,#ffffff);cursor:pointer}.ds-button:hover{background:var(--primary-hover,#063586)}.ds-control:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}@media(max-width:639px),(pointer:coarse){.ds-button,.ds-input{min-height:44px}}"
     },
     {
       "name": "outline button",
       "kind": "button",
       "description": "Implemented outline button variant.",
       "html": "<button class=\"ds-control ds-button\">outline</button>",
-      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px Arial,Helvetica,sans-serif;height:36px;padding:8px 16px;border-radius:var(--radius-md,.5rem);border:1px solid var(--border,#dce2e6);background:var(--background,#f8f9fb);color:var(--foreground,#182329);cursor:pointer}.ds-button:hover{background:var(--accent,#e4efeb)}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px \"Source Sans 3\",sans-serif;height:36px;padding:8px 16px;border-radius:10px;border:1px solid var(--border,#e5e7eb);background:var(--background,#f8f9fb);color:var(--foreground,#063586);cursor:pointer}.ds-button:hover{background:var(--accent,#e9eef7)}.ds-control:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}@media(max-width:639px),(pointer:coarse){.ds-button,.ds-input{min-height:44px}}"
     },
     {
       "name": "ghost button",
       "kind": "button",
       "description": "Implemented ghost button variant.",
       "html": "<button class=\"ds-control ds-button\">ghost</button>",
-      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px Arial,Helvetica,sans-serif;height:36px;padding:8px 16px;border-radius:var(--radius-md,.5rem);border:0;background:transparent;color:var(--foreground,#182329);cursor:pointer}.ds-button:hover{background:var(--accent,#e4efeb)}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px \"Source Sans 3\",sans-serif;height:36px;padding:8px 16px;border-radius:10px;border:0;background:transparent;color:var(--foreground,#063586);cursor:pointer}.ds-button:hover{background:var(--accent,#e9eef7)}.ds-control:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}@media(max-width:639px),(pointer:coarse){.ds-button,.ds-input{min-height:44px}}"
     },
     {
       "name": "secondary button",
       "kind": "button",
       "description": "Implemented secondary button variant.",
       "html": "<button class=\"ds-control ds-button\">secondary</button>",
-      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px Arial,Helvetica,sans-serif;height:36px;padding:8px 16px;border-radius:var(--radius-md,.5rem);border:0;background:var(--muted,#eef1f3);color:var(--foreground,#182329);cursor:pointer}.ds-button:hover{background:color-mix(in srgb,var(--muted,#eef1f3) 90%,transparent)}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px \"Source Sans 3\",sans-serif;height:36px;padding:8px 16px;border-radius:10px;border:0;background:var(--muted,#edf2f7);color:var(--foreground,#063586);cursor:pointer}.ds-button:hover{background:color-mix(in srgb,var(--muted,#edf2f7) 90%,transparent)}.ds-control:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}@media(max-width:639px),(pointer:coarse){.ds-button,.ds-input{min-height:44px}}"
     },
     {
       "name": "destructive button",
       "kind": "button",
       "description": "Implemented destructive button variant.",
       "html": "<button class=\"ds-control ds-button\">destructive</button>",
-      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px Arial,Helvetica,sans-serif;height:36px;padding:8px 16px;border-radius:var(--radius-md,.5rem);border:0;background:var(--destructive,#bb3030);color:var(--primary-foreground,#ffffff);cursor:pointer}.ds-button:hover{background:color-mix(in srgb,var(--destructive,#bb3030) 90%,transparent)}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px \"Source Sans 3\",sans-serif;height:36px;padding:8px 16px;border-radius:10px;border:0;background:var(--destructive,#dc2626);color:var(--primary-foreground,#ffffff);cursor:pointer}.ds-button:hover{background:color-mix(in srgb,var(--destructive,#dc2626) 90%,transparent)}.ds-control:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}@media(max-width:639px),(pointer:coarse){.ds-button,.ds-input{min-height:44px}}"
     },
     {
       "name": "link button",
       "kind": "button",
       "description": "Implemented link button variant.",
       "html": "<button class=\"ds-control ds-button\">link</button>",
-      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px Arial,Helvetica,sans-serif;height:36px;padding:8px 16px;border-radius:var(--radius-md,.5rem);border:0;background:transparent;color:var(--primary,#245e50);cursor:pointer}.ds-button:hover{text-decoration:underline}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;font:500 14px \"Source Sans 3\",sans-serif;height:36px;padding:8px 16px;border-radius:10px;border:0;background:transparent;color:var(--primary,#044ce2);cursor:pointer}.ds-button:hover{text-decoration:underline}.ds-control:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}@media(max-width:639px),(pointer:coarse){.ds-button,.ds-input{min-height:44px}}"
     },
     {
       "name": "Text field",
@@ -265,15 +291,15 @@
       "refersTo": "input",
       "description": "Labelled input with focus and validation states.",
       "html": "<label class=\"ds-label\" for=\"ds-name\">Name</label><input id=\"ds-name\" class=\"ds-control ds-input\" placeholder=\"Full name\">",
-      "css": ".ds-label{display:block;margin-bottom:8px;font:500 14px Arial,Helvetica,sans-serif;color:var(--foreground,#182329)}.ds-input{height:36px;padding:4px 12px;border:1px solid var(--border,#dce2e6);border-radius:var(--radius-md,.5rem);background:transparent;color:var(--foreground,#182329);font:14px Arial,Helvetica,sans-serif;box-shadow:0 1px 2px #0000000d}.ds-input::placeholder{color:var(--muted-foreground,#58646e)}.ds-input:focus-visible{border-color:var(--primary,#245e50);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary,#245e50) 50%,transparent)}.ds-input[aria-invalid=true]{border-color:var(--destructive,#bb3030)}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "css": ".ds-label{display:block;margin-bottom:8px;font:500 14px \"Source Sans 3\",sans-serif;color:var(--foreground,#063586)}.ds-input{height:36px;padding:4px 12px;border:1px solid var(--border,#e5e7eb);border-radius:10px;background:var(--card,#ffffff);color:var(--foreground,#063586);font:14px \"Source Sans 3\",sans-serif;box-shadow:none}.ds-input::placeholder{color:var(--muted-foreground,#65758d)}.ds-input:focus-visible{border-color:var(--primary,#044ce2);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary,#044ce2) 50%,transparent)}.ds-input[aria-invalid=true]{border-color:var(--destructive,#dc2626)}.ds-control:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}@media(max-width:639px),(pointer:coarse){.ds-button,.ds-input{min-height:44px}}"
     },
     {
-      "name": "Navigation",
+      "name": "Settings secondary navigation",
       "kind": "nav",
       "refersTo": "navigation",
-      "description": "Current route in the sidebar.",
-      "html": "<a href=\"#users\" aria-current=\"page\" class=\"ds-control ds-nav\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"/></svg>Users</a>",
-      "css": ".ds-nav{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-lg,.75rem);background:var(--accent,#e4efeb);color:var(--primary,#245e50);font:500 14px/20px Arial,Helvetica,sans-serif;text-decoration:none}.ds-nav:hover{background:var(--muted,#eef1f3)}.ds-control:focus-visible{outline:2px solid var(--primary,#245e50);outline-offset:3px}.ds-control:disabled{opacity:.5;pointer-events:none}"
+      "description": "Permitted Settings routes, with current entry marked aria-current.",
+      "html": "<a class=\"ds-nav\" aria-current=\"page\" href=\"#roles\">Roles and permissions</a>",
+      "css": ".ds-nav{display:block;padding:10px 12px;border-radius:8px;background:var(--accent,#e9eef7);color:var(--primary,#044ce2);font:600 14px/20px \"Source Sans 3\",sans-serif;text-decoration:none}.ds-nav:hover{background:var(--muted,#edf2f7)}.ds-nav:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}"
     },
     {
       "name": "Active status",
@@ -281,7 +307,7 @@
       "refersTo": "status",
       "description": "Noninteractive membership label.",
       "html": "<span class=\"ds-status\">Active</span>",
-      "css": ".ds-status{display:inline-flex;padding:2px 8px;border:1px solid transparent;border-radius:9999px;background:var(--accent,#e4efeb);color:var(--primary,#245e50);font:500 12px/16px Arial,Helvetica,sans-serif}"
+      "css": ".ds-status{display:inline-flex;padding:2px 8px;border:1px solid transparent;border-radius:9999px;background:var(--accent,#e9eef7);color:var(--primary,#044ce2);font:500 12px/16px \"Source Sans 3\",sans-serif}"
     },
     {
       "name": "Card",
@@ -289,7 +315,7 @@
       "refersTo": "card",
       "description": "Bordered content surface.",
       "html": "<div class=\"ds-card\">Workspace preferences</div>",
-      "css": ".ds-card{padding:24px;border:1px solid var(--border,#dce2e6);border-radius:var(--radius-xl,1rem);background:var(--card,#ffffff);color:var(--foreground,#182329);font:600 16px Arial,Helvetica,sans-serif;box-shadow:0 1px 3px #0000001a,0 1px 2px -1px #0000001a}"
+      "css": ".ds-card{padding:24px;border:1px solid var(--border,#e5e7eb);border-radius:var(--radius-xl,1rem);background:var(--card,#ffffff);color:var(--foreground,#063586);font:600 16px \"Source Sans 3\",sans-serif;box-shadow:none}"
     },
     {
       "name": "Demo chip",
@@ -297,36 +323,51 @@
       "refersTo": "demo-chip",
       "description": "Header label when NEXT_PUBLIC_DEMO_MODE is on.",
       "html": "<span class=\"ds-demo\">Demo</span>",
-      "css": ".ds-demo{display:inline-flex;padding:4px 8px;border-radius:var(--radius-md,.5rem);background:var(--accent,#e4efeb);color:var(--primary,#245e50);font:500 12px/16px Arial,Helvetica,sans-serif}"
+      "css": ".ds-demo{display:inline-flex;padding:4px 8px;border-radius:var(--radius-md,.5rem);background:var(--accent,#e9eef7);color:var(--primary,#044ce2);font:500 12px/16px \"Source Sans 3\",sans-serif}"
+    },
+    {
+      "name": "Protected role status",
+      "kind": "chip",
+      "refersTo": "access-status",
+      "description": "Readable neutral authorization state.",
+      "html": "<span class=\"ds-access-status\">Protected</span>",
+      "css": ".ds-access-status{display:inline-block;padding:4px 8px;border-radius:6px;background:var(--muted,#edf2f7);color:var(--foreground,#063586);font:12px \"Source Sans 3\",sans-serif;overflow-wrap:anywhere}"
+    },
+    {
+      "name": "Permission matrix",
+      "kind": "custom",
+      "description": "Locally scrolling catalog permissions with labelled checkbox cells.",
+      "html": "<div class=\"ds-matrix\" tabindex=\"0\" role=\"region\" aria-label=\"Permissions\"><table><thead><tr><th scope=\"col\">Resource</th><th scope=\"col\">Read</th></tr></thead><tbody><tr><th scope=\"row\">Roles</th><td><input type=\"checkbox\" checked aria-label=\"Read roles\"></td></tr></tbody></table></div>",
+      "css": ".ds-matrix{overflow-x:auto;max-width:100%;font:13px \"Source Sans 3\",sans-serif;color:var(--foreground,#063586)}.ds-matrix table{width:100%;border-collapse:collapse}.ds-matrix th,.ds-matrix td{padding:12px 10px;border-bottom:1px solid var(--border,#e5e7eb);text-align:center}.ds-matrix th:first-child{text-align:left}.ds-matrix thead{background:var(--muted,#edf2f7)}.ds-matrix input{accent-color:var(--primary,#044ce2)}.ds-matrix input:focus-visible,.ds-matrix:focus-visible{outline:2px solid var(--primary,#044ce2);outline-offset:3px}.ds-matrix input:disabled{opacity:.5}"
     }
   ],
   "narrative": {
-    "northStar": "The Clear Workspace",
-    "overview": "A clean, modern enterprise workspace for finding members, editing access, and adjusting preferences. The explicitly selected minimal direction favors readable records, restrained color, and familiar navigation. Mode: Operate.\n\nNeutral bordered surfaces support routine desktop work. Auth uses a split brand panel; the signed-in shell uses a fixed sidebar, header, and centered main column. A mobile navigation drawer and locally scrolling tables preserve access to the same tasks. System sans-serif avoids external font requests in this offline starter.\n\nProduct copy lives in `messages/` (en, fr, de, vi). This file is visual only. Demo metrics and demo sessions stay labelled.",
+    "northStar": "The Clear Warehouse Board",
+    "overview": "A clean, modern enterprise workspace for APA Nano warehouse operations: shift pulse, movements, and exceptions first; members and preferences as supporting tools. Mode: Operate.\n\nNeutral bordered surfaces support routine desktop work. Auth uses a full-bleed warehouse scene with a centered glass card and blue actions. The signed-in shell uses a fixed sidebar, header, and centered main column. Dashboard is a split board: live pulse strip, today’s movements, and attention/quick actions.\n\nProduct copy lives in `messages/` (en, fr, de, vi). This file is visual only. Demo metrics and demo sessions stay labelled.",
     "keyCharacteristics": [
-      "Restrained forest-green actions and neutral surfaces.",
+      "Restrained operations-blue actions and neutral surfaces.",
       "Compact hierarchy with readable table content.",
       "Desktop-first structure with mobile access to the same tasks."
     ],
     "rules": [
       {
         "name": "The Purposeful Accent Rule",
-        "body": "Use forest green for primary actions, current navigation, and active status; keep secondary information neutral.",
+        "body": "Use operations blue for primary actions, current navigation, and active status; keep secondary information neutral.",
+        "section": "colors"
+      },
+      {
+        "name": "The Auth Field Rule",
+        "body": "Preserve the warehouse scene and centered auth form; routine Settings work stays on neutral card surfaces.",
         "section": "colors"
       },
       {
         "name": "The Local Overflow Rule",
-        "body": "Keep wide records inside their own keyboard-focusable scrolling region so the page remains usable on small screens.",
+        "body": "Keep wide records inside their own keyboard-focusable scrolling region (`overflow-x-auto`, `tabIndex={0}`) so the page remains usable on small screens.",
         "section": "layout"
       },
       {
-        "name": "The Auth Field Rule",
-        "body": "Forest green may fill the left auth panel at large breakpoints. Everywhere else it stays on actions, current nav, icons, and status — not on page backgrounds.",
-        "section": "colors"
-      },
-      {
         "name": "The Border First Rule",
-        "body": "Use borders and surface tones to separate routine content; reserve stronger depth for dialogs.",
+        "body": "Use borders and surface tones to separate routine content; reserve stronger depth for dialogs and menus.",
         "section": "elevation"
       }
     ],

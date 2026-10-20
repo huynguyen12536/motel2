@@ -1,0 +1,202 @@
+.access-settings {
+  min-width: 0;
+}
+.access-settings-layout {
+  display: grid;
+  grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.access-settings-nav {
+  display: grid;
+  gap: 4px;
+}
+.access-settings-nav a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.access-settings-nav a:hover {
+  background: var(--muted);
+}
+.access-settings-nav a[aria-current="page"] {
+  color: var(--primary);
+  background: var(--accent);
+  font-weight: 600;
+}
+.access-settings-main {
+  min-width: 0;
+}
+.access-settings-main--general {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.access-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.access-toolbar > input {
+  flex: 1 1 180px;
+  max-width: 360px;
+}
+.access-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.access-form {
+  display: grid;
+  gap: 18px;
+}
+.access-form > div > label {
+  margin-bottom: 8px;
+}
+.access-feedback {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  margin-block: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+}
+.access-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.access-matrix {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.access-matrix table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.access-matrix th,
+.access-matrix td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.access-matrix th:first-child {
+  text-align: left;
+}
+.access-matrix thead {
+  background: var(--muted);
+}
+.access-role-options {
+  display: grid;
+  gap: 8px;
+  max-height: 46dvh;
+  overflow-y: auto;
+}
+.access-role-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.access-role-option small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+.access-details {
+  display: grid;
+  gap: 0;
+  margin-bottom: 24px;
+}
+.access-details > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(0, 2fr);
+  gap: 20px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.access-details dt {
+  color: var(--muted-foreground);
+}
+.access-details dd {
+  overflow-wrap: anywhere;
+}
+.access-section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.access-select {
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 14px;
+  max-width: 100%;
+}
+.access-metric-group {
+  margin-top: 28px;
+}
+.access-metric-group li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-block: 12px;
+  font-size: 14px;
+}
+@media (max-width: 800px) {
+  .access-settings-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .access-settings-nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .access-settings-main--general {
+    padding: 16px;
+  }
+  .access-toolbar > input {
+    max-width: none;
+  }
+}
+@media (max-width: 450px) {
+  .access-details > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+  .access-toolbar > button {
+    flex: 1 1 auto;
+  }
+}
+@media (max-width: 1023px) {
+  .wms-shell--settings .wms-shell__main {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    transition: none;
+  }
+}

@@ -16,6 +16,7 @@ import { useUiStore } from "@/stores/ui.store";
 import { usePermission } from "@/hooks/use-permission";
 import { PERMISSIONS } from "@/config/permissions";
 import { PageHeader } from "@/components/shared/page-header/page-header";
+import { PageSectionNav } from "@/components/shared/layout/page-section-nav";
 import { LoadingState } from "@/components/shared/loading/loading-state";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,7 +39,7 @@ function WorkspaceForm({ settings }: { settings: WorkspaceSettings }) {
   });
   return (
     <form
-      className="space-y-4"
+      className="wms-workspace-form"
       onSubmit={form.handleSubmit((values) =>
         mutation.mutate(values, {
           onSuccess: () => toast.success(t("settingsSaved")),
@@ -46,6 +47,7 @@ function WorkspaceForm({ settings }: { settings: WorkspaceSettings }) {
         }),
       )}
     >
+      <div className="space-y-2">
       <Label htmlFor="workspace-name">{t("workspaceName")}</Label>
       <Input
         id="workspace-name"
@@ -57,6 +59,7 @@ function WorkspaceForm({ settings }: { settings: WorkspaceSettings }) {
       <p id="workspace-error" className="text-xs text-destructive">
         {form.formState.errors.workspaceName && t(form.formState.errors.workspaceName.message ?? "invalid")}
       </p>
+      </div>
       {can(PERMISSIONS.SETTINGS.UPDATE) && (
         <Button type="submit" disabled={mutation.isPending}>
           {t(mutation.isPending ? "saving" : "saveChanges")}
@@ -79,8 +82,13 @@ export function SettingsPanel() {
         title={t("settings")}
         description={t("settingsDescription")}
       />
-      <div className="max-w-3xl divide-y rounded-xl border bg-card px-6 md:px-8">
-        <section className="py-7">
+      <div className="wms-settings-layout">
+        <PageSectionNav label={t("settings")} vertical items={[
+          { id: "settings-general", label: t("general") },
+          { id: "settings-preferences", label: t("preferences") },
+        ]} />
+        <div className="wms-settings-content">
+        <section id="settings-general">
           <h2 className="mb-5 text-lg font-semibold">{t("general")}</h2>
           {query.isPending ? (
             <LoadingState />
@@ -95,9 +103,9 @@ export function SettingsPanel() {
             <WorkspaceForm settings={query.data} />
           )}
         </section>
-        <section className="space-y-6 py-7">
+        <section id="settings-preferences" className="space-y-6">
           <h2 className="text-lg font-semibold">{t("preferences")}</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="wms-preference-row">
             <Label htmlFor="locale">{t("language")}</Label>
             <Select
               value={locale}
@@ -125,7 +133,7 @@ export function SettingsPanel() {
               </SelectContent>
             </Select>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="wms-preference-row">
             <Label htmlFor="theme">{t("appearance")}</Label>
             <Select value={theme} onValueChange={setTheme}>
               <SelectTrigger id="theme" className="w-full">
@@ -152,6 +160,7 @@ export function SettingsPanel() {
             {t("preferencesNote")}
           </p>
         </section>
+        </div>
       </div>
     </>
   );

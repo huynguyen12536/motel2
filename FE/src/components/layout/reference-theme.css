@@ -1,0 +1,162 @@
+/* COMPTA's measured palette and public background assets, requested by the user. */
+.wms-shell.compta-theme { background: var(--background); }
+.wms-shell.compta-theme .wms-shell__content { position: relative; background: var(--background); }
+.wms-shell.compta-theme .wms-shell__content::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("/images/compta-workspace-bg.png") center / cover no-repeat;
+  opacity: 0.72;
+}
+.wms-shell.compta-theme [data-slot="page-frame"] { background: transparent; }
+.wms-shell.compta-theme .wms-side { background: var(--background); color: var(--foreground); }
+.wms-shell.compta-theme .wms-side::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("/images/compta-nav-rail.png") center / cover no-repeat;
+  opacity: 0.78;
+}
+.wms-shell.compta-theme .wms-side > * { position: relative; }
+.wms-shell.compta-theme .wms-side__brand { border-color: var(--border); }
+.wms-shell.compta-theme .wms-side__brand-title { color: var(--foreground); }
+.wms-shell.compta-theme :is(.wms-side__brand-sub, .wms-side__group-btn, .wms-side__group-label, .wms-side__item, .wms-side__item svg) { color: var(--muted-foreground); }
+.wms-shell.compta-theme .wms-side__item:hover { background: rgb(255 255 255 / 0.6); color: var(--primary); }
+.wms-shell.compta-theme .wms-side__item--active,
+.wms-shell.compta-theme .wms-side__item--active:hover {
+  border-color: var(--soft-border);
+  background: var(--soft-surface-strong);
+  color: var(--primary);
+  box-shadow: var(--shadow-surface);
+}
+.wms-shell.compta-theme .wms-side__item--active svg { color: var(--primary); }
+.wms-shell.compta-theme .wms-topbar {
+  border-color: #d1d5db;
+  background: color-mix(in srgb, var(--background) 94%, transparent);
+}
+.wms-shell.compta-theme :is(.wms-topbar__search, .wms-circle-btn) {
+  border-color: var(--soft-border);
+  background: var(--soft-surface-strong);
+  color: var(--foreground);
+  box-shadow: inset 0 1px 0 #ffffffbf;
+}
+.wms-shell.compta-theme :is(.wms-account-trigger__avatar, .wms-account-card__avatar) { background: #e4edff; color: #044ce2; }
+.wms-shell.compta-theme :is([data-slot="record-panel"], .wms-settings-content > section, .wms-section-nav--vertical, .wms-wh-detail, .wms-wh-tree, .wms-wh-table-card, .wms-wh-kpi) {
+  border: 1px solid var(--soft-border);
+  border-radius: 14px;
+  background: var(--soft-surface);
+  box-shadow: var(--shadow-surface);
+}
+.wms-shell.compta-theme [data-slot="table-container"] { background: transparent; }
+.wms-shell.compta-theme :is([data-slot="table-header"], .wms-wh-table thead) { background: var(--muted); }
+.wms-shell.compta-theme .wms-dash :is(.wms-card, .wms-card--analytics:first-child, .wms-kpi) {
+  border: 1px solid var(--soft-border);
+  border-radius: 14px;
+  background: var(--soft-surface);
+  box-shadow: inset 0 1px 0 #ffffffbf;
+}
+.wms-shell.compta-theme .wms-dash :is(.wms-card:hover, .wms-kpi:hover) {
+  border-color: var(--soft-border);
+  background: var(--soft-surface-strong);
+  box-shadow: var(--shadow-surface);
+}
+.wms-shell.compta-theme .wms-dash :is(.wms-page-title, .wms-kpi__value) { color: var(--foreground); text-shadow: none; }
+.wms-shell.compta-theme .wms-dash .wms-kpi-grid { background: transparent; box-shadow: none; }
+.wms-shell.compta-theme .wms-dash .wms-card__head { border-color: transparent; }
+.wms-shell.compta-theme .wms-dash .wms-card__title { color: #26364d; font-size: 14px; }
+.wms-shell.compta-theme .wms-dash .wms-chart--framed { border: 0; background: transparent; }
+.wms-shell.compta-theme .wms-dash :is(.wms-page-date, .wms-page-period, .wms-range-select__control) {
+  border-color: var(--soft-border);
+  background-color: rgb(255 255 255 / 0.72);
+  color: var(--foreground);
+  box-shadow: inset 0 1px 0 #ffffffbf;
+}
+.wms-shell.compta-theme :is(.wms-section-nav a[aria-current], .wms-wh-tabs__btn--active) {
+  border-color: var(--soft-border);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.72);
+  color: var(--primary);
+  box-shadow: 0 1px 3px #3741510d;
+}
+.wms-shell.compta-theme .wms-section-nav a { border-radius: 999px; }
+.wms-shell.compta-theme .wms-settings-layout .wms-section-nav a { border-radius: 10px; }
+.wms-shell.compta-theme :is([data-slot="input"], [data-slot="select-trigger"]) {
+  background: var(--card);
+  border-radius: 10px;
+}
+.dark .wms-shell.compta-theme :is(.wms-section-nav a[aria-current], .wms-wh-tabs__btn--active) {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+/* Revenue chart: narrow navy columns, turquoise latest period, segmented filters. */
+.wms-reference-chart__head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.wms-reference-chart__value { color: var(--foreground); font-size: 20px; line-height: 1.2; }
+.wms-reference-chart__caption { color: var(--muted-foreground); font-size: 11px; }
+.wms-chart-demo { border-radius: 999px; background: #edf2f7; padding: 2px 6px; color: #65758d; font-size: 9px; font-weight: 600; }
+.wms-reference-chart__controls { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 12px 20px; }
+.wms-segmented { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 999px; background: rgb(255 255 255 / 0.72); }
+.wms-segmented button { min-height: 28px; padding: 3px 9px; border: 0; border-radius: 999px; color: var(--muted-foreground); background: transparent; font: inherit; font-size: 11px; cursor: pointer; }
+.wms-segmented button[aria-pressed="true"] { background: var(--card); color: var(--primary); box-shadow: 0 1px 3px #3741511a; }
+.wms-reference-bars { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 10px; padding: 8px 0 28px; height: 240px; }
+.wms-reference-bars__axis { display: flex; flex-direction: column; justify-content: space-between; color: var(--muted-foreground); font-size: 10px; text-align: right; }
+.wms-reference-bars__plot { position: relative; min-width: 0; }
+.wms-reference-bars__grid { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+.wms-reference-bars__grid span { border-top: 1px solid #dce2e9; }
+.wms-reference-bars__columns { position: absolute; inset: 0; display: grid; gap: 6px; }
+.wms-reference-bars__column { position: relative; display: flex; align-items: flex-end; justify-content: center; min-width: 0; }
+.wms-reference-bars__bar { position: relative; width: 100%; max-width: 18px; padding: 0; border: 0; border-radius: 4px 4px 2px 2px; background: var(--chart-1); cursor: default; }
+.wms-reference-bars__bar[data-current] { background: #1fd2d8; }
+.wms-reference-bars__bar:hover, .wms-reference-bars__bar:focus-visible { filter: brightness(1.1); z-index: 2; }
+.wms-reference-bars__label { position: absolute; top: calc(100% + 10px); color: var(--muted-foreground); font-size: 9px; white-space: nowrap; }
+.wms-reference-bars__label[data-current] { color: #138b92; font-weight: 600; }
+.wms-reference-bars__tooltip { position: absolute; bottom: calc(100% + 10px); left: 50%; z-index: 10; padding: 7px 9px; border-radius: 9px; background: #142746; color: #fff; font-size: 10px; white-space: nowrap; transform: translateX(-50%); visibility: hidden; pointer-events: none; }
+.wms-reference-bars__tooltip strong { display: block; margin-top: 4px; }
+.wms-reference-bars__column:first-child .wms-reference-bars__tooltip { left: 0; transform: none; }
+.wms-reference-bars__column:last-child .wms-reference-bars__tooltip { left: auto; right: 0; transform: none; }
+.wms-reference-bars__bar:is(:hover, :focus-visible) .wms-reference-bars__tooltip { visibility: visible; }
+
+/* Business-health radar and distribution ring from the reference dashboard. */
+.wms-reference-health { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; min-width: 0; }
+.wms-reference-health__radar { width: 140px; height: 140px; flex: 0 0 140px; }
+.wms-reference-health__metrics { flex: 1 1 140px; min-width: 0; margin: 0; }
+.wms-reference-health__metrics > div { display: grid; grid-template-columns: 1fr auto; gap: 5px 8px; margin-bottom: 14px; }
+.wms-reference-health__metrics dt { color: var(--muted-foreground); font-size: 11px; }
+.wms-reference-health__metrics dd { margin: 0; color: var(--foreground); font-size: 12px; }
+.wms-reference-health__track { grid-column: 1 / -1; height: 4px; overflow: hidden; border-radius: 999px; background: #dfe5ed; }
+.wms-reference-health__track span { display: block; height: 100%; border-radius: inherit; background: #1fd2d8; }
+.wms-reference-breakdown { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+.wms-reference-breakdown__chart { position: relative; width: 150px; height: 150px; flex: 0 0 150px; }
+.wms-reference-breakdown__center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; pointer-events: none; }
+.wms-reference-breakdown__center strong { color: var(--foreground); font-size: 22px; }
+.wms-reference-breakdown__center span { max-width: 86px; color: var(--muted-foreground); font-size: 10px; text-align: center; }
+.wms-reference-breakdown__legend { flex: 1 1 150px; display: grid; gap: 10px; min-width: 0; margin: 0; padding: 0; list-style: none; }
+.wms-reference-breakdown__legend li { display: grid; grid-template-columns: 6px minmax(0, 1fr) auto; align-items: center; gap: 7px; color: var(--muted-foreground); font-size: 11px; }
+.wms-reference-breakdown__legend strong { color: var(--foreground); font-size: 12px; }
+.wms-reference-breakdown__swatch { width: 6px; height: 6px; border-radius: 50%; }
+
+.dark .wms-shell.compta-theme .wms-shell__content::before,
+.dark .wms-shell.compta-theme .wms-side::before { opacity: 0.06; }
+.dark .wms-shell.compta-theme .wms-dash .wms-card__title { color: var(--foreground); }
+.dark .wms-shell.compta-theme .wms-reference-chart__controls > div { background: var(--muted); }
+.dark .wms-shell.compta-theme .wms-topbar { border-color: var(--border); }
+
+/* Keep text, fields and chart marks legible after legacy dashboard overrides. */
+.dark .wms-shell.compta-theme .wms-dash {
+  --wms-text: var(--foreground); --wms-navy: var(--foreground); --wms-secondary: var(--muted-foreground);
+  --wms-muted: var(--muted-foreground); --wms-card: var(--card); --wms-primary: var(--primary);
+  --wms-border: var(--border); --wms-border-soft: var(--border);
+}
+.dark .wms-shell.compta-theme .wms-dash :is(.wms-page-subtitle, .wms-kpi__label, .wms-card__subtitle, .wms-queue__subtitle, .wms-queue__time) { color: var(--muted-foreground); }
+.dark .wms-shell.compta-theme .wms-dash :is(.wms-queue__title, .wms-table td, .wms-area-zone__name) { color: var(--foreground); }
+.dark .wms-shell.compta-theme .wms-dash :is(.wms-page-date, .wms-page-period, .wms-range-select__control, .wms-segmented, .wms-section-nav a[aria-current]) { background: var(--card); color: var(--foreground); border-color: var(--border); }
+.dark .wms-shell.compta-theme .wms-reference-bars__grid span { border-color: var(--chart-grid); }
+.dark .wms-shell.compta-theme :is(.wms-reference-health__track, .wms-reference-bars__axis) { color: var(--muted-foreground); }
+.dark .wms-shell.compta-theme .wms-reference-health__track { background: var(--border); }
+.dark .wms-shell.compta-theme .wms-chart-demo { background: var(--accent); color: var(--foreground); }
+.dark .wms-shell.compta-theme .wms-segmented button[aria-pressed="true"] { background: var(--accent); color: var(--primary); }
+.wms-shell.compta-theme [data-slot="select-trigger"]:is(.wms-page-period, .wms-range-select__control, .wms-wh-select) { display: inline-flex; background-image: none; min-width: 140px; max-width: 100%; }
+.wms-kpi__value, .wms-reference-chart__value { font-variant-numeric: tabular-nums; }

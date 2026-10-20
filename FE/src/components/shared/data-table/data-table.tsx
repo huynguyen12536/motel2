@@ -26,6 +26,7 @@ export function DataTable<T>({
   total,
   onPageChange,
   pending,
+  label,
 }: {
   data: T[];
   columns: ColumnDef<T>[];
@@ -34,9 +35,11 @@ export function DataTable<T>({
   total: number;
   onPageChange: (page: number) => void;
   pending?: boolean;
+  label?:string;
 }) {
   "use no memo";
   const t = useTranslations();
+  const access=useTranslations("access");
   const compact = useUiStore((state) => state.compact);
   // TanStack Table v8 exposes mutable table methods; this component opts out of compiler memoization.
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -48,10 +51,11 @@ export function DataTable<T>({
   });
   return (
     <div
+      data-slot="data-table"
       className="overflow-hidden rounded-xl border bg-card"
       aria-busy={pending}
     >
-      <Table aria-label={t("allUsers")}>
+      <Table aria-label={label??t("allUsers")}>
         <TableHeader>
           {table.getHeaderGroups().map((group) => (
             <TableRow key={group.id} className="bg-muted/50">
@@ -74,7 +78,7 @@ export function DataTable<T>({
               {row.getVisibleCells().map((cell) => (
                 <TableCell
                   key={cell.id}
-                  className={compact ? "px-5 py-2" : "px-5 py-4"}
+                  className={compact ? "px-4 py-2" : "px-4 py-3"}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
@@ -85,13 +89,13 @@ export function DataTable<T>({
       </Table>
       {!data.length && (
         <EmptyState
-          title={t("noUsers")}
-          description={t("noUsersDescription")}
+          title={label?access("noRecords"):t("noUsers")}
+          description={label?access("emptyHint"):t("noUsersDescription")}
         />
       )}
       <div className="flex flex-wrap items-center justify-between gap-3 border-t px-5 py-4 text-sm">
         <p className="text-muted-foreground">
-          {t("pagination", {
+          {(label?access:t)("pagination", {
             page,
             pages: Math.max(1, Math.ceil(total / pageSize)),
             total,

@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { appConfig } from "../../../config/app.config.js";
-import { logger } from "../../../config/logger.js";
+import { logger } from "../../../../logger/index.js";
 
 export class AppError extends Error {
   constructor(
@@ -42,14 +41,30 @@ export function errorHandler(
     });
     return;
   }
+  if (
+    error &&
+    typeof error === "object" &&
+    "type" in error &&
+    (error.type === "entity.parse.failed" || error.type === "entity.too.large")
+  ) {
+    const large = error.type === "entity.too.large";
+    res
+      .status(large ? 413 : 400)
+      .json({
+        error: {
+          code: large ? "BODY_TOO_LARGE" : "INVALID_JSON",
+          message: large ? "Request body too large" : "Invalid JSON body",
+        },
+      });
+    return;
+  }
 
-  const message = error instanceof Error ? error.message : "Internal server error";
-  logger.error({ err: error }, "Unhandled request error");
+  logger.error({ event: "request.unhandled_error" }, "Unhandled request error");
 
   res.status(500).json({
     error: {
       code: "INTERNAL_ERROR",
-      message: appConfig.isProduction ? "Internal server error" : message,
+      message: "Internal server error",
     },
   });
 }

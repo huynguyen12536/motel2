@@ -9,10 +9,17 @@ async function login(page: Page) {
 test("protected routes, validation, login and logout", async ({ page }) => {
   await page.goto("/users");
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
+  await page
+    .getByRole("button", { name: "Show password", exact: true })
+    .click();
+  await expect(page.getByLabel("Password", { exact: true })).toHaveAttribute(
+    "type",
+    "text",
+  );
+  await page.getByLabel("Email", { exact: true }).clear();
+  await page.getByLabel("Password", { exact: true }).clear();
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
-  await expect(
-    page.getByText("Enter your email or username."),
-  ).toBeVisible();
+  await expect(page.getByText("Enter your email or username.")).toBeVisible();
   await login(page);
   await expect(
     page.getByRole("heading", { name: "Tổng quan kho", exact: true }),
@@ -21,7 +28,7 @@ test("protected routes, validation, login and logout", async ({ page }) => {
     path: "../docs/screenshots/dashboard-desktop.png",
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Nguyễn Văn A", exact: true }).click();
+  await page.getByRole("button", { name: /^Nguyễn Văn A —/ }).click();
   await page.getByRole("menuitem", { name: "Sign out", exact: true }).click();
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
 });
@@ -38,7 +45,9 @@ test("users create, edit, search, delete and empty state", async ({ page }) => {
   await page.getByLabel("Email address").fill("test@example.com");
   await page.getByRole("button", { name: "Save user", exact: true }).click();
   await expect(page.getByText("User saved.", { exact: true })).toBeVisible();
-  await page.getByRole("searchbox").fill("test@example.com");
+  await page
+    .getByRole("searchbox", { name: "Search members…", exact: true })
+    .fill("test@example.com");
   await expect(
     page.getByRole("cell").filter({ hasText: "Test Member" }),
   ).toBeVisible();
@@ -75,9 +84,13 @@ test("language, theme, settings and session reset", async ({ page }) => {
   await page.getByRole("option", { name: "Tối", exact: true }).click();
   await expect(page.locator("html")).toHaveClass(/dark/);
   await page.reload();
+  await expect(page).toHaveURL(/\/settings$/);
+  await expect(page.locator("html")).toHaveClass(/dark/);
+  await page.evaluate(() => sessionStorage.clear());
+  await page.reload();
   await expect(page).toHaveURL(/\/auth\/sign-in$/);
   await expect(
-    page.getByRole("heading", { name: "Sign in", exact: true }),
+    page.getByRole("heading", { name: "Đăng nhập", exact: true }),
   ).toBeVisible();
 });
 test("mobile navigation is usable without page overflow", async ({ page }) => {

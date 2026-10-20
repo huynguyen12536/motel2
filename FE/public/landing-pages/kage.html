@@ -474,7 +474,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   transition:width .35s var(--ease-out), height .35s var(--ease-out), margin .35s var(--ease-out),
              background .35s, border-color .35s, opacity .3s; opacity:0; }
 .cur-dot.act{ width:52px; height:52px; margin:-26px 0 0 -26px; background:rgba(223,231,224,.07); border-color:rgba(223,231,224,.6); }
-@media (hover:hover) and (pointer:fine){ .cur-dot{ opacity:1 } }
+@media (hover:hover) and (pointer:fine){ .cur-dot.is-visible{ opacity:1 } }
 
 /* ============================================================= responsive */
 @media (max-width:1080px){
@@ -2609,6 +2609,22 @@ function buildWarehouseWorld() {
     greenGlow: new THREE.MeshBasicMaterial({ color: hdr(.14, 2.4, .86), toneMapped: false }),
     redGlow: new THREE.MeshBasicMaterial({ color: hdr(2.6, .08, .08), toneMapped: false })
   };
+  const concreteLoader = new THREE.TextureLoader();
+  const concreteTexture = (file, srgb) => {
+    const map = concreteLoader.load('secret-pathways-assets/textures/' + file);
+    map.wrapS = map.wrapT = THREE.RepeatWrapping;
+    map.repeat.set(12, 22);
+    map.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    if (srgb) map.encoding = THREE.sRGBEncoding;
+    return map;
+  };
+  mat.floor.map = concreteTexture('smooth-concrete-diffuse.jpg', true);
+  mat.floor.normalMap = concreteTexture('smooth-concrete-normal.jpg', false);
+  mat.floor.roughnessMap = concreteTexture('smooth-concrete-roughness.jpg', false);
+  mat.floor.normalScale = new THREE.Vector2(.55, .55);
+  mat.floor.color.setHex(0x69717a);
+  mat.floor.roughness = .68;
+  mat.floor.metalness = .04;
   const box = (w, h, d, material, x, y, z, parent) => {
     const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), material);
     m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
@@ -2629,8 +2645,29 @@ function buildWarehouseWorld() {
   [-1, 1].forEach(s => box(.35, 16, 112, mat.steel, s * 31.8, 8, -30));
   for (let z = 12; z > -76; z -= 8) {
     box(63, .18, .22, mat.beam, 0, 14.7, z);
-    const lamp = box(5.6, .06, .42, mat.blueGlow.clone(), 0, 14.35, z - 2);
-    WORLD.statusLights.push(lamp);
+    [-18, -9, 0, 9, 18].forEach((x, li) => {
+      box(4.9, .20, .62, mat.black, x, 14.15, z - 2);
+      box(.07, .7, .07, mat.beam, x - 1.95, 14.5, z - 2);
+      box(.07, .7, .07, mat.beam, x + 1.95, 14.5, z - 2);
+      const lamp = box(4.55, .055, .42, mat.blueGlow.clone(), x, 14.02, z - 2);
+      lamp.material.opacity = .76 + li * .025;
+      WORLD.statusLights.push(lamp);
+    });
+    if (((12 - z) / 8) % 2 === 0) {
+      [-9, 0, 9].forEach(x => {
+        const down = new THREE.SpotLight(0xb8d8ff, 8.5, 22, Math.PI * .23, .62, 1.35);
+        down.position.set(x, 13.9, z - 2);
+        down.target.position.set(x, 0, z - 2);
+        down.castShadow = false;
+        root.add(down); root.add(down.target);
+        const cone = new THREE.Mesh(
+          new THREE.CylinderGeometry(.16, 2.75, 13.2, 18, 1, true),
+          new THREE.MeshBasicMaterial({ color:0x8fc5ff, transparent:true, opacity:.018,
+            blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide })
+        );
+        cone.position.set(x, 7.35, z - 2); root.add(cone);
+      });
+    }
   }
   for (let z = 8; z > -72; z -= 5.5) {
     [-1, 1].forEach(s => box(.13, .035, 3.8, mat.white, s * 4.45, .025, z));
@@ -2717,7 +2754,10 @@ function buildWarehouseWorld() {
     normalizeHeight(forkliftModel, 3.25);
     normalizeHeight(workerModel, 2.05);
     normalizeHeight(aisleModel, 9.4);
-    [[-12.8, -32, Math.PI / 2], [12.8, -32, -Math.PI / 2]].forEach(([x, z, ry]) => {
+    [
+      [-12.7, -10, Math.PI / 2], [-12.7, -34, Math.PI / 2], [-12.7, -58, Math.PI / 2],
+      [12.7, -10, -Math.PI / 2], [12.7, -34, -Math.PI / 2], [12.7, -58, -Math.PI / 2]
+    ].forEach(([x, z, ry]) => {
       const aisle = aisleModel.clone(true);
       aisle.position.x += x; aisle.position.z += z; aisle.rotation.y = ry;
       root.add(aisle);
@@ -4555,9 +4595,10 @@ function wireFocus() {
 function wireCursor() {
   const dot = $('#cursor');
   if (COARSE) { dot.style.display = 'none'; return; }
-  let x = vpW() / 2, y = vpH() / 2, tx2 = x, ty = y;
   addEventListener('pointermove', e => {
-    tx2 = e.clientX; ty = e.clientY;
+    if (e.pointerType === 'touch') return;
+    dot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+    dot.classList.add('is-visible');
     RIG.tmx = (e.clientX / vpW()) * 2 - 1;
     RIG.tmy = -((e.clientY / vpH()) * 2 - 1);
   }, { passive: true });
@@ -4565,11 +4606,12 @@ function wireCursor() {
     el.addEventListener('mouseenter', () => dot.classList.add('act'));
     el.addEventListener('mouseleave', () => dot.classList.remove('act'));
   });
-  (function tick() {
-    x = lerp(x, tx2, .18); y = lerp(y, ty, .18);
-    dot.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
-    requestAnimationFrame(tick);
-  })();
+  const hide = () => dot.classList.remove('is-visible', 'act');
+  document.documentElement.addEventListener('pointerleave', hide);
+  addEventListener('blur', hide);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) hide();
+  });
 }
 
 function makeGrain() {

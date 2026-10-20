@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { getWarehouseModel } from "@/features/warehouse/config/warehouse-models";
 import { warehouseZones } from "@/features/warehouse/mocks/warehouse.mock";
 import { WarehouseScene } from "@/features/warehouse/3d/warehouse-scene";
+import type { ViewPlane } from "@/features/warehouse/3d/camera-controller";
 import { ViewerToolbar } from "@/features/warehouse/3d/viewer-toolbar";
 import { ModelPlaceholder } from "@/features/warehouse/3d/model-placeholder";
 import type { Warehouse3DModelConfig } from "@/features/warehouse/types/warehouse.types";
@@ -26,7 +27,9 @@ export function WarehouseViewer({
     [warehouseId],
   );
   const [resetToken, setResetToken] = useState(0);
-  const [floor, setFloor] = useState("1F");
+  const [zoomToken, setZoomToken] = useState(0);
+  const [floor, setFloor] = useState("ALL");
+  const [viewPlane, setViewPlane] = useState<ViewPlane>("3d");
 
   const cameraGoal = useMemo(() => {
     if (!selectedZoneId) return null;
@@ -61,9 +64,13 @@ export function WarehouseViewer({
       onSelectZone={onSelectZone}
       cameraGoal={cameraGoal}
       resetToken={resetToken}
+      zoomToken={zoomToken}
       onReset={() => setResetToken((token) => token + 1)}
+      onZoom={() => setZoomToken((token) => token + 1)}
       floor={floor}
       onFloorChange={setFloor}
+      viewPlane={viewPlane}
+      onViewPlane={setViewPlane}
     />
   );
 }
@@ -76,9 +83,13 @@ function ViewerShell({
   onSelectZone,
   cameraGoal,
   resetToken,
+  zoomToken,
   onReset,
+  onZoom,
   floor,
   onFloorChange,
+  viewPlane,
+  onViewPlane,
 }: {
   model: Warehouse3DModelConfig;
   warehouseName: string;
@@ -90,9 +101,13 @@ function ViewerShell({
     target: [number, number, number];
   } | null;
   resetToken: number;
+  zoomToken: number;
   onReset: () => void;
+  onZoom: () => void;
   floor: string;
   onFloorChange: (floor: string) => void;
+  viewPlane: ViewPlane;
+  onViewPlane: (plane: ViewPlane) => void;
 }) {
   const [loadError, setLoadError] = useState(false);
   const hasGlb = Boolean(model.glbUrl) && !loadError;
@@ -119,33 +134,40 @@ function ViewerShell({
       <div className="wms-wh-viewer__stage">
         <ViewerToolbar
           onReset={onReset}
+          onZoom={onZoom}
           onFit={onReset}
           floorsEnabled={floorsEnabled}
+          floors={model.floorMappings ? Object.keys(model.floorMappings).reverse() : []}
           floor={floor}
           onFloorChange={onFloorChange}
+          viewPlane={viewPlane}
+          onViewPlane={onViewPlane}
         />
 
         {hasGlb ? (
           <GlbErrorBoundary onError={() => setLoadError(true)}>
             <Canvas
               shadows
-              dpr={[1, 1.75]}
+              dpr={[1, 1.5]}
               camera={{
                 position: model.defaultCamera.position,
                 fov: 42,
                 near: 0.1,
-                far: 200,
+                far: 800,
               }}
-              gl={{ antialias: true, alpha: false }}
+              gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
               aria-label={`Không gian 3D ${warehouseName}`}
             >
               <WarehouseScene
                 model={model}
                 zones={zones}
+                floor={floor}
                 selectedZoneId={selectedZoneId}
                 onSelectZone={onSelectZone}
                 cameraGoal={cameraGoal}
                 resetToken={resetToken}
+                zoomToken={zoomToken}
+                viewPlane={viewPlane}
               />
             </Canvas>
           </GlbErrorBoundary>
@@ -153,23 +175,26 @@ function ViewerShell({
           <>
             <Canvas
               shadows
-              dpr={[1, 1.75]}
+              dpr={[1, 1.5]}
               camera={{
                 position: model.defaultCamera.position,
                 fov: 42,
                 near: 0.1,
-                far: 200,
+                far: 800,
               }}
-              gl={{ antialias: true, alpha: false }}
+              gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
               aria-label={`Placeholder 3D ${warehouseName}`}
             >
               <WarehouseScene
                 model={{ ...model, glbUrl: null }}
                 zones={zones}
+                floor={floor}
                 selectedZoneId={selectedZoneId}
                 onSelectZone={onSelectZone}
                 cameraGoal={cameraGoal}
                 resetToken={resetToken}
+                zoomToken={zoomToken}
+                viewPlane={viewPlane}
               />
             </Canvas>
             <div className="wms-wh-viewer__hint" role="note">

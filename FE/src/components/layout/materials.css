@@ -1,0 +1,48 @@
+/* Glass is reserved for floating layers, never for dense data or nested cards. */
+.wms-glass-panel[data-material="floating"],
+.dark .wms-glass-panel[data-material="floating"] {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  box-shadow: var(--glass-shadow);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .wms-glass-panel[data-material="floating"],
+  .dark .wms-glass-panel[data-material="floating"] {
+    background: var(--glass-surface);
+    -webkit-backdrop-filter: blur(12px) saturate(115%);
+    backdrop-filter: blur(12px) saturate(115%);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  }
+
+  .wms-shell.compta-theme .wms-topbar.wms-topbar--scrolled,
+  .dark .wms-shell.compta-theme .wms-topbar.wms-topbar--scrolled {
+    background: var(--glass-surface);
+    border-color: var(--glass-border);
+    -webkit-backdrop-filter: blur(16px) saturate(115%);
+    backdrop-filter: blur(16px) saturate(115%);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.08), inset 0 1px 0 var(--glass-highlight);
+  }
+}
+
+/* Small raised/pressed states, with an explicit selected color and focus ring. */
+.wms-shell.compta-theme .wms-segmented button[aria-pressed="true"] {
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.12), inset 0 1px 0 var(--glass-highlight);
+}
+.wms-shell.compta-theme .wms-segmented button:active {
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.18);
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more), (forced-colors: active) {
+  .wms-glass-panel[data-material="floating"],
+  .dark .wms-glass-panel[data-material="floating"],
+  .wms-shell.compta-theme .wms-topbar.wms-topbar--scrolled,
+  .dark .wms-shell.compta-theme .wms-topbar.wms-topbar--scrolled {
+    background: var(--card);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+}

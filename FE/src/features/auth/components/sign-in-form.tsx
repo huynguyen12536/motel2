@@ -9,6 +9,7 @@ import { PasswordField } from "@/features/auth/components/password-field";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { env } from "@/config/env";
 
 function GoogleMark() {
   return (
@@ -45,6 +46,7 @@ function MicrosoftMark() {
 }
 
 export function SignInForm() {
+  "use no memo"; // React Hook Form exposes mutable registration/state; do not cache its render bindings.
   const t = useTranslations();
   const { form, mutation, expired } = useSignIn();
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -73,6 +75,18 @@ export function SignInForm() {
         )}
 
         <div className="login-fields">
+          {!env.demoMode && (
+            <div className="space-y-2">
+              <Label htmlFor="company-code">{t("access.companyCode")}</Label>
+              <Input
+                id="company-code"
+                required
+                maxLength={64}
+                autoComplete="organization"
+                {...form.register("companyCode")}
+              />
+            </div>
+          )}
           <div>
             <Label htmlFor="email" className="login-label">
               {t("emailShort")}
@@ -179,6 +193,14 @@ export function SignInForm() {
           )}
         </button>
       </form>
+      {!env.demoMode && (
+        <Link
+          href="/auth/platform-sign-in"
+          className="mt-4 block text-sm underline"
+        >
+          {t("access.platformLogin")}
+        </Link>
+      )}
 
       <div className="login-divider">{t("orContinue")}</div>
 

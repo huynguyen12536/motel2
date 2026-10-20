@@ -1,0 +1,35 @@
+name: BE Database Migration
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: be-neon-migrations
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Require develop ref
+        run: |
+          test "$GITHUB_REF" = refs/heads/develop || { echo '::error::Run database migrations from develop only'; exit 1; }
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.22.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Deploy committed migrations
+        run: pnpm db:deploy
+        env:
+          MASTER_DIRECT_URL: ${{ secrets.MASTER_DIRECT_URL }}

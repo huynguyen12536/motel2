@@ -3,6 +3,7 @@ export const signInSchema = z.object({
   email: z.string().trim().min(1, "identifierRequired"),
   password: z.string().min(1, "passwordRequired"),
   remember: z.boolean(),
+  companyCode:z.string().trim().max(64).optional(),
 });
 export type SignInValues = z.infer<typeof signInSchema>;
 export const signUpSchema = z.object({

@@ -9,18 +9,29 @@ import {
 
 export function ViewerToolbar({
   onReset,
+  onZoom,
   onFit,
   floorsEnabled,
+  floors,
   floor,
   onFloorChange,
+  viewPlane,
+  onViewPlane,
 }: {
   onReset: () => void;
+  onZoom: () => void;
   onFit: () => void;
   floorsEnabled: boolean;
+  floors: string[];
   floor: string;
   onFloorChange: (floor: string) => void;
+  viewPlane: "3d" | "oxy" | "oxz" | "oyz";
+  onViewPlane: (plane: "3d" | "oxy" | "oxz" | "oyz") => void;
 }) {
-  const floors = ["3F", "2F", "1F", "GF"];
+  const floorOptions = [
+    { value: "ALL", label: "Tất cả" },
+    ...floors.map((item) => ({ value: item, label: item })),
+  ];
 
   return (
     <>
@@ -28,7 +39,7 @@ export function ViewerToolbar({
         <ToolbarBtn label="Xoay / Orbit" onClick={() => undefined}>
           <Move size={16} />
         </ToolbarBtn>
-        <ToolbarBtn label="Phóng to" onClick={() => undefined}>
+        <ToolbarBtn label="Phóng to" onClick={onZoom}>
           <ZoomIn size={16} />
         </ToolbarBtn>
         <ToolbarBtn label="Đặt lại camera" onClick={onReset}>
@@ -40,30 +51,48 @@ export function ViewerToolbar({
         <ToolbarBtn label="Focus khu vực" onClick={onFit}>
           <Focus size={16} />
         </ToolbarBtn>
+        <ToolbarBtn label="Phối cảnh 3D" pressed={viewPlane === "3d"} onClick={() => onViewPlane("3d")}>
+          3D
+        </ToolbarBtn>
+        <ToolbarBtn label="Mặt OXY — nhìn dọc trục Z. Giữ WASD để di chuyển, Shift để đi nhanh" pressed={viewPlane === "oxy"} onClick={() => onViewPlane("oxy")}>
+          XY
+        </ToolbarBtn>
+        <ToolbarBtn label="Mặt OXZ — nhìn từ trên. Giữ WASD để di chuyển, Shift để đi nhanh" pressed={viewPlane === "oxz"} onClick={() => onViewPlane("oxz")}>
+          XZ
+        </ToolbarBtn>
+        <ToolbarBtn label="Mặt OYZ — nhìn dọc trục X. Giữ WASD để di chuyển, Shift để đi nhanh" pressed={viewPlane === "oyz"} onClick={() => onViewPlane("oyz")}>
+          YZ
+        </ToolbarBtn>
       </div>
 
-      <div className="wms-wh-floors" aria-label="Chọn tầng">
-        <p className="wms-wh-floors__title">Tầng</p>
-        {floors.map((item) => (
+      {floorsEnabled ? (
+        <div className="wms-wh-floors" aria-label="Chọn tầng">
+          <p className="wms-wh-floors__title">Tầng</p>
+          {floorOptions.map((item) => (
           <button
-            key={item}
+            key={item.value}
             type="button"
             className={
-              floor === item
+              floor === item.value
                 ? "wms-wh-floors__btn wms-wh-floors__btn--active"
                 : "wms-wh-floors__btn"
             }
             disabled={!floorsEnabled}
             title={
-              floorsEnabled ? item : "Mô hình chưa hỗ trợ phân tầng."
+              floorsEnabled
+                ? item.value === "ALL"
+                  ? "Hiển thị toàn bộ tầng"
+                  : `Chỉ hiển thị tầng ${item.label}`
+                : "Mô hình chưa hỗ trợ phân tầng."
             }
-            aria-pressed={floor === item}
-            onClick={() => onFloorChange(item)}
+            aria-pressed={floor === item.value}
+            onClick={() => onFloorChange(item.value)}
           >
-            {item}
+            {item.label}
           </button>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : null}
     </>
   );
 }
@@ -71,17 +100,20 @@ export function ViewerToolbar({
 function ToolbarBtn({
   label,
   onClick,
+  pressed,
   children,
 }: {
   label: string;
   onClick: () => void;
+  pressed?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <button
       type="button"
-      className="wms-wh-toolbar__btn"
+      className={pressed ? "wms-wh-toolbar__btn wms-wh-toolbar__btn--active" : "wms-wh-toolbar__btn"}
       aria-label={label}
+      aria-pressed={pressed}
       title={label}
       onClick={onClick}
     >
